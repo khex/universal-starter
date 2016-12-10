@@ -3,7 +3,6 @@ import { QuestionService } from './question.service';
 
 @Component({
   selector: 'my-app',
-  styleUrls: ['./partials/question.component.css'],
   template: `
     <div>
       <h2>Job Application for Heroes</h2>
