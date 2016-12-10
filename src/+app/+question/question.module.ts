@@ -1,19 +1,21 @@
-import { NgModule }                     from '@angular/core';
-import { BrowserModule }                from '@angular/platform-browser';
-import { ReactiveFormsModule }          from '@angular/forms';
+import { NgModule }              from '@angular/core';
+import { BrowserModule }         from '@angular/platform-browser';
+import { ReactiveFormsModule }   from '@angular/forms';
 
-import { QuestionComponent }            from './question.component';
-import { QuestionRoutingModule }        from './question-routing.module';
-import { DynamicFormComponent }         from './dynamic-form.component';
-import { DynamicFormQuestionComponent } from './dynamic-form-question.component';
+import { QuestionComponent }     from './question.component';
+import { QuestionRoutingModule } from './question-routing.module';
+
+/* ex. Dynamic Question */
+import { DFComponent }           from './df.component';
+import { DFQuestionComponent }   from './df-question.component';
 
 @NgModule({
-  imports:      [ QuestionRoutingModule,
-                  BrowserModule,
+  imports:      [ BrowserModule,
+                  QuestionRoutingModule,
                   ReactiveFormsModule ],
   declarations: [ QuestionComponent,
-                  DynamicFormComponent,
-                  DynamicFormQuestionComponent ],
+                  DFComponent,
+                  DFQuestionComponent ],
   bootstrap:    [ QuestionComponent ]
 })
 export class QuestionModule {
