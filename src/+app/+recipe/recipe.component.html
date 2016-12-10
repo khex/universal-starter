@@ -1,0 +1,104 @@
+<!-- https://codepen.io/jaycbrf/pen/iBszr?editors=1010 -->
+
+  <form class="well form-horizontal" id="contact_form"
+        (ngSubmit)="onSubmit()">
+    <fieldset>
+
+      <!-- Form Name -->
+      <legend>Добавление рецепта</legend>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Название блюда:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" 
+                 [(ngModel)]="data.name">
+        </div>
+      </div>
+
+      <!-- Text area -->
+      <div class="form-group">
+        <label class="col-md-3 control-label">Краткое описание:</label>
+        <div class="col-md-9">
+          <textarea class="form-control" rows="3"
+                    [(ngModel)]="data.description">></textarea>
+        </div>
+        <div class="col-md-9 col-md-offset-3">
+          <p>Обязательно напишите 2-3 строки - что это за блюдо, его особенности, вкусовые качества.</p>
+          <p>Этот текст будет показываться в качестве анонса к Вашему рецепту - и именно по этому тексту люди будут определять, стоит читать Ваш рецепт - или нет.</p>
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Основное фото:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" name="photo_url"
+                 placeholder="http://localhost:3000/images/asdf.jpg"
+                 [(ngModel)]="data.imageUrl">>
+        </div>
+      </div>
+
+      <!-- Select Basic -->
+      <div class="form-group">
+        <label class="col-md-3 control-label">Рубрика:</label>
+        <div class="col-md-4">
+          <select multiple name="category" class="form-control"
+                  [(ngModel)]="data.category">
+            <option value="2"  >Бульоны и супы</option>
+            <option value="6"  >Горячие блюда</option>
+            <option value="12" >Салаты</option>
+            <option value="15" >Закуски</option>
+            <option value="19" >Напитки</option>
+            <option value="23" >Соусы</option>
+            <option value="25" >Выпечка</option>
+            <option value="30" >Десерты</option>
+            <option value="35" >Заготовки</option>
+            <option value="228">Блюда из лаваша</option>
+            <option value="227">Готовим в аэрогриле</option>
+            <option value="55" >Каши</option>
+            <option value="187">Украшения для блюд</option>
+            <option value="247">Готовим в пароварке</option>
+            <option value="289">Приготовление молочных продуктов</option>
+            <option value="308">Готовим в мультиварке</option>
+            <option value="356">Маринад, панировка</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Select Basic -->
+      <div class="form-group">
+        <label class="col-md-3 control-label">Назначение блюда:</label>
+        <div class="col-md-4">
+          <select multiple name="purpose" class="form-control"
+                  [(ngModel)]="data.purpose">
+            <option>На завтрак</option>
+            <option>На обед</option>
+            <option>На ужин</option>
+            <option>На полдник</option>
+            <option>Для детей</option>
+            <option>На праздничный стол</option>
+            <option>Неожиданные гости</option>
+            <option>Специальное питание</option>
+            <option>На природу (На пикник)</option>
+            <option>Рецепт для хлебопечки</option>
+        </div>
+      </div>
+
+      <!-- Success message -->
+      <div class="alert alert-success" role="alert" id="success_message">
+        Success <i class="glyphicon glyphicon-thumbs-up"></i>
+        Thanks for contacting us, we will get back to you shortly.
+      </div>
+
+      <!-- Button -->
+      <div class="form-group">
+        <label class="col-md-3 control-label"></label>
+        <div class="col-md-4">
+          <button type="submit" class="btn btn-warning" >Send
+          <span class="glyphicon glyphicon-send"></span></button>
+        </div>
+      </div>
+
+    </fieldset>
+  </form>

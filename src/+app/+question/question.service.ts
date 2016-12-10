@@ -10,6 +10,7 @@ export class QuestionService {
   // Todo: make asynchronous
   getQuestions() {
     let questions: QuestionBase<any>[] = [
+
       new DropdownQuestion({
         key: 'brave',
         label: 'Bravery Rating',
@@ -21,6 +22,7 @@ export class QuestionService {
         ],
         order: 3
       }),
+
       new TextboxQuestion({
         key: 'firstName',
         label: 'First name',
@@ -28,12 +30,14 @@ export class QuestionService {
         required: true,
         order: 1
       }),
+
       new TextboxQuestion({
         key: 'emailAddress',
         label: 'Email',
         type: 'email',
         order: 2
       })
+
     ];
     return questions.sort((a, b) => a.order - b.order);
   }

@@ -4,7 +4,12 @@ import { Component, Inject, ChangeDetectionStrategy, ViewEncapsulation } from '@
   changeDetection: ChangeDetectionStrategy.Default,
   encapsulation: ViewEncapsulation.Emulated,
   selector: 'about',
-  template: 'About component'
+  template: `
+    <div>
+      <span xLarge>Universal JavaScript {{ title }}!</span>
+    </div>
+    Two-way binding: <input type="text" [value]="title" (input)="title = $event.target.value">
+  `
 })
 export class AboutComponent {
   constructor(@Inject('req') req: any) {

@@ -1,13 +1,23 @@
-import { Component, Inject, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { Inject,
+	     Component,
+	     ViewEncapsulation,
+	     ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.Default,
-  encapsulation: ViewEncapsulation.Emulated,
-  selector: 'recipe',
-  template: 'Recipe component'
+    changeDetection: ChangeDetectionStrategy.Default,
+    encapsulation: ViewEncapsulation.Emulated,
+    selector: 'recipe',
+    templateUrl: './recipe.component.html'
 })
 export class RecipeComponent {
-  constructor(@Inject('req') req: any) {
-    // console.log('req',  req)
-  }
+
+    data: Object = {};
+
+    constructor(@Inject('req') req: any) {
+        console.log('req',  req)
+    }
+
+    onSubmit() {
+        console.info(this.data);
+    }
 }
