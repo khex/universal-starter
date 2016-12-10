@@ -1,7 +1,9 @@
 import { Inject,
-	     Component,
+         Component,
 	     ViewEncapsulation,
 	     ChangeDetectionStrategy } from '@angular/core';
+import { FormGroup,
+         FormBuilder }             from '@angular/forms';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.Default,
@@ -11,13 +13,22 @@ import { Inject,
 })
 export class RecipeComponent {
 
-    data: Object = {};
+    form: FormGroup;
 
-    constructor(@Inject('req') req: any) {
-        console.log('req',  req)
+    constructor(@Inject(FormBuilder) fb: FormBuilder) {
+        this.form = fb.group({
+        //  angular.io/docs/ts/latest/api/forms/index/FormBuilder-class.html
+        //  name: fb.group({ first: '', last: '' }),
+            name: '',
+            description: '',
+            imageUrl: '',
+            category: '',
+            purpose: ''
+        });
     }
 
     onSubmit() {
-        console.info(this.data);
+        console.log(this.form.status);
+        console.info(this.form.value);
     }
 }
