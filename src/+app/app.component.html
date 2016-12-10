@@ -1,25 +1,66 @@
-<nav>
-  <a routerLinkActive="router-link-active" routerLink="home">Home</a>
-  <a routerLinkActive="router-link-active" routerLink="about">About</a>
-  <a routerLinkActive="router-link-active" routerLink="todo">Todo</a>
-  <a routerLinkActive="router-link-active" routerLink="lazy">Lazy</a>
-  <a routerLinkActive="router-link-active" routerLink="recipe">Recipe</a>
-  <a routerLinkActive="router-link-active" routerLink="question">Question</a>
-</nav>
-<div class="hero-universal">
-  <div class="inner-hero">
-    <div>
-      <span xLarge>Universal JavaScript {{ title }}!</span>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Leguminy</a>
     </div>
 
-    Two-way binding: <input type="text" [value]="title" (input)="title = $event.target.value">
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a class="active"
+               routerLinkActive="router-link-active" routerLink="home">Home</a></li>
+        <li><a routerLinkActive="router-link-active" routerLink="about">About</a></li>
+        <li><a routerLinkActive="router-link-active" routerLink="todo">Todo</a></li>
+        <li><a routerLinkActive="router-link-active" routerLink="lazy">Lazy</a></li>
+        <li><a routerLinkActive="router-link-active" routerLink="recipe">Recipe</a></li>
+        <li><a routerLinkActive="router-link-active" routerLink="question">Question</a></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
 
-    <br>
-    <br>
+</nav>
 
-    <strong>Router-outlet:</strong>
-    <main>
-      <router-outlet></router-outlet>
-    </main>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="sidebar-module sidebar-module-inset">
+        <h4>About</h4>
+        <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+      </div>      
+    </div>
+    <div class="col-sm-8 col-sm-offset-1 blog-main">
+      <div class="hero-universal">
+        <div class="inner-hero">
+          <div>
+            <span xLarge>Universal JavaScript {{ title }}!</span>
+          </div>
+
+          Two-way binding: <input type="text" [value]="title" (input)="title = $event.target.value">
+
+          <br>
+          <br>
+
+          <strong>Router-outlet:</strong>
+          <main>
+            <router-outlet></router-outlet>
+          </main>
+        </div>
+      </div>      
+    </div>
   </div>
 </div>
+
+
+<footer class="blog-footer">
+  <p>Blog template built for
+     <a href="http://getbootstrap.com">Bootstrap</a> by
+     <a href="https://twitter.com/mdo">@mdo</a>.
+  </p>
+  <p><a href="#">Back to top</a></p>
+</footer>

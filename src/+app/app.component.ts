@@ -22,7 +22,7 @@ export class XLargeDirective {
   changeDetection: ChangeDetectionStrategy.Default,
   encapsulation: ViewEncapsulation.Emulated,
   selector: 'app',
-  styleUrls: ['./app.component.css'],
+  styleUrls: [ './app.component.css' ],
   templateUrl: './app.component.html'
 
 })
