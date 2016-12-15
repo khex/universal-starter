@@ -1,0 +1,353 @@
+
+<!-- stackoverflow.com/questions/33700266 Select Basic -->
+
+<form class="well form-horizontal"
+      [formGroup]="myForm"
+      novalidate
+      (ngSubmit)="save(myForm)">
+  <fieldset>
+    <!--
+        Basic Data
+    -->
+    <legend>Добавление рецепта</legend>
+  
+    <!-- Name -->
+    <div class="form-group"> 
+      <label class="col-sm-3 control-label">Название блюда:</label> 
+      <div class="col-sm-9"> 
+        <input class="form-control" type="text"
+               schema="Thing > name"
+               [formControl]="myForm.controls['name']"> 
+      </div> 
+    </div>      
+
+    <!-- Description -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Краткое описание:</label>
+      <div class="col-sm-9">
+        <textarea class="form-control" type="text" rows="3"
+                  schema.org="Thing > description"
+                  [formControl]="myForm.controls['description']">
+        </textarea>
+      </div>
+    </div>
+
+    <!-- Image Url -->
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Основное фото:</label>
+      <div class="col-sm-9">
+        <input class="form-control" type="text"
+               schema.org="Thing > image"
+               [formControl]="myForm.controls['imageUrl']">
+      </div>
+    </div>
+
+    <!--
+        Ingredients
+    -->
+    <legend>Ингредиенты</legend>
+
+    <p>Вы можете разбить ингредиенты на <b>группы</b>
+       (например: тесто, начинка, соус).</p>
+
+    <!-- Ingredient Labels -->
+    <div class="form-group ">
+      <label class="col-sm-2 control-label ingredient">Группа</label>
+      <label class="col-sm-3 control-label ingredient">Ингредиент</label>
+      <label class="col-sm-2 control-label ingredient">К-вол</label>
+      <label class="col-sm-2 control-label ingredient">Мера</label>
+      <label class="col-sm-3 control-label ingredient">Примечание</label>
+    </div>
+
+
+    <!--  Ingredients Array  -->
+    <div formArrayName="ingredients">
+      <div *ngFor="let address of myForm.controls.ingredients.controls;
+                   let i=index">
+
+        <!-- Ingredient -->
+        <div class="form-group" [formGroupName]="i">
+
+          <!--  Ingredient Index
+          <div class="col-sm-1"> <b>{{i + 1}}.</b> </div>
+          -->
+
+          <!--  Ingredient Group  -->
+          <div class="col-sm-2 col-ingred">
+            <input class="form-control" type="text" formControlName="group">
+          </div>
+
+          <!--  Ingredient Name  -->
+          <div class="col-sm-3 col-ingred">
+            <input class="form-control" type="text" formControlName="name">
+            <!-- <small [hidden]="myForm.controls.addresses.controls
+                                         [i].controls.street.valid"
+                   class="text-danger">Street is required</small>
+            -->
+          </div>
+
+          <!--  Ingredient Amount  -->
+          <div class="col-sm-1 col-ingred">
+            <input class="form-control" type="text" formControlName="amount">
+          </div>
+
+          <!--  Ingredient Measure  -->
+          <div class="col-sm-2 col-ingred">
+            <select class="form-control" formControlName="measure">
+              <option value=""          >не выбрано</option>
+              <option value= "1, г."    >г.</option>
+              <option value= "2, кг."   >кг.</option>
+              <option value= "3, мл."   >мл.</option>
+              <option value= "4, л."    >л.</option>
+              <option value= "5, стак"  >стак.</option>
+              <option value= "6, шт"    >шт</option>
+              <option value= "7, бан."  >бан.</option>
+              <option value= "8, ст. л.">ст. л.</option>
+              <option value= "9, ч. л." >ч. л.</option>
+              <option value="10, вилок" >вилок</option>
+              <option value="11, ломт." >ломт.</option>
+              <option value="12, пуч."  >пуч.</option>
+              <option value="13, горст.">горст.</option>
+              <option value="14, дол."  >дол.</option>
+              <option value="15, бут."  >бут.</option>
+              <option value="16, пач."  >пач.</option>
+              <option value="17, пакет.">пакет.</option>
+              <option value="18, упак." >упак.</option>
+              <option value="19, зуб."  >зуб.</option>
+              <option value="20, щепот.">щепот.</option>
+              <option value="21, веточ.">веточ.</option>
+              <option value="22, по вкусу">по вкусу</option>
+            </select>
+          </div>
+
+          <!--  Ingredient Note  -->
+          <div class="col-sm-4 col-ingred">
+            <input class="form-control" type="text"
+                   style="width:90%; display: inline;"
+                   formControlName="note">
+
+            <span class="glyphicon glyphicon-remove pull-right"
+                  *ngIf="myForm.controls.ingredients.controls.length > 1"
+                  (click)="removeIngredient(i)">
+            </span>              
+          </div>
+          
+        </div>
+      </div><!-- end *ngFor-->
+    </div><!-- formArrayName="ingredients"> -->
+    
+    <div class="margin-20">
+      <a (click)="addIngredient()" style="cursor: default">Добавить ингредиент +</a>
+    </div>
+
+    <!--
+        Schema.org values
+    -->
+    <legend>Recipe Schema.org</legend>
+    <div class="form-group">
+
+      <!-- Category -->
+      <label class="col-md-3 control-label">Категория:</label>
+      <div class="col-md-3">
+        <select class="form-control"
+                schema.org="Recipe > recipeCategory"
+                [formControl]="myForm.controls['category']">
+          <!-- или в однині recipe is 'salad' -->
+          <option value= ""               >не выбрано</option>
+          <option value= "1, salads"      >Салаты</option>
+          <option value= "2, appetisers"  >Закуски</option>
+          <option value= "3, soups"       >Супы и Бульоны</option>
+          <option value= "4, main dishes" >Основные блюда</option>
+          <option value= "5, beverages"   >Напитки</option>
+          <option value= "6, souses"      >Соусы</option>
+          <option value= "7, deserts"     >Десерты</option>
+          <option value= "8, preservation">Заготовки</option>
+        </select>
+      </div>
+
+      <!-- Cooking Method -->
+      <label class="col-md-3 control-label">Способ приготовления:</label>
+      <div class="col-md-3">
+        <select class="form-control"
+                schema.org="Recipe >> cookingMethod"
+                [formControl]="myForm.controls['cookMeth']">
+          <option value=  ""         >не выбрано</option>
+          <option value=  "1, fry"   >жарка</option>
+          <option value=  "2, baking">запекание</option>
+          <option value=  "3, stewg" >тушение</option>
+          <option value=  "4, boil"  >варка</option>
+          <option value=  "5, steam" >на пару</option>
+          <!--
+          <option value=  "6" >квашение</option>
+          <option value=  "7" >сушение</option>
+          <option value=  "8" >соление</option>
+          <option value=  "9" >копчение</option>
+          <option value= "10">вяление</option>
+          <option value= "11">замораживание</option>
+          <option value= "12">маринование</option>
+          <option value= "13">консервирование</option>
+          <option value= "14">гриль, на углях</option>
+          <option value= "15">в аэрогриль</option>
+          <option value= "16">в микроволновка</option>
+          <option value= "17">в скороварка</option>
+          <option value= "18">в мультиварке</option>
+          <option value= "19">в микроволновке</option>
+          -->
+        </select>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <!-- RecipeCuisine -->
+      <label class="col-md-3 control-label">Кухня:</label>
+      <div class="col-md-3">
+        <select class="form-control"
+                schema="Recipe >> recipeCuisine"
+                [formControl]="myForm.controls['cuisine']">
+          <option value=  ""               >не выбрано</option>
+          <option value=  "1, abkhazian"   >Абхазская кухня‎</option>
+          <option value=  "2, australian"  >Австралийская кухня</option>
+          <option value=  "3, austrian"    >Австрийская кухня</option>
+          <option value=  "4, azerbaijani" >Азербайджанская кухня</option>
+          <option value=  "5, albanian"    >Албанская кухня‎</option>
+          <option value=  "6, algerian"    >Алжирская кухня‎</option>
+          <option value=  "7, american"    >Американская кухня‎</option>
+          <option value=  "8, english"     >Английская кухня‎</option>
+          <option value=  "9, arabic"      >Арабская кухня</option>
+          <option value= "10, argentine"   >Аргентинская кухня</option>
+          <option value= "11, armenian"    >Армянская кухня‎</option>
+        </select>
+      </div>
+
+      <!-- Recipe Yield
+           Или количество шт. напр. печеньки - 28 шт.
+           Савоярди - 100 шт.
+           Переделать форму ввода под калькулятор
+           К-во [number] [порц., шт.]
+      -->
+      <label class="col-md-3 control-label">К-во порций:</label>
+      <div class="col-md-3">
+        <select class="form-control"
+                schema="Recipe >> recipeYield"
+                [formControl]="myForm.controls['yield']">
+          <option value=  "" >не выбрано</option>
+          <option value=  "1">1‎</option>
+          <option value=  "2">2‎</option>
+          <option value=  "3">3‎</option>
+          <option value=  "4">4‎</option>
+          <option value=  "6">6‎</option>
+          <option value=  "8">8‎</option>
+          <option value= "10">1‎0</option>
+          <option value= "12">12‎</option>
+          <option value= "16">1‎6</option>
+          <option value= "20">20‎</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Total, Cook & Prep Time -->
+    <div class="form-group"> 
+      <label class="col-sm-3 control-label">Время приготовления:</label> 
+      <div class="col-sm-3"> 
+        <input class="form-control" type="text"
+               placeholder="Общее время чч:мм"
+               schema="Thing > totalTime"
+               [formControl]="myForm.controls['totalTime']">
+      </div>
+      <div class="col-md-3">
+        <input class="form-control" type="text"
+               schema="Recipe >> prepTime"
+               placeholder="Время подготовки чч:мм"
+               [formControl]="myForm.controls['prepTime']">
+      </div>
+      <div class="col-md-3">
+        <input class="form-control" type="text"
+               schema="Recipe >> cookTime"
+               placeholder="Время готовки чч:мм"
+               [formControl]="myForm.controls['cookTime']">
+      </div>
+    </div>
+
+    <div class="form-group">
+      
+      <!-- Suitable For Diet -->
+      <label class="col-md-3 control-label">Подходит для диеты:</label>
+      <div class="col-md-3">
+        <select class="form-control" schema="Recipe >> suitableForDiet"
+                [formControl]="myForm.controls['diet']">
+          <option value= ""              >не выбрано</option>
+          <option value= "1, diabetes"   >при диабете</option>
+          <option value= "2, gluten-free">безглютеновая</option>
+          <option value= "3, halal"      >халяль</option>
+          <!--<option value= "4, ">HinduDiet</option>-->
+          <option value= "5, kashrut"    >кошерная еда</option>
+          <option value= "6, low-calorie">низкокалорийная</option>
+          <option value= "7, low-fat"    >обезжиреная</option>
+          <option value= "8, low-salt"   >бессолевая</option>
+          <option value= "9, vegan"      >веганская</option>
+          <option value="10, vegetarian" >вегитарианская</option>
+        </select>
+      </div>
+
+      <!-- Purpose -->
+      <label class="col-md-3 control-label">Назначение блюда:</label>
+      <div class="col-md-3">
+        <select class="form-control" schema="no schema"
+                [formControl]="myForm.controls['purpose']">
+          <option value= ""            >не выбрано</option>
+          <option value= "1, breakfast">завтрак</option>
+          <option value= "2, lunch"    >обед</option>
+          <option value= "3, dinner"   >ужин</option>
+          <option value= "4, aft-snack">подник</option>
+          <option value= "5, festive"  >праздничное блюдо</option>
+          <option value= "6, children" >для детей</option>
+          <option value= "7, hastily"  >неожиданные гости</option>
+          <option value= "8, picnic"   >на природу</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Button -->
+    <div class="form-group">
+      <label class="col-md-3 control-label"></label>
+      <div class="col-md-4">
+        <button type="submit"
+                class="btn btn-primary"
+                [disabled]="!myForm.valid">Send
+        <span class="glyphicon glyphicon-send"></span></button>
+      </div>
+
+    </div>
+
+  </fieldset>
+</form>
+
+
+     <!-- https://developers.google.com/search/docs/data-types/recipes
+          https://developers.google.com/search/docs/guides/mark-up-listings
+      <ol itemscope itemtype="http://schema.org/recipeInstructions">
+        <li itemprop="itemListElement"
+            itemscope
+            itemtype="http://schema.org/ListItem">
+          <a itemprop="item" href="https://example.com/dresses">
+          <span itemprop="name">Dresses</span></a>
+          <meta itemprop="position" content="1" />
+        </li>
+      </ol>
+      -->
+
+<!--
+    <label>Country:</label> 
+    <select [(ngModel)]="selectedCountry.id" (change)="onSelect($event.target.value)">
+      <option value="0">--Select--</option>
+      <option *ngFor="let country of countries" value= {{country.id}}>{{country.name}}</option>
+    </select>
+    <br/><br/>
+    <div>
+    <label>State:</label>
+    <select>
+      <option *ngIf='selectedCountry.id == 0' value="0">--Select--</option>
+      <option *ngFor="let state of states " value= {{state.id}}>{{state.name}}</option>
+    </select>
+    </div>
+-->

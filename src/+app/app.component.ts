@@ -1,4 +1,9 @@
-import { Component, Directive, ElementRef, Renderer, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { Component,
+         Directive,
+         ElementRef,
+         Renderer,
+         ViewEncapsulation,
+         ChangeDetectionStrategy } from '@angular/core';
 
 //
 /////////////////////////

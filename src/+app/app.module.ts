@@ -4,15 +4,13 @@ import { FormsModule }      from  '@angular/forms';
 import { HomeModule }       from './+home/home.module';
 import { AboutModule }      from  './+about/about.module';
 import { TodoModule }       from  './+todo/todo.module';
-
 import { RecipeModule }     from  './+recipe/recipe.module';
-import { QuestionModule }   from  './+question/question.module';
 
 import { SharedModule }     from  './shared/shared.module';
 
 import { AppRoutingModule } from  './app-routing.module';
 import { AppComponent,
-	       XLargeDirective }  from  './app.component';
+	     XLargeDirective }  from  './app.component';
 
 
 @NgModule({
@@ -21,9 +19,8 @@ import { AppComponent,
   imports:      [ SharedModule,
                   HomeModule,
                   AboutModule,
-                  RecipeModule,
                   TodoModule,
-                  QuestionModule,
+                  RecipeModule,
                   AppRoutingModule ]
 })
 export class AppModule { }
