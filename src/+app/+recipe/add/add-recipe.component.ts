@@ -18,33 +18,7 @@ import { Recipe }      from './recipe.interface';
 })
 export class AddRecipeComponent implements OnInit{
   
-  name: string = 'Angular2';
   public myForm: FormGroup;
-
-  
-  //selectedCountry: Country = new Country(0, 'India');
-  //countries: Country[];
-  //states: State[];
-  /**
-  @Inject(FormBuilder);
-  @Inject(DataService);
-  constructor(_fb: FormBuilder, private _ds: DataService) {
-  //this.countries = this._ds.getCountries();
-
-    this.myForm = _fb.group({
-    //Basic data povarenok.ru/recipes/show/40998/
-      'name': 'Пицца с ветчиной и шампиньонами',
-      'description': `Пицца "В день рождения сына". У сына внезапно приключился день рождения.\
-      Нет, я, конечно, помню, когда он родился, но праздновать он не собирался, \
-      а тут приходит и спрашивает: "Мама, можно ко мне зайдут друзья? Мы посидим, \
-      пива попьем". Говорю: "Так ведь нет ничего!" "А ничего и не надо!" - отвечает. \
-      Ну, как же! 8 молодых, здоровых парней с пивом и закусить нечем... Надо \
-      срочно что-то придумать! Ну, конечно! Надо испечь пиццу! Даже 2 пиццы! Чтобы \
-      всем хватило! Бегом на кухню...`,
-      'imageUrl': 'http://www.povarenok.ru/images/recipes/27/2786/278630.jpg',
-    });
-  }
-  **/
 
   constructor(@Inject(FormBuilder) private _fb: FormBuilder) { }
 
