@@ -9,9 +9,9 @@ import { routing }             from './recipe-routing.module';
 
 import { ReadComponent }       from './route-comp/read.component';
 import { CreateComponent }     from './route-comp/create.component';
-//import { DeleteByIDComponent } from './route-comp/deleteByID.component';
-//import { ReadByIDComponent }   from './route-comp/readByID.component';
-//import { UpdateByIDComponent } from './route-comp/updateByID.component';
+import { DeleteByIDComponent } from './route-comp/deleteByID.component';
+import { ReadByIDComponent }   from './route-comp/readByID.component';
+import { UpdateByIDComponent } from './route-comp/updateByID.component';
 
 @NgModule({
   imports:      [
@@ -25,9 +25,9 @@ import { CreateComponent }     from './route-comp/create.component';
                   /*  route-components  */
                   ReadComponent,
                   CreateComponent,
-                  //DeleteByIDComponent,
-                  //ReadByIDComponent,
-                  //UpdateByIDComponent
+                  DeleteByIDComponent,
+                  ReadByIDComponent,
+                  UpdateByIDComponent
                  ]
 })
 export class RecipeModule { }
