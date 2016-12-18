@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { UniversalModule, isBrowser, isNode } from 'angular2-universal/node'; // for AoT we need to manually split universal packages
-
+import {APP_BASE_HREF} from '@angular/common';
 import { AppModule, AppComponent } from './+app/app.module';
 import { SharedModule } from './+app/shared/shared.module';
 import { CacheService } from './+app/shared/cache.service';
@@ -44,6 +44,7 @@ export const UNIVERSAL_KEY = 'UNIVERSAL_CACHE';
     { provide: 'res', useFactory: getResponse },
 
     { provide: 'LRU', useFactory: getLRU, deps: [] },
+    {provide: APP_BASE_HREF, useValue : '/' },
 
     CacheService,
 
