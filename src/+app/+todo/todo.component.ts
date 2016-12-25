@@ -1,7 +1,9 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { Component,
+         ViewEncapsulation,
+         ChangeDetectionStrategy } from '@angular/core';
 
-import { ModelService } from '../shared/model/model.service';
-import { Todo } from './todo.schema'
+import { ModelService }            from '../shared/model/model.service';
+import { Todo }                    from './todo.schema'
 
 
 @Component({

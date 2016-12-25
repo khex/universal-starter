@@ -2,6 +2,7 @@
  - AngN
  - AngiN
  - AngiNo
+ - ng-ex, Ngex
 
 # synonims to 'Angular'
     adj bent, jagged, akimbo, bifurcate, cornered, crooked, crossing,

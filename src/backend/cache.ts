@@ -1,17 +1,17 @@
 
 
 var _fakeLRUcount = 0;
-export const fakeDemoRedisCache = {
+export const fakeRedisCache = {
   _cache: {},
   get: (key) => {
-    let cache = fakeDemoRedisCache._cache[key];
+    let cache = fakeRedisCache._cache[key];
     _fakeLRUcount++;
     if (_fakeLRUcount >= 10) {
-      fakeDemoRedisCache.clear();
+      fakeRedisCache.clear();
       _fakeLRUcount = 0;
     }
     return cache;
   },
-  set: (key, data) => fakeDemoRedisCache._cache[key] = data,
-  clear: () => fakeDemoRedisCache._cache = {}
+  set: (key, data) => fakeRedisCache._cache[key] = data,
+  clear: () => fakeRedisCache._cache = {}
 };

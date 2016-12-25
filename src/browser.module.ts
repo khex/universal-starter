@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-
+import { APP_BASE_HREF } from '@angular/common';
 // for AoT we need to manually split universal packages
 import { UniversalModule,
          isBrowser, isNode,
@@ -58,6 +58,7 @@ export const UNIVERSAL_KEY = 'UNIVERSAL_CACHE';
     { provide: 'res', useFactory: getResponse },
 
     { provide: 'LRU', useFactory: getLRU, deps: [] },
+    { provide: APP_BASE_HREF, useValue : '/' },
 
     CacheService,
 

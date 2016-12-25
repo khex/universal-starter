@@ -6,23 +6,23 @@ import 'angular2-universal-polyfills';
 import 'ts-helpers';
 import './__workaround.node'; // temporary until 2.1.1 things are patched in Core
 
-import * as path from 'path';
-import * as express from 'express';
-import * as bodyParser from 'body-parser';
-import * as cookieParser from 'cookie-parser';
-import * as morgan from 'morgan';
-import * as compression from 'compression';
+import * as path          from 'path';
+import * as express       from 'express';
+import * as bodyParser    from 'body-parser';
+import * as cookieParser  from 'cookie-parser';
+import * as morgan        from 'morgan';
+import * as compression   from 'compression';
 
 // Angular 2
 import { enableProdMode } from '@angular/core';
 // Angular 2 Universal
-import { createEngine } from 'angular2-express-engine';
+import { createEngine }   from 'angular2-express-engine';
 
 // App
-import { MainModule } from './node.module';
+import { MainModule }     from './node.module';
 
 // Routes
-import { routes } from './server.routes';
+import { routes }         from './server.routes';
 
 // enable prod for faster renders
 enableProdMode();
@@ -57,22 +57,31 @@ function cacheControl(req, res, next) {
   next();
 }
 // Serve static files
-app.use('/assets', cacheControl, express.static(path.join(__dirname, 'assets'), {maxAge: 30}));
-app.use(cacheControl, express.static(path.join(ROOT, 'dist/client'), {index: false}));
+app.use('/assets',
+        cacheControl,
+        express.static(path.join(__dirname, 'assets'),
+                      {maxAge: 30})
+);
+app.use(cacheControl,
+        express.static(path.join(ROOT, 'dist/client'),
+                      {index: false})
+);
 
-//
-/////////////////////////
-// ** Example API
-// Notice API should be in aseparate process
-import { serverApi, createTodoApi } from './backend/api';
-// Our API for demos only
-app.get('/data.json', serverApi);
-app.use('/api', createTodoApi());
+
+  ///////////////////
+ //  Example API  //
+///////////////////
+import { TodoApi,
+         ServerApi,
+         RecipeApi } from './backend/api';
+
+app.get('/data.json',   ServerApi);
+app.use('/api/todos',   TodoApi());
+app.use('/api/recipes', RecipeApi());
 
 function ngApp(req, res) {
   res.render('index', {
-    req,
-    res,
+    req, res,
     // time: true, // use this to determine what part of your app is slow only in development
     preboot: false,
     baseUrl: '/',
@@ -97,7 +106,10 @@ app.get('*', function(req, res) {
   res.status(404).send(json);
 });
 
-// Server
+
+  //////////////
+ //  Server  //
+//////////////
 let server = app.listen(app.get('port'), () => {
   console.log(`Listening on: http://localhost:${server.address().port}`);
 });

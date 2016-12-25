@@ -12,7 +12,9 @@ import { ModelService } from '../shared/model/model.service';
   templateUrl: './home.component.html'
 })
 export class HomeComponent {
+
   data: any = {};
+
   constructor(public model: ModelService) {
 
     // we need the data synchronously for the client to set the server response
@@ -21,9 +23,8 @@ export class HomeComponent {
   }
 
   universalInit() {
-    this.model.get('/data.json').subscribe(data => {
-      this.data = data;
-    });
+    this.model.get('/data.json')
+        .subscribe(data => { this.data = data; });
   }
 
 }
