@@ -1,21 +1,23 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { RecipeComponent }      from './recipe.component';
-import { AddRecipeComponent }   from './add/add-recipe.component';
+import { ReadComponent }        from './read.component';
+import { CreateComponent }      from './create.component';
+import { ReadByIDComponent }    from './readByID.component';
+import { UpdateByIDComponent }  from './updateByID.component';
+import { DeleteByIDComponent }  from './deleteByID.component';
 
-import { ReadComponent }        from './route-comp/read.component';
-import { CreateComponent }      from './route-comp/create.component';
-import { DeleteByIDComponent }  from './route-comp/deleteByID.component';
-import { ReadByIDComponent }    from './route-comp/readByID.component';
-import { UpdateByIDComponent }  from './route-comp/updateByID.component';
-
-//export const routing = RouterModule.forChild([
-export const routing = RouterModule.forChild([
-  { path: 'recipe',          component: RecipeComponent },
-  { path: 'add-recipe',      component: AddRecipeComponent },
-  { path: 'post',            component: ReadComponent},
-  { path: 'post/add',        component: CreateComponent },
-  { path: 'post/:id',        component: ReadByIDComponent},
-  { path: 'post/:id/delete', component: DeleteByIDComponent},
-  { path: 'post/:id/update', component: UpdateByIDComponent}
+/** htttp://localhost:3000/api/todos?
+      value=This%20is%20My%20custom%20POST&
+      id=5&
+      created_at=2016-12-25T12%3A35%3A29.223Z&
+      complete=false
+**/
+export const Routing = RouterModule.forChild([
+  { path: 'recipes',           component: ReadComponent},
+  { path: 'recipe/create',     component: CreateComponent },
+  { path: 'recipe/:id',        component: ReadByIDComponent},
+  //  ex: 'recipe/:id/delete'
+  { path: 'recipe/delete/:id', component: DeleteByIDComponent},
+  //  ex: 'recipe/:id/update'
+  { path: 'recipe/update/:id', component: UpdateByIDComponent}
 ]);

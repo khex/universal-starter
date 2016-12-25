@@ -1,0 +1,46 @@
+<div class="btn-group btn-group-justified" role="group" aria-label="...">
+  <div class="btn-group" role="group">
+    <a routerLinkActive="router-link-active"
+       routerLink="/recipe/create"
+       class="btn btn-success">Add New Recipe
+    </a>
+  </div>
+  <div class="btn-group" role="group">
+    <a routerLinkActive="router-link-active"
+       routerLink="/recipe/1715"
+       class="btn btn-success">Read By ID
+    </a>
+  </div>
+  <div class="btn-group" role="group">
+    <a class="btn btn-success"
+       routerLinkActive="router-link-active"
+       routerLink="/recipe/update/1715">Update By ID
+    </a>
+  </div>
+  <div class="btn-group" role="group">
+    <a class="btn btn-success"
+       routerLinkActive="router-link-active"
+       routerLink="/recipe/delete/1715">Delete By ID
+    </a>
+  </div>
+</div>
+
+<h3>Recipe Read Component</h3>
+
+<!-- <pre>{{ recipes | json }}</pre> -->
+<div class="media" *ngFor="let recipe of recipes">
+  <div class="media-left">
+    <a routerLinkActive="router-link-active"
+       routerLink='/recipe/{{recipe.rid}}'>
+      <img alt="100x100"
+           class="media-object"
+           src="assets/rid-1.jpg"
+           style="width: 100px; height: 100px;"
+           data-holder-rendered="true">
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">{{recipe.name}}</h4>
+    {{recipe.description}}
+  </div>
+</div>

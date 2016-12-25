@@ -1,33 +1,26 @@
 import { NgModule }            from '@angular/core';
 import { FormsModule,
-	       ReactiveFormsModule }   from '@angular/forms';
+	       ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule }        from '../shared/shared.module';
-import { RecipeComponent }     from './recipe.component';
-import { AddRecipeComponent }  from './add/add-recipe.component';
-import { routing }             from './recipe-routing.module';
 
-import { ReadComponent }       from './route-comp/read.component';
-import { CreateComponent }     from './route-comp/create.component';
-import { DeleteByIDComponent } from './route-comp/deleteByID.component';
-import { ReadByIDComponent }   from './route-comp/readByID.component';
-import { UpdateByIDComponent } from './route-comp/updateByID.component';
+import { Routing }             from './recipe-routing.module';
+
+import { ReadComponent }       from './read.component';
+import { CreateComponent }     from './create.component';
+import { DeleteByIDComponent } from './deleteByID.component';
+import { ReadByIDComponent }   from './readByID.component';
+import { UpdateByIDComponent } from './updateByID.component';
 
 @NgModule({
-  imports:      [
+  imports:      [ Routing,
                   SharedModule,
-                  routing,
                   FormsModule,
-                  ReactiveFormsModule
-                ],
-  declarations: [ RecipeComponent,
-                  AddRecipeComponent,
-                  /*  route-components  */
-                  ReadComponent,
+                  ReactiveFormsModule ],
+  declarations: [ ReadComponent,
                   CreateComponent,
                   DeleteByIDComponent,
                   ReadByIDComponent,
-                  UpdateByIDComponent
-                 ]
+                  UpdateByIDComponent ]
 })
 export class RecipeModule { }

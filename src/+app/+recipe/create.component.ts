@@ -12,11 +12,11 @@ import { FormGroup,
 import { Recipe }      from './recipe.interface';
 
 @Component({
-  selector:    'my-app',
-  templateUrl: './add-recipe.component.html',
+  selector:    'create',
+  templateUrl: './create.component.html',
   //providers:   [DataService]
 })
-export class AddRecipeComponent implements OnInit{
+export class CreateComponent implements OnInit{
   
   public myForm: FormGroup;
 
