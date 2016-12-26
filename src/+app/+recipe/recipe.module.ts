@@ -6,20 +6,18 @@ import { SharedModule }        from '../shared/shared.module';
 
 import { Routing }             from './recipe-routing.module';
 
-import { ReadComponent }       from './read.component';
-import { CreateComponent }     from './create.component';
-import { DeleteByIDComponent } from './deleteByID.component';
-import { ReadByIDComponent }   from './readByID.component';
-import { UpdateByIDComponent } from './updateByID.component';
+import { ReadAllComponent }    from './read-all/read-all.component';
+import { CreateComponent }     from './create-update/create.component';
+import { ReadByIDComponent }   from './read-byid/read-byid.component';
+import { UpdateByIDComponent } from './create-update/update-byid.component';
 
 @NgModule({
   imports:      [ Routing,
                   SharedModule,
                   FormsModule,
                   ReactiveFormsModule ],
-  declarations: [ ReadComponent,
+  declarations: [ ReadAllComponent,
                   CreateComponent,
-                  DeleteByIDComponent,
                   ReadByIDComponent,
                   UpdateByIDComponent ]
 })

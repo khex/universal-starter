@@ -9,11 +9,11 @@ import { FormGroup,
 
 //import { Country, State } from 'src/country';
 //import { DataService }    from 'src/dataservice';
-import { Recipe }      from './recipe.interface';
+import { Recipe }      from '../recipe.interface';
 
 @Component({
   selector:    'create',
-  templateUrl: './create.component.html',
+  templateUrl: './create.template.html',
   //providers:   [DataService]
 })
 export class CreateComponent implements OnInit{

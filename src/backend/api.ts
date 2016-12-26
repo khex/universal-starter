@@ -32,14 +32,10 @@ export const ServerApi = (req, res) => {
 ***************/
 var COUNT = 4;
 var TODOS = [
-  { id: 0, value: 'finish example',
-    created_at: new Date(), completed: false },
-  { id: 1, value: 'add tests',
-    created_at: new Date(), completed: false },
-  { id: 2, value: 'include development environment',
-    created_at: new Date(), completed: false },
-  { id: 3, value: 'include production environment',
-    created_at: new Date(), completed: false }
+  { id: 0, value: 'finish example', created_at: new Date(), completed: false },
+  { id: 1, value: 'add tests', created_at: new Date(), completed: false },
+  { id: 2, value: 'include development environment', created_at: new Date(), completed: false },
+  { id: 3, value: 'include production environment', created_at: new Date(), completed: false }
 ];
 
 export const TodoApi = () => {
@@ -108,6 +104,7 @@ export const TodoApi = () => {
     });
 
   return router;
+
 };
 
 
@@ -118,18 +115,89 @@ var RecipesDB = [
   {
     rid: 1,
     name: 'Пицца по-милански',
-    description: `Рецепт пиццы по-милански из книги 'Всевозможные` +
-      `рецепты пиццы и макаронных изделий', авторства одного из ` +
-      `лучших шеф-поваров Северной Америки, Рона Каленьюика.`,
+    description: 'Рецепт пиццы по-милански из книги "Всевозможные рецепты пиццы и макаронных изделий", авторства одного из лучших шеф-поваров Северной Америки, Рона Каленьюика.',
     url: 'http://localhost:3000/recipe/1/pizza-po-milanski',
     created_at: "2016-12-25T12:35:00.000Z",
-    imageUrl: 'assets/images/rid-1.jpg'
-  }, {
+    imageUrl: 'assets/images/rid-1.jpg',
+    schema: {
+      category:   'Основные блюда',
+      // <meta itemprop="prepTime" content="PT15M">15 minutes
+      // write own pipe ro convrt
+      //prepTime:   'PT8M',
+      //cookTime:   'PT12M',
+      totalTime:  'PT20M',
+      method:    ['выпекание'],
+      cuisine:    'Итальянская',
+      yield:      '2 пиццы',
+      firDiet:   [],
+      purpose:   ['обед', 'ужин', 'для детей', 'закуска'],
+      weight:      0,
+      complexity: 'medium',
+      cost:       '$$',
+      nutrition: { calories: 0 },
+      ingredients: [{
+          group: '',
+          ingred: 'Тесто дрожжевое',
+          amount: '450',
+          measure: 'г',
+          note: 'готового или приготовленого по нашему рецепту'
+        }, {
+          group: '',
+          ingred: 'Соус',
+          amount: '250',
+          measure: 'мл',
+          note: 'для пиццы'
+        }, {
+          group: '',
+          ingred: 'Колбаса',
+          amount: '450',
+          measure: 'г',
+          note: 'острая итальянской'
+        }, {
+          group: '',
+          ingred: 'Моцарелла',
+          amount: '340',
+          measure: 'г',
+          note: ''
+        }, {
+          group: '',
+          ingred: 'Перец сладкий красный',
+          amount: '1.5',
+          measure: 'стакана',
+          note: 'нарезаного'
+        }, {
+          group: '',
+          ingred: 'Лук красный',
+          amount: '1.5',
+          measure: 'стакана',
+          note: 'нарезаного'
+      }],
+      /** <ItemList>
+        <ol itemscope itemtype="http://schema.org/BreadcrumbList">
+          <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a itemprop="item" href="https://example.com/dresses">
+            <meta itemprop="position" content="1" />
+            <span itemprop="description">Dresses</span></a>
+          </li>
+        </ol>
+
+        <span itemprop="recipeInstructions">
+          Preheat the oven to 350 degrees. Mix in the ingredients in a bowl. Add
+          the flour last. Pour the mixture into a loaf pan and bake for one hour.
+        </span>
+      **/
+      instructions: [
+        {descript: 'Приготовьте тесто для пиццы, как указано в рецепте. Полейте соусом и положите нарезаную колбасу.'},
+        {descript: 'Повыпьте сыром. Сверху положите красный сладкий перец и лук.'},
+        {descript: 'Выпекайте в предварительно разогретой до 230 градусов духовку10-12 минут или до образования золотистой кррочки.'},
+        {descript: 'Получаеться две пиццы диаметром по 30 см.'}
+      ]
+    },
+  },
+  {
     rid: 2,
     name: 'Основное тесто для пиццы',
-    description: `Рецепт пиццы по-милански из книги 'Всевозможные` +
-      `рецепты пиццы и макаронных изделий', авторства одного из ` +
-      `лучших шеф-поваров Северной Америки, Рона Каленьюика.`,
+    description: 'Рецепт теста для основы пиццы из книги "Всевозможные рецепты пиццы и макаронных изделий", авторства одного из лучших шеф-поваров Северной Америки, Рона Каленьюика.',
     url: 'http://localhost:3000/recipe/2/osnovnoe-testo-dlja-pizzy',
     created_at: "2016-12-25T12:36:00.000Z",
     imageUrl: 'assets/images/rid-1.jpg'
@@ -156,7 +224,7 @@ var RecipesDB = [
 
 export const RecipeApi = () => {
 
-  //  as recipeRouter;
+  //  RecipeRouter
   var RR = Router();
 
   RR.route('/')
@@ -184,4 +252,5 @@ export const RecipeApi = () => {
     });
 
   return RR;
+
 }

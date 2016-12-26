@@ -2,26 +2,26 @@
 
 export interface Recipe {
   // required field with minimum 5 characters
-  name: string;
+  name:        string;
   description: string;
-  imageUrl: string;
+  imageUrl:    string;
   // schema.org
-  category: string,
-  cookMeth: string;
-  cuisine: string;
-  yield: string;
-  totalTime: string;
-  prepTime: string;
-  cookTime: string;
-  diet: string;
-  purpose: string;
+  category:    string,
+  cookMeth:    string;
+  cuisine:     string;
+  yield:       string;
+  totalTime:   string;
+  prepTime:    string;
+  cookTime:    string;
+  diet:        string;
+  purpose:     string;
   // recipe have one or more Ingredients
   ingredients: Ingredient[];
 }
 
 export interface Ingredient {
-  name: string;
-  amount: number;
+  name:    string;
+  amount:  number;
   measure: string;
-  note: string;
+  note:    string;
 }

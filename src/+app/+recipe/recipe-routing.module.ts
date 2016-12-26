@@ -1,10 +1,10 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { ReadComponent }        from './read.component';
-import { CreateComponent }      from './create.component';
-import { ReadByIDComponent }    from './readByID.component';
-import { UpdateByIDComponent }  from './updateByID.component';
-import { DeleteByIDComponent }  from './deleteByID.component';
+import { ReadAllComponent }     from './read-all/read-all.component';
+import { CreateComponent }      from './create-update/create.component';
+import { ReadByIDComponent }    from './read-byid/read-byid.component';
+import { UpdateByIDComponent }  from './create-update/update-byid.component';
+
 
 /** htttp://localhost:3000/api/todos?
       value=This%20is%20My%20custom%20POST&
@@ -13,11 +13,20 @@ import { DeleteByIDComponent }  from './deleteByID.component';
       complete=false
 **/
 export const Routing = RouterModule.forChild([
-  { path: 'recipes',           component: ReadComponent},
-  { path: 'recipe/create',     component: CreateComponent },
-  { path: 'recipe/:id',        component: ReadByIDComponent},
-  //  ex: 'recipe/:id/delete'
-  { path: 'recipe/delete/:id', component: DeleteByIDComponent},
+  /*  ? Other Module  */
+  { path: 'recipes',            component: ReadAllComponent},
+  //       recipes/category     RecipesComponent
+  //       recipes/ingredient   15 per page
+  //       recipes/method
+  //       recipes/cuisine
+  //       recipes/diet
+  //       recipes/purpose
+  //       recipes/time [fast, slow, medium]
+  //       recipes/yield [6, >6, <9]
+
+  { path: 'recipe/create',      component: CreateComponent },
+    //    'recipes/show/:id'
+  { path: 'recipe/:rid',        component: ReadByIDComponent},
   //  ex: 'recipe/:id/update'
-  { path: 'recipe/update/:id', component: UpdateByIDComponent}
+  { path: 'recipe/update/:rid', component: UpdateByIDComponent}
 ]);

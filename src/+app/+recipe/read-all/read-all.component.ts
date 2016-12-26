@@ -1,15 +1,15 @@
 import { Component,
          ViewEncapsulation,
          ChangeDetectionStrategy } from '@angular/core';
-import { ModelService }            from '../shared/model/model.service';
+import { ModelService }            from '../../shared/model/model.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
   encapsulation: ViewEncapsulation.Emulated,
   selector: 'read',
-  templateUrl: './read.component.html'
+  templateUrl: './read-all.template.html'
 })
-export class ReadComponent {
+export class ReadAllComponent {
 
   recipes: any[];
 

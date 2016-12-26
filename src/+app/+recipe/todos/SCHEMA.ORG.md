@@ -13,14 +13,14 @@
   [x] recipeCategory:     <Text>
   [x] prepTime:           <Duration> 
   [x] cookTime:           <Duration> 
-  [x] totalTime:          <Duration> 
+  [x] totalTime:          <Duration> automative
   [x] cookingMethod:      <Text> multiple
   [x] recipeCuisine:      <Text> single
   [x] recipeYield:        <Text>
   [x] suitableForDiet:    <RestrictedDiet> ex.: LowFatDiet"
  -[x] purpose:            <Text> пикник, 8 марта, день ВДВ
   [ ] totalWeight:        <Text> yandex, calculate by ingredients
- -[ ] temperature:        <Text> pizza: hot & room tenperature. smth only cold
+-?[ ] temperature:        <Text> pizza: hot & room tenperature. smth only cold
  -[ ] complexity:         <Text> hard, easy, medium
  -[ ] cost:               <Text> $, $$, $$$
   [ ] recipeIngredient:   <Text>
