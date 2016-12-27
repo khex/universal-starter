@@ -4,9 +4,7 @@ import { Inject, Injectable, isDevMode } from '@angular/core';
 export class CacheService {
   static KEY = 'CacheService';
 
-  constructor(@Inject('LRU') public _cache: Map<string, any>) {
-
-  }
+  constructor(@Inject('LRU') public _cache: Map<string, any>) { }
 
   /**
    * check if there is a value in our store
@@ -73,7 +71,6 @@ export class CacheService {
     if (isDevMode() && this._isInvalidValue(key)) {
       throw new Error('Please provide a valid key to save in the CacheService');
     }
-
     return key + '';
   }
 

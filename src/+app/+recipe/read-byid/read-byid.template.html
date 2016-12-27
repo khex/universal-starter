@@ -1,3 +1,89 @@
-<h3>Read By ID:{{id}} Component</h3>
+<div class="page-header">
+  <h2>{{recipe.name}}</h2>
+</div>
 
+<div class="row">
+  <div class="col-md-3 col-xs-6">
+    <a class="thumbnail">
+      <img class="img-rounded"
+           src="{{recipe.imageUrl}}"
+           alt="{{recipe.name}}">
+    </a>
+  </div>
+  <div class="col-md-9">
+    <p>{{recipe.description}}</p>
+    <p>{{recipe.created_at}}</p>
+  </div>
+</div>
+
+<!-------------------
+| Schema.org values |
+scotch.io/tutorials/angular-2-form-validation
+*ngIf="!complexForm.controls['gender'].valid &&
+        complexForm.controls['gender'].touched"
+-------------------->
+<div class="row">
+  <div class="col-md-6">
+    <div *ngIf="schema?.category">
+      <p><b>Категория:</b> {{schema.category}}</p>
+    </div>
+    <div *ngIf="schema?.method">
+      <p><b>Метод приготовления:</b> {{schema.method}}</p>
+    </div>
+    <div *ngIf="schema?.cuisine">
+      <p><b>Кухня:</b> {{schema.cuisine}}</p>
+    </div>
+    <div *ngIf="schema?.yield">
+      <p><b>К-во порций:</b> {{schema.yield}}</p>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="schema?.firDiet?.length > 0">
+      <p><b>Для диеты:</b> {{schema.firDiet}}</p>
+    </div>
+    <div *ngIf="schema?.purpose">
+      <p><b>Подходит для:</b> {{schema.purpose}}</p>
+    </div>
+    <div *ngIf="schema?.weight">
+      <p><b>Вес блюда:</b> {{schema.weight}}</p>
+    </div>
+    <div *ngIf="schema?.complexity">
+      <p><b>Сложность приготовления:</b> {{schema.complexity}}</p>
+    </div>
+    <div *ngIf="schema?.cost">
+      <p><b>Стоимость:</b> {{schema.cost}}</p>
+    </div>
+    <div *ngIf="schema?.calories">
+      <p><b>Калораж:</b> {{schema.calories}}</p>
+    </div>
+  </div>
+</div>
+
+<!-----------------
+    INGREDIENTS 
+------------------>
+
+<div class="page-header">
+  <h3>Ингредиенты</h3>
+</div>
+<div *ngIf="recipe?.ingredients">
+  <div *ngFor="let i of ingred">
+    <p><b>{{i.name}}</b> - {{i.amount}} {{i.meas}} <i>{{i.note}}</i></p>
+  </div>
+<div>
+
+<!------------------
+    INSTRUCTIONS 
+------------------->
+
+<div *ngIf="recipe?.instructions" class="panel panel-warning">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Инструкции</div>
+  <!-- List group -->
+  <ul *ngFor="let inst of instra" class="list-group">
+    <li class="list-group-item">{{inst.descript}}</li>
+  </ul>
+</div>
+<!--
 <pre>{{ recipe | json }}</pre>
+-->

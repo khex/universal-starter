@@ -10,9 +10,8 @@ import { CacheService  } from './cache.service';
 
 @Injectable()
 export class ApiService {
-  constructor(public _http: Http) {
 
-  }
+  constructor(public _http: Http) { }
 
  /**
   * whatever domain/feature method name
