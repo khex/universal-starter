@@ -24,6 +24,32 @@ import { MainModule }     from './node.module';
 // Routes
 import { routes }         from './server.routes';
 
+/******************************
+**         MONGOOSE          **
+******************************/
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+let uri = 'mongodb://khex:qwerty@ds145128.mlab.com:45128/legubase';
+mongoose.connect(uri, (err) => {
+  if (err) { console.log(err.message); }
+  else     { console.log('Connected to MongoDb'); }
+});
+
+let RecipeSchema = new Schema({
+  name: String,
+  image: String,
+  description: String
+});
+
+let Recipe = mongoose.model('Recipe', RecipeSchema);
+let recipe = new Recipe({
+  name: 'Пицца по-милански',
+  image: 'pizza.jpg',
+  description: 'The firs Recipe entrance in MongoDB'
+});
+//recipe.save();
+
 // enable prod for faster renders
 enableProdMode();
 
@@ -57,15 +83,9 @@ function cacheControl(req, res, next) {
   next();
 }
 // Serve static files
-app.use('/assets',
-        cacheControl,
-        express.static(path.join(__dirname, 'assets'),
-                      {maxAge: 30})
+app.use('/assets', cacheControl, express.static(path.join(__dirname, 'assets'), {maxAge: 30})
 );
-app.use(cacheControl,
-        express.static(path.join(ROOT, 'dist/client'),
-                      {index: false})
-);
+app.use(cacheControl, express.static(path.join(ROOT, 'dist/client'), {index: false}));
 
 
   ///////////////////
@@ -78,6 +98,14 @@ import { TodoApi,
 app.get('/data.json',   ServerApi);
 app.use('/api/todos',   TodoApi());
 app.use('/api/recipes', RecipeApi());
+
+/** MongoLab **/
+app.get('/api-serv/recipes', (req, res) => {
+  Recipe.find({}, (err, docs) => {
+    if (err) { console.log(err.message); }
+    else     { res.send(docs); }
+  });
+});
 
 function ngApp(req, res) {
   res.render('index', {
