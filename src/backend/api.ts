@@ -1,8 +1,8 @@
 var util       = require('util');
+//  import { inspect } from 'util';
 var { Router } = require('express');
 import { fakeDataBase }   from './db';
 import { fakeRedisCache } from './cache';
-
 
 /**************************
 *   Fake DB & Cache API   *
@@ -116,13 +116,14 @@ var RecipesDB = [{
     name: 'Пицца по-милански',
     description: 'Рецепт пиццы по-милански из книги "Всевозможные рецепты пиццы и макаронных изделий", авторства одного из лучших шеф-поваров Северной Америки, Рона Каленьюика.',
     url: 'http://localhost:3000/recipe/1/pizza-po-milanski',
-    created_at: "2016-12-25T12:35:00.000Z",
-    imageUrl: 'assets/images/rid-1.jpg',
+    datePublished: "2016-12-25T12:35:00.000Z",
+    image: 'assets/images/rid-1.jpg',
+    author: 'Рон Каленьюик',
     schema: {
       category:   'Основные блюда',
       // <meta itemprop="prepTime" content="PT15M">15 minutes
       // write own pipe ro convrt
-      //prepTime:   'PT8M',
+      prepTime:   'PT10M',
       //cookTime:   'PT12M',
       totalTime:  'PT20M',
       method:    ['выпекание'],
@@ -133,7 +134,7 @@ var RecipesDB = [{
       weight:      0,
       complexity: 'medium',
       cost:       '$$',
-      calories:    0,
+      calories:    2450,
     },
     ingredients: [{
         group: '',
@@ -187,10 +188,10 @@ var RecipesDB = [{
         </span>
       **/
     instructions: [
-      {descript: 'Приготовьте тесто для пиццы, как указано в рецепте. Полейте соусом и положите нарезаную колбасу.'},
-      {descript: 'Повыпьте сыром. Сверху положите красный сладкий перец и лук.'},
-      {descript: 'Выпекайте в предварительно разогретой до 230 градусов духовку10-12 минут или до образования золотистой кррочки.'},
-      {descript: 'Получаеться две пиццы диаметром по 30 см.'}
+      {step: 'Приготовьте тесто для пиццы, как указано в рецепте. Полейте соусом и положите нарезаную колбасу.'},
+      {step: 'Повыпьте сыром. Сверху положите красный сладкий перец и лук.'},
+      {step: 'Выпекайте в предварительно разогретой до 230 градусов духовку10-12 минут или до образования золотистой кррочки.'},
+      {step: 'Получаеться две пиццы диаметром по 30 см.'}
     ]
   }, {
     rid: 2,

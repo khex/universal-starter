@@ -14,7 +14,5 @@ export const routes: string[] = [
   'home',
   'todo',
   'lazy',
-  'recipe',
-  'add-recipe',
-  'post'
+  'recipes'
 ];

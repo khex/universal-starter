@@ -6,7 +6,7 @@
   <div class="col-md-3 col-xs-6">
     <a class="thumbnail">
       <img class="img-rounded"
-           src="{{recipe.imageUrl}}"
+           src="{{recipe.image}}"
            alt="{{recipe.name}}">
     </a>
   </div>
@@ -75,15 +75,15 @@ scotch.io/tutorials/angular-2-form-validation
 <!------------------
     INSTRUCTIONS 
 ------------------->
-
 <div *ngIf="recipe?.instructions" class="panel panel-warning">
   <!-- Default panel contents -->
   <div class="panel-heading">Инструкции</div>
   <!-- List group -->
   <ul *ngFor="let inst of instra" class="list-group">
-    <li class="list-group-item">{{inst.descript}}</li>
+    <li class="list-group-item">{{inst.step}}</li>
   </ul>
 </div>
+
 <!--
 <pre>{{ recipe | json }}</pre>
 -->
