@@ -28,7 +28,7 @@ import { routes }         from './server.routes';
 **         MONGOOSE          **
 ******************************/
 var mongoose = require('mongoose');
-var Recipe   = require('./backend/RecipeModel');
+var RR       = require('./backend/recipe-router');
 
 let uri = 'mongodb://khex:qwerty@ds145128.mlab.com:45128/legubase';
 mongoose.connect(uri, (err) => {
@@ -82,26 +82,7 @@ import { TodoApi, ServerApi } from './backend/api';
 
 app.get('/data.json',   ServerApi);
 app.use('/api/todos',   TodoApi());
-
-
-  ////////////////////
- //    MongoLab    //
-////////////////////
-app.get('/api/recipes', (req, res) => {
-  Recipe.find({}, (err, docs) => {
-    if (err) { console.log(err.message); }
-    else     { res.send(docs); }
-  });
-});
-
-app.get('/api/recipes/:rid', (req, res) => {
-  var rid = Number(req.params.rid);
-  Recipe.findOne({'rid': rid}, (err, doc) => {
-    if (err) { console.log(err.message); }
-    else     { res.json(doc); }
-  });
-});
-//  end mongolab
+app.use('/api/recipes', RR);
 
 function ngApp(req, res) {
   res.render('index', {
