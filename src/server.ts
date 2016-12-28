@@ -28,7 +28,7 @@ import { routes }         from './server.routes';
 **         MONGOOSE          **
 ******************************/
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var Recipe   = require('./backend/RecipeModel');
 
 let uri = 'mongodb://khex:qwerty@ds145128.mlab.com:45128/legubase';
 mongoose.connect(uri, (err) => {
@@ -36,19 +36,6 @@ mongoose.connect(uri, (err) => {
   else     { console.log('Connected to MongoDb'); }
 });
 
-let RecipeSchema = new Schema({
-  name: String,
-  image: String,
-  description: String
-});
-
-let Recipe = mongoose.model('Recipe', RecipeSchema);
-let recipe = new Recipe({
-  name: 'Пицца по-милански',
-  image: 'pizza.jpg',
-  description: 'The firs Recipe entrance in MongoDB'
-});
-//recipe.save();
 
 // enable prod for faster renders
 enableProdMode();
@@ -91,26 +78,36 @@ app.use(cacheControl, express.static(path.join(ROOT, 'dist/client'), {index: fal
   ///////////////////
  //  Example API  //
 ///////////////////
-import { TodoApi,
-         ServerApi,
-         RecipeApi } from './backend/api';
+import { TodoApi, ServerApi } from './backend/api';
 
 app.get('/data.json',   ServerApi);
 app.use('/api/todos',   TodoApi());
-app.use('/api/recipes', RecipeApi());
 
-/** MongoLab **/
-app.get('/api-serv/recipes', (req, res) => {
+
+  ////////////////////
+ //    MongoLab    //
+////////////////////
+app.get('/api/recipes', (req, res) => {
   Recipe.find({}, (err, docs) => {
     if (err) { console.log(err.message); }
     else     { res.send(docs); }
   });
 });
 
+app.get('/api/recipes/:rid', (req, res) => {
+  var rid = Number(req.params.rid);
+  Recipe.findOne({'rid': rid}, (err, doc) => {
+    if (err) { console.log(err.message); }
+    else     { res.json(doc); }
+  });
+});
+//  end mongolab
+
 function ngApp(req, res) {
   res.render('index', {
     req, res,
-    // time: true, // use this to determine what part of your app is slow only in development
+    // time: true, // use this to determine what part
+    //of your app is slow only in development
     preboot: false,
     baseUrl: '/',
     requestUrl: req.originalUrl,

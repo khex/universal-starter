@@ -19,7 +19,7 @@ export class ReadAllComponent {
 
   universalInit() {
     this.model
-      .get('/api-serv/recipes')
+      .get('/api/recipes')
       .subscribe(data => {
         console.log(data);
         this.recipes = data;

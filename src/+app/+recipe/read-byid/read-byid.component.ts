@@ -8,6 +8,8 @@ import { ActivatedRoute }          from '@angular/router';
 import { ModelService }            from '../../shared/model/model.service';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Default,
+  encapsulation: ViewEncapsulation.Emulated,
   selector: 'read-by-ID',
   templateUrl: './read-byid.template.html'
 })
@@ -38,8 +40,6 @@ export class ReadByIDComponent {
         this.schema = data.schema;
         this.ingred = data.ingredients;
         this.instra = data.instructions;
-        //console.log(this.recipe);
-        //console.log(this.schema);
     });
 
   }
