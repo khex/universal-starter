@@ -24,18 +24,6 @@ import { MainModule }     from './node.module';
 // Routes
 import { routes }         from './server.routes';
 
-/******************************
-**         MONGOOSE          **
-******************************/
-var mongoose = require('mongoose');
-var RR       = require('./backend/recipe-router');
-
-let uri = 'mongodb://khex:qwerty@ds145128.mlab.com:45128/legubase';
-mongoose.connect(uri, (err) => {
-  if (err) { console.log(err.message); }
-  else     { console.log('Connected to MongoDb'); }
-});
-
 
 // enable prod for faster renders
 enableProdMode();
@@ -79,6 +67,7 @@ app.use(cacheControl, express.static(path.join(ROOT, 'dist/client'), {index: fal
  //  Example API  //
 ///////////////////
 import { TodoApi, ServerApi } from './backend/api';
+var RR  = require('./backend/recipe-router');
 
 app.get('/data.json',   ServerApi);
 app.use('/api/todos',   TodoApi());

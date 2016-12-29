@@ -1,6 +1,16 @@
-var express   = require('express');
-var Recipe    = require('./recipe-model');
-var RR        = express.Router();
+var express  = require('express');
+var mongoose = require('mongoose');
+var Recipe   = require('./recipe-model');
+var RR       = express.Router();
+
+/***********************
+**    MLAB TESTING    **
+************************/
+let uri = 'mongodb://khex:qwerty@ds145128.mlab.com:45128/legubase';
+mongoose.connect(uri, (err) => {
+  if (err) { console.log(err.message); }
+  else     { console.log('Connected to MongoDb'); }
+});
 
 RR.use((req, res, next) => {
   console.log('Somebody just came to RR');
