@@ -31,7 +31,7 @@
       <label class="col-sm-3 control-label">Основное фото:</label>
       <div class="col-sm-9">
         <input class="form-control" type="text"
-              [formControl]="myForm.controls['imageUrl']">
+              [formControl]="myForm.controls['image']">
       </div>
     </div>
 
@@ -56,10 +56,15 @@
     <!--  Ingredients Array  -->
     <div formArrayName="ingredients">
 
-      <div *ngFor="let address of myForm.controls.ingredients.controls">
+      <div *ngFor="let address of myForm.controls.ingredients.controls;
+                   let i=index">
 
         <!-- Ingredient -->
         <div class="form-group" [formGroupName]="i">
+
+          <!--  Ingredient Index
+          <div class="col-sm-1"> <b>{{i + 1}}.</b> </div>
+          -->
 
           <!--  Ingredient Group  -->
           <div class="col-sm-2 col-ingred">
@@ -1032,7 +1037,7 @@
           </div>
 
           <!--  Ingredient Amount  -->
-          <div class="col-sm-1 col-ingred">
+          <div class="col-sm-2 col-ingred">
             <input class="form-control" type="text"
                    formControlName="amount">
           </div>
@@ -1067,7 +1072,7 @@
           </div>
 
           <!--  Ingredient Note  -->
-          <div class="col-sm-4 col-ingred">
+          <div class="col-sm-3 col-ingred">
             <input class="form-control" type="text"
                    style="width: 90%; display: inline;"
                    formControlName="note">
@@ -1084,9 +1089,50 @@
     <div class="margin-20">
       <a (click)="addIngredient()" style="cursor: default">Добавить ингредиент</a>
     </div>
+  
+    <!--
+        Instructions
+    -->
+    <legend>Инструкции</legend>
+
+    <p>Укажите пошаговые инструкции</p>
+
+    <!-- Schema.org: Recipe > recipeInstructions <Text> [g,y] +-->
+    <!-- Instructions Array  -->
+    <div formArrayName="instructions">
+
+      <div *ngFor="let address of myForm.controls.instructions.controls;
+                   let i=index">
+
+        <!-- Instruction -->
+        <div class="form-group" [formGroupName]="i">
+
+          <!--  Ingredient Index
+          <div class="col-sm-1"> <b>{{i + 1}}.</b> </div>
+          -->
+
+          <!--  Ingredient Note  -->
+          <div class="col-sm-11 col-ingred">
+            <input class="form-control" type="text"
+                   style="width: 90%; display: inline;"
+                   formControlName="step">
+            <span class="glyphicon glyphicon-remove pull-right"
+                  *ngIf="myForm.controls.instructions.controls.length > 1"
+                  (click)="removeInstruction(i)">
+            </span>              
+          </div>
+          
+        </div>
+      </div><!-- end *ngFor-->
+    </div><!-- formArrayName="instructions"> -->
+    
+    <div class="margin-20">
+      <a (click)="addInstruction()" style="cursor: default">Добавить ингредиент</a>
+    </div>
 
     <!--
         Schema.org Values
+        from temp.html
     -->
     <legend>Recipe Schema.org</legend>
     <div class="form-group">
@@ -1137,8 +1183,9 @@
           <option value= "19, в микроволновке">в микроволновке</option>
         </select>
       </div>
-    </div>
-    
+
+    </div><!-- form-group -->
+
     <div class="form-group">
 
       <!-- Schema.org: Recipe > recipeCuisine <Text> [g,y] +-->
@@ -1281,7 +1328,8 @@
         <input class="form-control" type="text"
               [formControl]="myForm.controls['yield']">
       </div>
-    </div>
+
+    </div><!-- form-group -->
 
     <!-- Schema.org: Recipe > totalTime, prepTime, cookTime
         <Duration> in ISO 8601 format. [g,y] + -->
@@ -1353,16 +1401,8 @@
 
     </div><!-- form-group -->
 
-
     <div class="form-group">
       
-      <!-- Schema.org: Recipe > nutrition > calories <Energy> [g,y] +-->
-      <label class="col-md-3 control-label">Калораж:</label>
-      <div class="col-md-3">
-        <input class="form-control" type="text" 
-               [formControl]="myForm.controls['calories']">
-      </div>
-
       <!-- Schema.org: Recipe > costs <Text> [myValue] +-->
       <label class="col-md-3 control-label">Стоимость:</label>
       <div class="col-md-3">
@@ -1394,9 +1434,8 @@
     <div class="form-group">
       <label class="col-md-3 control-label"></label>
       <div class="col-md-4">
-        <button type="submit"
-                class="btn btn-primary"
-                [disabled]="!myForm.valid">Send
+        <button class="btn btn-primary" type="submit"
+               [disabled]="!myForm.valid">Send
         <span class="glyphicon glyphicon-send"></span></button>
       </div>
 
@@ -1422,14 +1461,14 @@
 <!--
     <label>Country:</label> 
     <select [(ngModel)]="selectedCountry.id" (change)="onSelect($event.target.value)">
-      <option value="0">--Select--</option>
+      <option value="0">Select</option>
       <option *ngFor="let country of countries" value= {{country.id}}>{{country.name}}</option>
     </select>
     <br/><br/>
     <div>
     <label>State:</label>
     <select>
-      <option *ngIf='selectedCountry.id == 0' value="0">--Select--</option>
+      <option *ngIf='selectedCountry.id == 0' value="0">Select</option>
       <option *ngFor="let state of states " value= {{state.id}}>{{state.name}}</option>
     </select>
     </div>

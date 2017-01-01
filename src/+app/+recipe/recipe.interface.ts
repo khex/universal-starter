@@ -4,10 +4,11 @@ export interface Recipe {
   // required field with minimum 5 characters
   name:        string;
   description: string;
-  imageUrl:    string;
+  image:       string;
+  date:        string;
   // schema.org
   category:    string,
-  cookMeth:    string;
+  method:      string;
   cuisine:     string;
   yield:       string;
   totalTime:   string;
@@ -15,13 +16,20 @@ export interface Recipe {
   cookTime:    string;
   diet:        string;
   purpose:     string;
-  // recipe have one or more Ingredients
+  costs:       string;
+  complxty:    string;
+  instructions:Instruction[];
   ingredients: Ingredient[];
 }
 
 export interface Ingredient {
+  group:   string;
   name:    string;
-  amount:  number;
+  amount:  string;
   measure: string;
   note:    string;
+}
+
+export interface Instruction {
+  step: string;   
 }

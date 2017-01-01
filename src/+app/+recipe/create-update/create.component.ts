@@ -25,37 +25,40 @@ export class CreateComponent implements OnInit{
   ngOnInit() {
     // we will initialize our form here
     this.myForm = this._fb.group({
-      name:        ['Пицца с ветчиной и шампиньонами', [Validators.required, Validators.minLength(5)]],
+      name:        ['Пицца с ветчиной и шампиньонами'],
       description: ['Пицца "В день рождения сына". У сына внезапно приключился день рождения'],
-      imageUrl:    ['http://www.povarenok.ru/images/recipes/27/2786/278630.jpg'],
+      image:       ['http://www.povarenok.ru/images/recipes/27/2786/278630.jpg'],
       date:        new Date(), // set format dd:mm:hhhh
       // schema.org
-      category:  [''],
-      method:    [''],
-      cuisine:   [''],
-      yield:     [''],
-      totalTime: [''],
-      prepTime:  [''],
-      cookTime:  [''],
-      diet:      [''],
-      purpose:   [''],
-      calories:  [''],
-      costs:     [''],
-      complxty:  [''],
-      ingredients: this._fb.array([ this.initIngredient() ])
+      category:    [''],
+      method:      [''],
+      cuisine:     [''],
+      yield:       [''],
+      totalTime:   [''],
+      prepTime:    [''],
+      cookTime:    [''],
+      diet:        [''],
+      purpose:     [''],
+      costs:       [''],
+      complxty:    [''],
+      // arrays
+      instructions:this._fb.array([ this.initInstruction() ]),
+      ingredients: this._fb.array([ this.initIngredient()  ])
     });
   }
 
+
+  /** INGREDIENT LOGIC **/
   initIngredient() {
     return this._fb.group({
+      group:   [''],
       name:    [''],
       amount:  [''],
       measure: [''],
-      note:    [''],
-      group:   [''],
+      note:    ['']
     });
   }
-  
+
   addIngredient() {
     // add ingredient to the list
     const control = <FormArray>this.myForm.controls['ingredients'];
@@ -67,6 +70,27 @@ export class CreateComponent implements OnInit{
     const control = <FormArray>this.myForm.controls['ingredients'];
     control.removeAt(i);
   }
+
+
+  /** INSTRUCTION LOGIC **/
+  initInstruction() {
+    return this._fb.group({
+      step:    ['']
+    });
+  }
+
+  addInstruction() {
+    // add ingredient to the list
+    const control = <FormArray>this.myForm.controls['instructions'];
+    control.push(this.initInstruction());
+  }
+
+  removeInstruction(i: number) {
+    // remove ingredient from the list
+    const control = <FormArray>this.myForm.controls['instructions'];
+    control.removeAt(i);
+  }
+
 
   //save(model: Recipe): void {
   save(myForm): void {
