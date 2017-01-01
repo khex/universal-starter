@@ -4,8 +4,4 @@ import { Component } from '@angular/core';
   selector: 'update-by-ID',
   template: `<h3>Update By ID:{{id}} Component</h3>`
 })
-export class UpdateByIDComponent {
-  
-  id:number = 1715;
-
-}
+export class UpdateByIDComponent { }

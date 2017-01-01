@@ -28,23 +28,25 @@ export class CreateComponent implements OnInit{
       name:        ['Пицца с ветчиной и шампиньонами', [Validators.required, Validators.minLength(5)]],
       description: ['Пицца "В день рождения сына". У сына внезапно приключился день рождения'],
       imageUrl:    ['http://www.povarenok.ru/images/recipes/27/2786/278630.jpg'],
+      date:        new Date(), // set format dd:mm:hhhh
       // schema.org
-      category:   [''],
-      cookMeth:   [''],
-      cuisine:    [''],
-      yield:      [''],
-      totalTime:  [''],
-      prepTime:   [''],
-      cookTime:   [''],
-      diet:       [''],
-      purpose:    [''],
-      //ingredients
+      category:  [''],
+      method:    [''],
+      cuisine:   [''],
+      yield:     [''],
+      totalTime: [''],
+      prepTime:  [''],
+      cookTime:  [''],
+      diet:      [''],
+      purpose:   [''],
+      calories:  [''],
+      costs:     [''],
+      complxty:  [''],
       ingredients: this._fb.array([ this.initIngredient() ])
     });
   }
 
   initIngredient() {
-    // initialize our ingredients
     return this._fb.group({
       name:    [''],
       amount:  [''],
