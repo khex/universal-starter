@@ -7,8 +7,7 @@
  - Ingredients
    - [x] ingredients **v0.2.9**
    - [x] measure **v0.2.9**
-   - [ ] repair "Добавить ингредиент"
-   - [ ] build <select> by Angyular
+   - [x] repair "Добавить ингредиент" **v0.2.11**
  - [x] category **v0.2.9**
  - [х] method **v0.2.9**
  - Cuisine
@@ -21,3 +20,11 @@
  - [x] calories **v0.2.9**
  - [x] costs **v0.2.9**
  - [x] complxty **v0.2.9**
+ - [ ] add "placeholders" to all fields
+ - [ ] add comments to all `ng2-select` functions
+ - [ ] change `Ingred._fb.group['name']`
+ - [ ] change `Ingred._fb.group['measure']`
+
+ - [ ] move `sckima` to own fb.group
+ - [ ] resize `create page` to 12 without panel
+ - [ ] make `create page` pop-up?

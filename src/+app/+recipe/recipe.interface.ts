@@ -1,6 +1,6 @@
 // recipe.interface.ts
 
-export interface Recipe {
+export interface IRecipe {
   // required field with minimum 5 characters
   name:        string;
   description: string;
@@ -18,11 +18,11 @@ export interface Recipe {
   purpose:     string;
   costs:       string;
   complxty:    string;
-  instructions:Instruction[];
-  ingredients: Ingredient[];
+  instructions:IInstruction[];
+  ingredients: IIngredient[];
 }
 
-export interface Ingredient {
+export interface IIngredient {
   group:   string;
   name:    string;
   amount:  string;
@@ -30,6 +30,6 @@ export interface Ingredient {
   note:    string;
 }
 
-export interface Instruction {
+export interface IInstruction {
   step: string;   
 }
