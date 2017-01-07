@@ -1,4 +1,4 @@
-export const Ingreds = [
+export const IngredsData = [
   {iid:  1, name: 'Абрикос'},
   {iid:  2, name: 'Авокадо'},
   {iid:  3, name: 'Агар-агар'},

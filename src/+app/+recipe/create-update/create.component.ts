@@ -9,7 +9,8 @@ import { FormGroup,
          FormBuilder }       from '@angular/forms';
 
 import { IRecipe }           from '../recipe.interface';
-import { Ingreds }           from './ingred-data';
+import { IngredsData }           from './ingreds-data';
+import { CuisineData }       from './cuisine-data';
 
 @Component({
   selector:    'create',
@@ -18,39 +19,18 @@ import { Ingreds }           from './ingred-data';
 })
 export class CreateComponent implements OnInit{
 
-  /**  NG2-SELECT  **/
-  private value:any = {};
-  private _disabledV:string = '0';
-  private disabled:boolean = false;
-  private items:Array<any> = [];
-
-  private get disabledV():string {
-    return this._disabledV;
-  }
-
-  private set disabledV(value:string) {
-    this._disabledV = value;
-    this.disabled = this._disabledV === '1';
-  }
-
-  public selected(value:any):void {
-    console.log('Selected value is: ', value);
-  }
-
-  public removed(value:any):void {
-    console.log('Removed value is: ', value);
-  }
-
-  public typed(value:any):void {
-    console.log('New search input: ', value);
-  }
-
-  public refreshValue(value:any):void {
-    this.value = value;
-  }
-  /**  end of NG2-SELECT  **/
-
   public myForm: FormGroup;
+
+  /**  ng2-select > Cuisine  **/
+  private cuisineObjc:any = {};
+  private cuisineData:Array<any> = CuisineData;
+
+  public refreshValue(cuisine:any):void {
+    this.cuisineObjc = cuisine;
+    /** stackoverflow.com/questions/35039610 **/
+    this.myForm.patchValue({cuisine: `${cuisine.id}, ${cuisine.text}`});
+  }
+
 
   constructor(@Inject(FormBuilder) private _fb: FormBuilder) { }
 
