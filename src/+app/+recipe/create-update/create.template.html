@@ -34,7 +34,8 @@
               [formControl]="myForm.controls['image']">
       </div>
     </div>
-
+    
+    <!-- ng2-select Ingredients example  
     <div class="form-group">
       <label class="col-sm-3 control-label">Selec Item:</label>
       <div class="col-sm-9">
@@ -49,7 +50,7 @@
       </ng-select>
       </div>
     </div>
-
+    -->
 
     <!--
         Ingredient
@@ -1154,12 +1155,12 @@
     <div class="form-group">
 
       <!-- Schema.org: Recipe > recipeCategory <Text> [g,y] +-->
-      <label class="col-md-3 control-label">Категория:</label>
-      <div class="col-md-3">
+      <label class="col-md-2 control-label">Категория:</label>
+      <div class="col-md-4">
         <select class="form-control"
-               [formControl]="myForm.controls['category']">
-          <!-- или в однині recipe is 'salad' -->
-          <option value= "0, nodata"        >не выбрано</option>
+                placeholder="выберете что-то"
+                [formControl]="myForm.controls['category']">
+          <!-- чи в однині recipe is 'salad' -->
           <option value= "1, Салаты"        >Салаты</option>
           <option value= "2, Закуски"       >Закуски</option>
           <option value= "3, Супы и Бульоны">Супы и Бульоны</option>
@@ -1172,59 +1173,15 @@
         </select>
       </div>
 
-      <!-- Schema.org: Recipe > cookingMethod <Text> [g,y] +-->
-      <label class="col-md-3 control-label">Способ приготовления:</label>
-      <div class="col-md-3">
-        <select class="form-control"
-               [formControl]="myForm.controls['method']">
-          <option value=  "0, nodata"   >не выбрано</option>
-          <option value=  "1, жарка"    >жарка</option>
-          <option value=  "2, выпекание">выпекание</option>
-          <option value=  "3, тушение"  >тушение</option>
-          <option value=  "4, варка"    >варка</option>
-          <option value=  "5, на пару"  >на пару</option>
-          <option value=  "6, квашение" >квашение</option>
-          <option value=  "7, сушение"  >сушение</option>
-          <option value=  "8, соление"  >соление</option>
-          <option value=  "9, копчение" >копчение</option>
-          <option value= "10, вяление"  >вяление</option>
-          <option value= "11, замораживание"  >замораживание</option>
-          <option value= "12, маринование"    >маринование</option>
-          <option value= "13, консервирование">консервирование</option>
-          <option value= "14, на углях гриль" >гриль, на углях</option>
-          <option value= "15, в аэрогриле"    >в аэрогриле</option>
-          <option value= "16, в микроволновке">в микроволновке</option>
-          <option value= "17, в скороварке"   >в скороварке</option>
-          <option value= "18, в мультиварке"  >в мультиварке</option>
-          <option value= "19, в микроволновке">в микроволновке</option>
-        </select>
-      </div>
-
-    </div><!-- form-group -->
-
-    <div class="form-group">
-
       <!-- Schema.org: Recipe > recipeCuisine <Text> [g,y] +-->
-      <label class="col-md-3 control-label">Кухня:</label>
-      <div class="col-md-3">
+      <label class="col-md-2 control-label">Кухня:</label>
+      <div class="col-md-4">
         <!-- [formControl]="myForm.controls['cuisine']" -->
         <ng-select [allowClear]="true"
                    [items]="cuisineData"
-                   (data)="refreshValue($event)"
+                   (data)="refreshCuisine($event)"
                    placeholder="выберете кухню">
-      </ng-select>
-      </div>
-
-      <!-- Schema.org: Recipe > recipeCuisine <Text> [g,y] +
-           Или количество шт. напр. печеньки - 28 шт.
-           Савоярди - 100 шт.
-           Переделать форму ввода под калькулятор
-           К-во [number] [порц., шт.]
-      -->
-      <label class="col-md-3 control-label">К-во порций:</label>
-      <div class="col-md-3">
-        <input class="form-control" type="text"
-              [formControl]="myForm.controls['yield']">
+        </ng-select>
       </div>
 
     </div><!-- form-group -->
@@ -1233,21 +1190,53 @@
         <Duration> in ISO 8601 format. [g,y] + -->
     <div class="form-group">
 
-      <label class="col-sm-3 control-label">Время приготовления:</label> 
-      <div class="col-sm-3"> 
-        <input class="form-control" type="text"
-               placeholder="Общее время чч:мм"
-              [formControl]="myForm.controls['totalTime']">
-      </div>
-      <div class="col-md-3">
+      <label class="col-sm-2 control-label">Подготовка:</label> 
+      <div class="col-md-4">
         <input class="form-control" type="text"
                placeholder="Время подготовки чч:мм"
               [formControl]="myForm.controls['prepTime']">
       </div>
+      
+      <label class="col-sm-2 control-label">Общее:</label> 
+      <div class="col-md-4">
+        <input class="form-control" type="text"
+               placeholder="Общее время чч:мм"
+              [formControl]="myForm.controls['totalTime']">
+      </div>
+      <!--
       <div class="col-md-3">
         <input class="form-control" type="text"
                placeholder="Время готовки чч:мм"
               [formControl]="myForm.controls['cookTime']">
+      </div>
+      -->
+    </div><!-- form-group -->
+
+    <div class="form-group">
+      <!-- Schema.org: Recipe > cookingMethod <Text> [g,y] +-->
+      <label class="col-md-2 control-label">Способ:</label>
+      <div class="col-md-4">
+        <!-- [formControl]="myForm.controls['method']" -->
+        <ng-select (data)="methods"
+                   [multiple]="true"
+                   [items]="methodItems"
+                   [disabled]="disabled"
+                   (data)="refreshMethod($event)"
+                   placeholder="&nbsp;&nbsp;выберете способ">
+        </ng-select>
+      </div>
+
+      <!-- Schema.org: Recipe > recipePurpose <Text> [myValue] +-->
+      <label class="col-md-2 control-label">Назначение:</label>
+      <div class="col-md-4">
+        <!-- [formControl]="myForm.controls['purpose']" -->
+        <ng-select (data)="purpose"
+                   [multiple]="true"
+                   [items]="purposeItems"
+                   [disabled]="disabled"
+                   (data)="refreshPurpose($event)"
+                   placeholder="&nbsp;&nbsp;выберете назначение">
+        </ng-select>
       </div>
 
     </div><!-- form-group -->
@@ -1255,11 +1244,11 @@
     <div class="form-group">
       
       <!-- Schema.org: Recipe > suitableForDiet <RestrictedDiet> [g,y] +-->
-      <label class="col-md-3 control-label">Подходит для диеты:</label>
-      <div class="col-md-3">
+      <label class="col-md-2 control-label">Диета:</label>
+      <div class="col-md-4">
         <select class="form-control"
-               [formControl]="myForm.controls['diet']">
-          <option value= "0, nodata"         >не выбрано</option>
+               [formControl]="myForm.controls['diet']"
+               placeholder="выберете диету">
           <option value= "1, При диабете"    >При диабете</option>
           <option value= "2, Безглютеновая"  >Безглютеновая</option>
           <option value= "3, Халяль"         >Халяль</option>
@@ -1273,28 +1262,17 @@
         </select>
       </div>
 
-      <!-- Schema.org: Recipe > recipePurpose <Text> [myValue] +-->
-      <label class="col-md-3 control-label">Назначение блюда:</label>
-      <div class="col-md-3">
-        <select class="form-control"
-               [formControl]="myForm.controls['purpose']">
-          <option value= "0, nodata"           >не выбрано</option>
-          <option value= "1, На завтрак"       >На завтрак</option>
-          <option value= "2, На обед"          >На обед</option>
-          <option value= "3, Полудник"         >Полудник</option>
-          <option value= "4, На ужин"          >На ужин</option>
-          <option value= "5, Праздничное блюдо">Праздничное блюдо</option>
-          <option value= "6, Для детей"        >Для детей</option>
-          <option value= "7, Неожиданные гости">Неожиданные гости</option>
-          <option value= "8, На природу"       >На природу</option>
-          <option value= "9, 8 Марта"          >8 Марта</option>
-          <option value="10, 23 февраля"       >23 февраля</option>
-          <option value="11, Новый год"        >Новый год</option>
-          <option value="12, Пасха"            >Пасха</option>
-          <option value="13, Рождество"        >Рождество</option>
-          <option value="14, День рождения"    >День рождения</option>
-          <option value="15, День влюбленных"  >День влюбленных</option>
-        </select>
+      <!-- Schema.org: Recipe > recipeCuisine <Text> [g,y] +
+           Или количество шт. напр. печеньки - 28 шт.
+           Савоярди - 100 шт.
+           Переделать форму ввода под калькулятор
+           К-во [number] [порц., шт.]
+      -->
+      <label class="col-md-2 control-label">Количество:</label>
+      <div class="col-md-4">
+        <input class="form-control" type="text"
+              [formControl]="myForm.controls['yield']"
+              placeholder="введите количество">
       </div>
 
     </div><!-- form-group -->
@@ -1302,11 +1280,11 @@
     <div class="form-group">
       
       <!-- Schema.org: Recipe > costs <Text> [myValue] +-->
-      <label class="col-md-3 control-label">Стоимость:</label>
-      <div class="col-md-3">
+      <label class="col-md-2 control-label">Стоимость:</label>
+      <div class="col-md-4">
         <select class="form-control"
-               [formControl]="myForm.controls['costs']">
-          <option value= "0, nodata">не выбрано</option>
+                [formControl]="myForm.controls['costs']">
+          <option value= "" selected>введите стоимость</option>
           <option value= "1, $"     >$</option>
           <option value= "2, $$"    >$$</option>
           <option value= "3, $$$"   >$$$</option>
@@ -1314,15 +1292,14 @@
       </div>
 
       <!-- Schema.org: Recipe > complexity <Text> [myValue] +-->
-      <label class="col-md-3 control-label">Сложность приготовления:</label>
-      <div class="col-md-3">
+      <label class="col-md-2 control-label">Сложность:</label>
+      <div class="col-md-4">
         <select class="form-control"
-               [formControl]="myForm.controls['complxty']">
-          <option value= "0, nodata"     >не выбрано</option>
-          <option value= "1, Новичок"    >Новичок</option>
-          <option value= "2, Легкий"     >Легкий</option>
-          <option value= "3, Продвинутый">Продвинутый</option>
-          <option value= "4, Эксперт"    >Эксперт</option>
+                [formControl]="myForm.controls['complxty']">
+          <option value= "" selected >выберете сложность</option>
+          <option value= "1, Новичок">Новичок</option>
+          <option value= "2, Легкий" >Легкий</option>
+          <option value= "3, Эксперт">Эксперт</option>
         </select>
       </div>
 
@@ -1330,44 +1307,15 @@
 
     <!-- Button -->
     <div class="form-group">
-      <label class="col-md-3 control-label"></label>
+      <label class="col-md-2 control-label"></label>
       <div class="col-md-4">
         <button class="btn btn-primary" type="submit"
-               [disabled]="!myForm.valid">Send
-        <span class="glyphicon glyphicon-send"></span></button>
+                [disabled]="!myForm.valid">Send
+          <span class="glyphicon glyphicon-send"></span>
+        </button>
       </div>
 
     </div><!-- form-group -->
 
   </fieldset>
 </form>
-
-
-<!-- https://developers.google.com/search/docs/data-types/recipes
-    https://developers.google.com/search/docs/guides/mark-up-listings
-<ol itemscope itemtype="http://schema.org/recipeInstructions">
-  <li itemprop="itemListElement"
-      itemscope
-      itemtype="http://schema.org/ListItem">
-    <a itemprop="item" href="https://example.com/dresses">
-    <span itemprop="name">Dresses</span></a>
-    <meta itemprop="position" content="1" />
-  </li>
-</ol>
--->
-
-<!--
-    <label>Country:</label> 
-    <select [(ngModel)]="selectedCountry.id" (change)="onSelect($event.target.value)">
-      <option value="0">Select</option>
-      <option *ngFor="let country of countries" value= {{country.id}}>{{country.name}}</option>
-    </select>
-    <br/><br/>
-    <div>
-    <label>State:</label>
-    <select>
-      <option *ngIf='selectedCountry.id == 0' value="0">Select</option>
-      <option *ngFor="let state of states " value= {{state.id}}>{{state.name}}</option>
-    </select>
-    </div>
--->

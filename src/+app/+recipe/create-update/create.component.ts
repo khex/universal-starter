@@ -9,8 +9,10 @@ import { FormGroup,
          FormBuilder }       from '@angular/forms';
 
 import { IRecipe }           from '../recipe.interface';
-import { IngredsData }           from './ingreds-data';
-import { CuisineData }       from './cuisine-data';
+import { IngredData,
+         CuisineData,
+         MethodData,
+         PurposeData }        from './dropdown-data';
 
 @Component({
   selector:    'create',
@@ -18,30 +20,56 @@ import { CuisineData }       from './cuisine-data';
   encapsulation: ViewEncapsulation.None // Enable dynamic HTML styles
 })
 export class CreateComponent implements OnInit{
-
-  public myForm: FormGroup;
-
-  /**  ng2-select > Cuisine  **/
-  private cuisineObjc:any = {};
-  private cuisineData:Array<any> = CuisineData;
-
-  public refreshValue(cuisine:any):void {
-    this.cuisineObjc = cuisine;
-    /** stackoverflow.com/questions/35039610 **/
-    this.myForm.patchValue({cuisine: `${cuisine.id}, ${cuisine.text}`});
+ 
+  /** helper func for nh2-selec multiple **/
+  public itemsToString(value:Array<any> = []):string {
+    return value
+      .map((item:any) => { return item.text; })
+      .join(',');
   }
 
 
+  /**  ng2-select > Cuisine  **/
+  private cuisineObjc: any = {};
+  private cuisineData: Array<any> = CuisineData;
+
+  public refreshCuisine(cuisine:any):void {
+    this.cuisineObjc = cuisine;
+    /** stackoverflow.com/questions/35039610 **/
+    this.myForm.patchValue({cuisine: `${cuisine.id}, ${cuisine.text}`});
+  } //  <--  The End  -->
+
+
+  /**  ng2-select > Method  **/
+  public  methodItems: Array<any> = MethodData;
+  private methods:any = [];
+
+  public refreshMethod(value:any):void {
+    this.methods = value;
+    let mtds = value.map((meth:any) => {
+      return `${meth.id}, ${meth.text}`;
+    });
+    this.myForm.patchValue({methods: mtds});
+    console.log(mtds);
+  } //  <--  The End  -->
+
+
+  /**  ng2-select > Purpose  **/
+  public purposeItems: Array<any> = PurposeData;
+  private purpose:any = [];
+
+  public refreshPurpose(value:any):void {
+    this.purpose = value;
+    let purp = value.map((prp:any) => {
+      return `${prp.id}, ${prp.text}`;
+    });
+    this.myForm.patchValue({purposes: purp});
+  } //  <--  The End  -->
+
+  public myForm: FormGroup;
   constructor(@Inject(FormBuilder) private _fb: FormBuilder) { }
 
   ngOnInit() {
-     
-    Ingreds.forEach((ingred:{iid:number, name:string}) => {
-      this.items.push({
-        id:   ingred.iid,
-        text: ingred.name
-      });
-    });
 
     // we will initialize our form here
     this.myForm = this._fb.group({
@@ -53,14 +81,14 @@ export class CreateComponent implements OnInit{
       instructions: this._fb.array([ this.initInstruction() ]),
       // schema.org
       category:  '',
-      method:    '',
       cuisine:   '',
-      yield:     '',
-      totalTime: '',
-      prepTime:  '',
-      cookTime:  '',
       diet:      '',
-      purpose:   '',
+      yield:     '',
+      prepTime:  '',
+      totalTime: '',
+  //  cookTime:  '',
+      methods:  [''],
+      purposes: [''],
       costs:     '',
       complxty:  ''
     });
