@@ -1110,3 +1110,65 @@ export const PurposeData = [
   {id:14, text: "День рождения"},
   {id:15, text: "День влюбленных"}
 ];
+
+export const MeasureData = [
+  {id: 1, text: "г."},
+  {id: 2, text: "кг."},
+  {id: 3, text: "мл."},
+  {id: 4, text: "л."},
+  {id: 5, text: "стак."},
+  {id: 6, text: "шт."},
+  {id: 7, text: "банк."},
+  {id: 8, text: "ст. л."},
+  {id: 9, text: "ч. л."},
+  {id:10, text: "вил."},
+  {id:11, text: "ломт."},
+  {id:12, text: "пуч."},
+  {id:13, text: "горст."},
+  {id:14, text: "дол."},
+  {id:15, text: "бут."},
+  {id:16, text: "пач."},
+  {id:17, text: "пакет."},
+  {id:18, text: "упак."},
+  {id:19, text: "зуб."},
+  {id:20, text: "щепот."},
+  {id:21, text: "веточ."},
+  {id:22, text: "по вкусу"},
+];
+
+export const CategoryData = [
+  {id: 1, text: "Салаты"},
+  {id: 2, text: "Закуски"},
+  {id: 3, text: "Супы и Бульоны"},
+  {id: 4, text: "Основные блюда"},
+  {id: 5, text: "Напитки"},
+  {id: 6, text: "Соусы"},
+  {id: 7, text: "Десерты"},
+  {id: 8, text: "Заготовки"},
+  {id: 9, text: "Полуфабрикаты"},
+];
+
+export const DietData = [
+  {id: 1, text: "При диабете"},
+  {id: 2, text: "Безглютеновая"},
+  {id: 3, text: "Халяль"},
+  {id: 4, text: "Индуизм"},
+  {id: 5, text: "Кошерная еда"},
+  {id: 6, text: "Низкокалорийная"},
+  {id: 7, text: "Обезжиреная"},
+  {id: 8, text: "Бессолевая"},
+  {id: 9, text: "Веганская"},
+  {id:10, text: "Вегитарианская"}
+];
+
+export const ValueData = [
+  {id: 1, text: "$"},
+  {id: 2, text: "$$"},
+  {id: 3, text: "$$$"}
+];
+
+export const ComplexData = [
+  {id: 1, text: "Новичок"},
+  {id: 2, text: "Легкий"},
+  {id: 3, text: "Эксперт"}
+];

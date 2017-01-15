@@ -12,7 +12,12 @@ import { IRecipe }           from '../recipe.interface';
 import { IngredData,
          CuisineData,
          MethodData,
-         PurposeData }        from './dropdown-data';
+         MeasureData,
+         PurposeData,
+         CategoryData,
+         DietData,
+         ValueData,
+         ComplexData }       from './dropdown-data';
 
 @Component({
   selector:    'create',
@@ -20,24 +25,20 @@ import { IngredData,
   encapsulation: ViewEncapsulation.None // Enable dynamic HTML styles
 })
 export class CreateComponent implements OnInit{
- 
+
+  public ingrData = IngredData;
+  public measData = MeasureData;
+  public cuisData = CuisineData;
+
+  public cateData = CategoryData;
+  public dietData = DietData;
+  public valuData = ValueData;
+  public compData = ComplexData;
+
   /** helper func for nh2-selec multiple **/
   public itemsToString(value:Array<any> = []):string {
-    return value
-      .map((item:any) => { return item.text; })
-      .join(',');
+    return value.map((item:any) => { return item.text; }).join(',');
   }
-
-
-  /**  ng2-select > Cuisine  **/
-  private cuisineObjc: any = {};
-  private cuisineData: Array<any> = CuisineData;
-
-  public refreshCuisine(cuisine:any):void {
-    this.cuisineObjc = cuisine;
-    /** stackoverflow.com/questions/35039610 **/
-    this.myForm.patchValue({cuisine: `${cuisine.id}, ${cuisine.text}`});
-  } //  <--  The End  -->
 
 
   /**  ng2-select > Method  **/
@@ -46,11 +47,8 @@ export class CreateComponent implements OnInit{
 
   public refreshMethod(value:any):void {
     this.methods = value;
-    let mtds = value.map((meth:any) => {
-      return `${meth.id}, ${meth.text}`;
-    });
-    this.myForm.patchValue({methods: mtds});
-    console.log(mtds);
+    let mtds = value.map((meth:any) => { return `${meth.id}, ${meth.text}`; });
+    this.myForm.patchValue({'shema': {'methods': mtds}});
   } //  <--  The End  -->
 
 
@@ -60,11 +58,10 @@ export class CreateComponent implements OnInit{
 
   public refreshPurpose(value:any):void {
     this.purpose = value;
-    let purp = value.map((prp:any) => {
-      return `${prp.id}, ${prp.text}`;
-    });
-    this.myForm.patchValue({purposes: purp});
+    let purp = value.map((prp:any) => { return `${prp.id}, ${prp.text}`; });
+    this.myForm.patchValue({'shema': {'purposes': purp}});
   } //  <--  The End  -->
+
 
   public myForm: FormGroup;
   constructor(@Inject(FormBuilder) private _fb: FormBuilder) { }
@@ -73,24 +70,25 @@ export class CreateComponent implements OnInit{
 
     // we will initialize our form here
     this.myForm = this._fb.group({
-      name:         '',
-      description:  '',
-      image:        '',
-      date:         new Date(),
+      name:        '',
+      description: '',
+      image:       '',
+      date:        new Date(),
+      shema:       this._fb.group({
+        category:  '',
+        cuisine:   '',
+        diet:      '',
+        yield:     '',
+        prepTime:  '',
+        totalTime: '',
+    //  cookTime:  '',
+        methods:  [''],
+        purposes: [''],
+        costs:     '',
+        complxty:  ''        
+      }),
       ingredients:  this._fb.array([ this.initIngredient()  ]),
       instructions: this._fb.array([ this.initInstruction() ]),
-      // schema.org
-      category:  '',
-      cuisine:   '',
-      diet:      '',
-      yield:     '',
-      prepTime:  '',
-      totalTime: '',
-  //  cookTime:  '',
-      methods:  [''],
-      purposes: [''],
-      costs:     '',
-      complxty:  ''
     });
   }
 
