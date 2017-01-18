@@ -13,6 +13,11 @@ var InstructionSchema = new Schema ({
   step: String
 });
 
+var KeyvalueSchema = new Schema ({
+  id:   Number,
+  text: String
+});
+
 var RecipeSchema = new Schema({
   rid:         Number,
   name:        String,
@@ -21,18 +26,16 @@ var RecipeSchema = new Schema({
   image:       String,
   author:      String,
   skima: {
-    category:  String,
+    category:  KeyvalueSchema,
+    cuisine:   KeyvalueSchema,
+    diet:      KeyvalueSchema,
+    yield:     String,
     prepTime:  String,
     totalTime: String,
-    method:   [String],
-    cuisine:   String,
-    yield:     String,
-    forDiet:  [String],
-    purpose:  [String],
-    weight:    String,
-    diffclty:  String,
-    costs:     String,
-    calories:  String
+    methods:  [KeyvalueSchema],
+    purposes: [KeyvalueSchema],
+    costs:     KeyvalueSchema,
+    complxty:  KeyvalueSchema
   },
   ingredients:  [IngredientSchema],
   instructions: [InstructionSchema]

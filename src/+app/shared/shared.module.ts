@@ -1,9 +1,11 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ApiService } from './api.service';
-import { ModelService } from './model/model.service';
+import { NgModule,
+         ModuleWithProviders } from '@angular/core';
+import { CommonModule }        from '@angular/common';
+import { RouterModule }        from '@angular/router';
+import { FormsModule,
+         ReactiveFormsModule } from '@angular/forms';
+import { ApiService }          from './api.service';
+import { ModelService }        from './model/model.service';
 
 const MODULES = [
   // Do NOT include UniversalModule, HttpModule, or JsonpModule here

@@ -7,16 +7,17 @@ import { FormGroup,
          FormArray,
          Validators,
          FormBuilder }       from '@angular/forms';
+import { ModelService }      from '../../shared/model/model.service';
 
 import { IRecipe }           from '../recipe.interface';
-import { IngredData,
-         CuisineData,
+import { DietData,
+         ValueData,
+         IngredData,
          MethodData,
          MeasureData,
          PurposeData,
-         CategoryData,
-         DietData,
-         ValueData,
+         CuisineData,
+         CategoryData,       
          ComplexData }       from './dropdown-data';
 
 @Component({
@@ -64,7 +65,10 @@ export class CreateComponent implements OnInit{
 
 
   public myForm: FormGroup;
-  constructor(@Inject(FormBuilder) private _fb: FormBuilder) { }
+
+  constructor(@Inject(FormBuilder)
+              private _fb: FormBuilder,
+              private model: ModelService,) { }
 
   ngOnInit() {
 
@@ -134,10 +138,104 @@ export class CreateComponent implements OnInit{
     control.removeAt(i);
   }
 
-  //save(model: Recipe): void {
-  save(myForm): void {
-    // call API to save customer
-    console.log(myForm.value);
+  strgToObjc(strg: any) :any {
+    if (typeof strg !== 'string') {
+      throw Error(`strgToObjc: bad strg -> ${strg}`);
+    } else {
+      let list = strg.split(", ");
+      return {
+        id:   Number(list[0]),
+        text: list[1],
+      }
+    }
   }
 
+  shemaType(subKey: string) :string {
+    let drop = ['category', 'cuisine', 'diet', 'costs', 'complxty']; 
+    let mult = ['methods', 'purposes'];
+    let text = ['prepTime', 'totalTime', 'yield'];
+
+    let dropTrue = drop.some( val => { return val === subKey} );
+    let multTrue = mult.some( val => { return val === subKey} );
+    let textTrue = text.some( val => { return val === subKey} );
+
+    if      (dropTrue) { return 'drop' }
+    else if (multTrue) { return 'mult' }
+    else if (textTrue) { return 'text' }
+    else               { console.info('shemaType SubKey Error', subKey)}
+  }
+
+  save(myForm) :void {
+
+    let data = myForm.value;
+    let resp = {
+      published: new Date(),
+      author: 'Рон Каленьюик',
+      shema: {},
+      ingredients: [],
+      instructions: []
+    };
+
+    for (var key in data) {
+      if (data.hasOwnProperty(key)) {
+        /* + Ingredients  */
+        if (key === 'ingredients') {
+          for (var i = 0; i < data['ingredients'].length; i++) {
+            let ingr = {};
+            let ding = data['ingredients'][i];
+            //  ding['group'].length > 1
+            if (ding['group'])   { ingr['group']   = ding['group']; }
+            if (ding['name'])    { ingr['group']   = this.strgToObjc(ding['name']) }
+            if (ding['amount'])  { ingr['amount']  = ding['amount']; }
+            if (ding['measure']) { ingr['measure'] = this.strgToObjc(ding['measure']); }
+            if (ding['note'])    { ingr['note']    = ding['note']; }
+
+            resp['ingredients'][i] = ingr;
+          }
+        }
+        /* + Instructions  */
+        else if (key === 'instructions') {
+          // first step not empty like ''
+          if(data['instructions'][0]['step'].length > 0) {
+            resp['instructions'] = data['instructions'];
+          }
+        } 
+        /* + Skima done! */
+        else if (key === 'shema') {
+          for(var subKey in data['shema']) {
+            let dshs = data['shema'][subKey];
+            if (dshs) {
+              let tipe = this.shemaType(subKey);
+              if (tipe === 'drop') {
+                resp['shema'][subKey] = this.strgToObjc(dshs);
+              }
+              else if(tipe === 'mult') {
+                let tempList = dshs.map( (val) => {
+                  return this.strgToObjc(val);
+                });
+                resp['shema'][subKey] = tempList;
+              }
+              else {
+                resp['shema'][subKey] = dshs;
+              }
+            }
+          }
+        }
+        /* + MetaData  */
+        else {
+          //  data[key].length > 0
+          if (data[key]) { resp[key] = data[key]; } 
+        }
+
+      }
+    }
+
+    console.log(resp);
+    this.model
+      .post('/api/recipes/', JSON.stringify({resp}))
+      .subscribe(data => {
+        console.info(data);
+    });
+
+  }
 }

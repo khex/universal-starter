@@ -32,4 +32,21 @@ RR.get('/:rid', (req, res) => {
   });
 });
 
+RR.post('/', (req, res) => {
+  console.log("RR.post")
+  console.log(req.body);
+  res.json({
+    "status": req.status,
+    "body": req.body
+  });
+});
+
+/**
+var kitty = new Cat({ name: 'Zildjian' });
+kitty.save(function (err) {
+  if (err) { console.log(err); }
+  else     { console.log('meow'); }
+});
+**/
+
 module.exports = RR;

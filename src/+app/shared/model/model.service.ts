@@ -7,7 +7,7 @@ import 'rxjs/add/operator/share';
 import { CacheService  } from '../cache.service';
 import { ApiService  } from '../api.service';
 
-export function hashCodeString(str: string): string {
+export function hashCodeString(str:string): string {
   let hash = 0;
   if (str.length === 0) {
     return hash + '';
@@ -24,14 +24,12 @@ export function hashCodeString(str: string): string {
 @Injectable()
 export class ModelService {
    // This is only one example of one Model depending on your domain
-  constructor(public _api: ApiService, public _cache: CacheService) {
-
-  }
+  constructor(public _api: ApiService, public _cache: CacheService) { }
 
  /**
   * whatever domain/feature method name
   */
-  get(url) {
+  get(url:string) {
     // you want to return the cache if there is a response in it.
     // This would cache the first response so if your API isn't idempotent
     // you probably want to remove the item from the cache after you use it. LRU of 10
@@ -42,14 +40,18 @@ export class ModelService {
       return Observable.of(this._cache.get(key));
     }
     // you probably shouldn't .share() and you should write the correct logic
-    return this._api.get(url)
-      .do(json => {
-        this._cache.set(key, json);
-      })
+    return this._api
+      .get(url)
+      .do(json => { this._cache.set(key, json); })
       .share();
   }
-  // don't cache here since we're creating
-  create() {
-    // TODO
+
+  post(url:string, data:any) {
+    console.log('ModelService:', url);
+    return this._api
+      .post(url, data)
+      .do(json => { this._cache.set(url, json); })
+      .share();
   }
+
 }
