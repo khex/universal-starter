@@ -17,20 +17,20 @@ import { DietData,
          MeasureData,
          PurposeData,
          CuisineData,
-         CategoryData,       
-         ComplexData }       from './dropdown-data';
+         ComplexData,
+         CategoryData }      from './dropdown-data';
 
 @Component({
   selector:    'create',
   templateUrl: './create.template.html',
-  encapsulation: ViewEncapsulation.None // Enable dynamic HTML styles
+  // Enable dynamic HTML styles
+  encapsulation: ViewEncapsulation.None
 })
 export class CreateComponent implements OnInit{
 
   public ingrData = IngredData;
   public measData = MeasureData;
   public cuisData = CuisineData;
-
   public cateData = CategoryData;
   public dietData = DietData;
   public valuData = ValueData;
@@ -77,7 +77,6 @@ export class CreateComponent implements OnInit{
       name:        '',
       description: '',
       image:       '',
-      date:        new Date(),
       shema:       this._fb.group({
         category:  '',
         cuisine:   '',
@@ -169,6 +168,7 @@ export class CreateComponent implements OnInit{
 
     let data = myForm.value;
     let resp = {
+      rid: 0,
       published: new Date(),
       author: 'Рон Каленьюик',
       shema: {},
@@ -183,9 +183,9 @@ export class CreateComponent implements OnInit{
           for (var i = 0; i < data['ingredients'].length; i++) {
             let ingr = {};
             let ding = data['ingredients'][i];
-            //  ding['group'].length > 1
+
             if (ding['group'])   { ingr['group']   = ding['group']; }
-            if (ding['name'])    { ingr['group']   = this.strgToObjc(ding['name']) }
+            if (ding['name'])    { ingr['name']    = this.strgToObjc(ding['name']) }
             if (ding['amount'])  { ingr['amount']  = ding['amount']; }
             if (ding['measure']) { ingr['measure'] = this.strgToObjc(ding['measure']); }
             if (ding['note'])    { ingr['note']    = ding['note']; }

@@ -16,65 +16,71 @@
   </div>
 </div>
 
-<!-------------------
+<!--
 | Schema.org values |
 scotch.io/tutorials/angular-2-form-validation
 *ngIf="!complexForm.controls['gender'].valid &&
         complexForm.controls['gender'].touched"
--------------------->
+-->
 <div class="row">
+
   <div class="col-md-6">
-    <div *ngIf="schema?.category">
-      <p><b>Категория:</b> {{schema.category}}</p>
+    <div *ngIf="shema?.category">
+      <p><b>Категория:</b> {{shema.category.text}}</p>
     </div>
-    <div *ngIf="schema?.method">
-      <p><b>Метод приготовления:</b> {{schema.method}}</p>
+    <div *ngIf="shema?.cuisine">
+      <p><b>Кухня:</b> {{shema.cuisine.text}}</p>
     </div>
-    <div *ngIf="schema?.cuisine">
-      <p><b>Кухня:</b> {{schema.cuisine}}</p>
+    <div *ngIf="shema?.yield">
+      <p><b>К-во порций:</b> {{shema.yield}}</p>
     </div>
-    <div *ngIf="schema?.yield">
-      <p><b>К-во порций:</b> {{schema.yield}}</p>
+    <div *ngIf="shema?.prepTime">
+      <p><b>Время подготовки:</b> {{shema.prepTime}}</p>
     </div>
+    <div *ngIf="shema?.totalTime">
+      <p><b>Время приготовления:</b> {{shema.totalTime}}</p>
+    </div>
+    <div *ngIf="shema?.complxty">
+      <p><b>Сложность приготовления:</b> {{shema.complxty.text}}</p>
+    </div>
+    <div *ngIf="shema?.costs">
+      <p><b>Стоимость:</b> {{shema.costs.text}}</p>
+    </div>
+    <div *ngIf="shema?.diet">
+      <p><b>Для диеты:</b> {{shema.diet.text}}</p>
+    </div>
+    <div *ngIf="shema?.purposes">
+      <p *ngFor="let purp of shema.purposes">
+        <b>Подходит для:</b> {{purp.text}}
+      </p>
+    </div>
+    <div *ngIf="shema?.methods">
+      <p *ngFor="let meth of shema.methods">
+        <b>Метод приготовления:</b> {{meth.text}}</p>
+    </div>
+  <!-- temperary in one column
   </div>
   <div class="col-md-6">
-    <div *ngIf="schema?.firDiet?.length > 0">
-      <p><b>Для диеты:</b> {{schema.firDiet}}</p>
-    </div>
-    <div *ngIf="schema?.purpose">
-      <p><b>Подходит для:</b> {{schema.purpose}}</p>
-    </div>
-    <div *ngIf="schema?.weight">
-      <p><b>Вес блюда:</b> {{schema.weight}}</p>
-    </div>
-    <div *ngIf="schema?.complexity">
-      <p><b>Сложность приготовления:</b> {{schema.complexity}}</p>
-    </div>
-    <div *ngIf="schema?.cost">
-      <p><b>Стоимость:</b> {{schema.cost}}</p>
-    </div>
-    <div *ngIf="schema?.calories">
-      <p><b>Калораж:</b> {{schema.calories}}</p>
-    </div>
+  -->
   </div>
 </div>
 
-<!-----------------
+<!--
     INGREDIENTS 
------------------->
+-->
 
 <div class="page-header">
   <h3>Ингредиенты</h3>
 </div>
 <div *ngIf="recipe?.ingredients">
   <div *ngFor="let i of ingred">
-    <p><b>{{i.name}}</b> - {{i.amount}} {{i.meas}} <i>{{i.note}}</i></p>
+    <p><b>{{i.name.text}}</b> - {{i.amount}} {{i.measure.text}} <i>{{i.note}}</i></p>
   </div>
 <div>
 
-<!------------------
+<!--
     INSTRUCTIONS 
-------------------->
+-->
 <div *ngIf="recipe?.instructions" class="panel panel-warning">
   <!-- Default panel contents -->
   <div class="panel-heading">Инструкции</div>

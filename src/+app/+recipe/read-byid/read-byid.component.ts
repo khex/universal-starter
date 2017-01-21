@@ -15,13 +15,12 @@ import { ModelService }            from '../../shared/model/model.service';
 })
 export class ReadByIDComponent {
 
-  private recipe: any = {};
-  private schema: any = {};
-  private ingred: any = {};
-  private instra: any = {};
-
   private rid: any;
   private sub: any;
+  private recipe: any = {};
+  private shema:  any = {};
+  private ingred: any = {};
+  private instra: any = {};
 
   constructor(private model: ModelService,
               private route: ActivatedRoute) { }
@@ -30,14 +29,13 @@ export class ReadByIDComponent {
 
     this.sub = this.route.params.subscribe(params => {
       this.rid = params['rid'];
-    //console.log(this.rid);
     });
 
     this.model
       .get(`/api/recipes/${this.rid}`)
       .subscribe(data => {
         this.recipe = data;
-        this.schema = data.schema;
+        this.shema  = data.shema;
         this.ingred = data.ingredients;
         this.instra = data.instructions;
     });

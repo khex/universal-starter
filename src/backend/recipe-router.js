@@ -33,20 +33,17 @@ RR.get('/:rid', (req, res) => {
 });
 
 RR.post('/', (req, res) => {
-  console.log("RR.post")
-  console.log(req.body);
-  res.json({
-    "status": req.status,
-    "body": req.body
-  });
-});
 
-/**
-var kitty = new Cat({ name: 'Zildjian' });
-kitty.save(function (err) {
-  if (err) { console.log(err); }
-  else     { console.log('meow'); }
+  let reqRec = JSON.parse(req.body.data)['resp'];
+  let recipe = new Recipe(reqRec);
+  // recipe['rid'] = 1751;
+  console.log(`RR.post: ${reqRec.name}`);
+
+  recipe.save( (err) => {
+    if (err) { res.json({ "Error": err }) }
+    else     { res.json({ "Saved": reqRec }) }
+  });
+
 });
-**/
 
 module.exports = RR;
