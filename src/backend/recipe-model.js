@@ -1,20 +1,20 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var KeyValSchema = new Schema ({
+var KeyVal = new Schema ({
   id:   Number,
   text: String
 });
 
-var IngredientSchema = new Schema ({
+var Ingredient = new Schema ({
   group:   String,
-  name:    KeyValSchema,
+  name:    KeyVal,
   amount:  String,
-  measure: KeyValSchema,
+  measure: KeyVal,
   note:    String
 });
 
-var InstructionSchema = new Schema ({
+var Instruction = new Schema ({
   step: String
 });
 
@@ -26,19 +26,19 @@ var RecipeSchema = new Schema({
   image:         String,
   author:        String,
   shema: {
-    category:    KeyValSchema,
-    cuisine:     KeyValSchema,
-    diet:        KeyValSchema,
+    category:    KeyVal,
+    cuisine:     KeyVal,
+    diet:        KeyVal,
     yield:       String,
     prepTime:    String,
     totalTime:   String,
-    methods:    [KeyValSchema],
-    purposes:   [KeyValSchema],
-    costs:       KeyValSchema,
-    complxty:    KeyValSchema
+    methods:    [KeyVal],
+    purposes:   [KeyVal],
+    costs:       KeyVal,
+    complxty:    KeyVal
   },
-  ingredients:  [IngredientSchema],
-  instructions: [InstructionSchema]
+  ingredients:  [Ingredient],
+  instructions: [Instruction]
 });
 
 module.exports = mongoose.model('Recipe', RecipeSchema);

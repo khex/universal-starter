@@ -10,6 +10,7 @@ import { CreateComponent }     from './create-update/create.component';
 import { ReadByIDComponent }   from './read-byid/read-byid.component';
 import { UpdateByIDComponent } from './create-update/update-byid.component';
 
+
 @NgModule({
   imports:      [ Routing,
                   SharedModule,
@@ -19,6 +20,8 @@ import { UpdateByIDComponent } from './create-update/update-byid.component';
   declarations: [ ReadAllComponent,
                   CreateComponent,
                   ReadByIDComponent,
-                  UpdateByIDComponent ]
+                  UpdateByIDComponent ],
+  // for Services Only!
+  providers:    [ ]
 })
 export class RecipeModule { }

@@ -1,5 +1,3 @@
-
-
 var _fakeLRUcount = 0;
 export const fakeRedisCache = {
   _cache: {},

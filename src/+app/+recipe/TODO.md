@@ -14,3 +14,10 @@
  - [ ] move `sckima` to own fb.group
  - [ ] resize `create page` to 12 without panel
  - [ ] make `create page` pop-up?
+ - [ ] export  Buider functions to other file
+ - [ ] pagination for `AllRecipes`
+ - [ ] service for `getRecipesData`
+
+Qluqua link like pinterest link to:
+ - App (if app installed)
+ - WebPage with PlayMarket Logo . Link for App
