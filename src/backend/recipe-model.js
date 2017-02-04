@@ -1,44 +1,35 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var KeyVal = new Schema ({
-  id:   Number,
-  text: String
-});
-
-var Ingredient = new Schema ({
-  group:   String,
-  name:    KeyVal,
-  amount:  String,
-  measure: KeyVal,
-  note:    String
-});
-
-var Instruction = new Schema ({
-  step: String
-});
-
 var RecipeSchema = new Schema({
-  rid:           Number,
-  name:          String,
-  description:   String,
-  published:     Date,
-  image:         String,
-  author:        String,
+  rid:         Number,
+  name:        String,
+  description: String,
+  published:   Date,
+  image:       String,
+  author:      String,
   shema: {
-    category:    KeyVal,
-    cuisine:     KeyVal,
-    diet:        KeyVal,
+    category:  { id: Number, text: String },
+    cuisine:   { id: Number, text: String },
+    diet:      { id: Number, text: String },
     yield:       String,
     prepTime:    String,
     totalTime:   String,
-    methods:    [KeyVal],
-    purposes:   [KeyVal],
-    costs:       KeyVal,
-    complxty:    KeyVal
+    methods:  [{ id: Number, text: String }],
+    purposes: [{ id: Number, text: String }],
+    costs:     { id: Number, text: String },
+    complxty:  { id: Number, text: String }
   },
-  ingredients:  [Ingredient],
-  instructions: [Instruction]
+  instructions: [{
+    step: String
+  }],
+  ingredients:  [{
+    group:     String,
+    name:    { id: Number, text: String },
+    amount:    String,
+    measure: { id: Number, text: String },
+    note:      String
+  }],
 });
 
 module.exports = mongoose.model('Recipe', RecipeSchema);
