@@ -2,6 +2,9 @@
 .DS_Store
 morgan.log
 
+# Images
+/src/assets/images/
+
 # Built #
 /__build__/
 /__server_build__/

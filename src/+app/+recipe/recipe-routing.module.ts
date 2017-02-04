@@ -2,8 +2,8 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ReadAllComponent }     from './read-all/read-all.component';
 import { CreateComponent }      from './create-update/create.component';
-import { ReadByIDComponent }    from './read-byid/read-byid.component';
-import { UpdateByIDComponent }  from './create-update/update-byid.component';
+import { ReadOneComponent }     from './read-one/read-one.component';
+import { UpdateComponent }      from './create-update/update.component';
 
 
 /** htttp://localhost:3000/api/todos?
@@ -13,7 +13,7 @@ import { UpdateByIDComponent }  from './create-update/update-byid.component';
       complete=false
 **/
 export const Routing = RouterModule.forChild([
-  /*  ? Other Module  */
+  /*  Other Module  */
   { path: 'recipes',            component: ReadAllComponent},
   //       recipes/category     RecipesComponent
   //       recipes/ingredient   15 per page
@@ -26,7 +26,7 @@ export const Routing = RouterModule.forChild([
 
   { path: 'recipe/create',      component: CreateComponent },
     //    'recipes/show/:id'
-  { path: 'recipe/:rid',        component: ReadByIDComponent},
+  { path: 'recipe/:rid',        component: ReadOneComponent },
   //  ex: 'recipe/:id/update'
-  { path: 'recipe/update/:rid', component: UpdateByIDComponent}
+  { path: 'recipe/update/:rid', component: UpdateComponent }
 ]);

@@ -1,14 +1,12 @@
-import { Component, Inject, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { Inject, 
+	     Component,
+	     ViewEncapsulation,
+	     ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
-  encapsulation: ViewEncapsulation.Emulated,
+  encapsulation:   ViewEncapsulation.Emulated,
   selector: 'lazy',
-  template: `
-    <p>
-      Lazy component
-    </p>
-  `
+  template: `<p>Lazy component</p>`
 })
-export class LazyComponent {
-}
+export class LazyComponent { }

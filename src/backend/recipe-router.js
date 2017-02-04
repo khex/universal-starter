@@ -18,10 +18,15 @@ RR.use((req, res, next) => {
 });
 
 RR.get('/', (req, res) => {
-  Recipe.find({}, (err, docs) => {
-    if (err) { console.log(err.message); }
-    else     { res.send(docs); }
-  });
+
+  Recipe
+    .find()
+    .sort({"rid": -1})
+    .exec((err, docs) => {
+      if (err) throw err;
+      res.send(docs);
+    });
+
 });
 
 RR.get('/:rid', (req, res) => {
@@ -36,12 +41,22 @@ RR.post('/', (req, res) => {
 
   let reqRec = JSON.parse(req.body.data)['resp'];
   let recipe = new Recipe(reqRec);
-  // recipe['rid'] = 1751;
-  console.log(`RR.post: ${reqRec.name}`);
 
-  recipe.save( (err) => {
-    if (err) { res.json({ "Error": err }) }
-    else     { res.json({ "Saved": reqRec }) }
+  Recipe
+    .findOne()
+    .sort({"rid": -1})
+    .select({"rid": 1, "_id": 0})
+    .exec((err, doc) => {   
+      if (err) throw err;
+
+      let rid = doc['rid'] + 1;
+      recipe['rid'] = rid;
+      recipe['image'] = `assets/images/rid_${rid}.jpg`;
+
+      recipe.save((err) => {
+        if (err) { res.json({ "Error": err }) }
+        else     { res.json({ "Saved": reqRec }) }
+    });
   });
 
 });

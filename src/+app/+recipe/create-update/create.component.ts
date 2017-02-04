@@ -72,24 +72,22 @@ export class CreateComponent implements OnInit{
               private model: ModelService) { }
 
   ngOnInit() {
-    
     // we will initialize our form here
     this.myForm = this._fb.group({
-      name:        '',
-      description: '',
-      image:       '',
-      shema:       this._fb.group({
-        category:  '',
-        cuisine:   '',
-        diet:      '',
-        yield:     '',
-        prepTime:  '',
-        totalTime: '',
-    //  cookTime:  '',
-        methods:  [''],
-        purposes: [''],
-        costs:     '',
-        complxty:  ''        
+      name:         '',
+      description:  '',
+      image:        '',
+      shema:        this._fb.group({
+        category:   '',
+        cuisine:    '',
+        diet:       '',
+        yield:      '',
+        prepTime:   '',
+        totalTime:  '',
+        methods:   [''],
+        purposes:  [''],
+        costs:      '',
+        complxty:   ''        
       }),
       ingredients:  this._fb.array([ this.initIngredient()  ]),
       instructions: this._fb.array([ this.initInstruction() ]),

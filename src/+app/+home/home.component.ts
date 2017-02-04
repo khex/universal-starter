@@ -1,12 +1,12 @@
 import { Component,
-         ChangeDetectionStrategy,
-         ViewEncapsulation } from '@angular/core';
+         ViewEncapsulation,
+         ChangeDetectionStrategy } from '@angular/core';
 
-import { ModelService } from '../shared/model/model.service';
+import { ModelService }            from '../shared/model/model.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
-  encapsulation: ViewEncapsulation.Emulated,
+  encapsulation:   ViewEncapsulation.Emulated,
   selector: 'home',
   styleUrls: [ './home.component.css' ],
   templateUrl: './home.component.html'
@@ -23,8 +23,9 @@ export class HomeComponent {
   }
 
   universalInit() {
-    this.model.get('/data.json')
-        .subscribe(data => { this.data = data; });
+    this.model
+      .get('/data.json')
+      .subscribe(data => { this.data = data; });
   }
 
 }

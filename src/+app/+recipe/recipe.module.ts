@@ -7,8 +7,8 @@ import { SharedModule }        from '../shared/shared.module';
 import { Routing }             from './recipe-routing.module';
 import { ReadAllComponent }    from './read-all/read-all.component';
 import { CreateComponent }     from './create-update/create.component';
-import { ReadByIDComponent }   from './read-byid/read-byid.component';
-import { UpdateByIDComponent } from './create-update/update-byid.component';
+import { ReadOneComponent }    from './read-one/read-one.component';
+import { UpdateComponent }     from './create-update/update.component';
 
 
 @NgModule({
@@ -19,8 +19,8 @@ import { UpdateByIDComponent } from './create-update/update-byid.component';
                   ReactiveFormsModule ],
   declarations: [ ReadAllComponent,
                   CreateComponent,
-                  ReadByIDComponent,
-                  UpdateByIDComponent ],
+                  ReadOneComponent,
+                  UpdateComponent ],
   // for Services Only!
   providers:    [ ]
 })

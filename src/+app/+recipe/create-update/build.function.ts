@@ -1,7 +1,6 @@
 export function BuildFunk(data) {
 
   let resp = {
-    rid: 0,
     published: new Date(),
     author: 'Рон Каленьюик',
     shema: {},
@@ -9,14 +8,17 @@ export function BuildFunk(data) {
     instructions: []
   };
 
+  /**
+   *  Helper Func
+  **/
   let shemaType = (subKey: string) => {
     let drop = ['category', 'cuisine', 'diet', 'costs', 'complxty']; 
     let mult = ['methods', 'purposes'];
     let text = ['prepTime', 'totalTime', 'yield'];
 
-    let dropTrue = drop.some( val => { return val === subKey} );
-    let multTrue = mult.some( val => { return val === subKey} );
-    let textTrue = text.some( val => { return val === subKey} );
+    let dropTrue = drop.some((val) => { return val === subKey} );
+    let multTrue = mult.some((val) => { return val === subKey} );
+    let textTrue = text.some((val) => { return val === subKey} );
 
     if      (dropTrue) { return 'drop' }
     else if (multTrue) { return 'mult' }
@@ -24,13 +26,16 @@ export function BuildFunk(data) {
     else               { console.info('shemaType SubKey Error', subKey)}      
   };
 
+  /**
+   *  Helper Func
+  **/
   let strgToObjc= (strg: any) => {
     if (typeof strg !== 'string') {
       throw Error(`strgToObjc: bad strg -> ${strg}`);
     } else {
       let list = strg.split(", ");
       return {
-        id:   Number(list[0]),
+        id: Number(list[0]),
         text: list[1],
       }
     }
@@ -57,10 +62,10 @@ export function BuildFunk(data) {
       else if (key === 'instructions') {
         // first step not empty like ''
         if(data['instructions'][0]['step'].length > 0) {
-          resp['instructions'] = data['instructions'];
+           resp['instructions'] = data['instructions'];
         }
       } 
-      /*  Skima done! */
+      /*  Skima done!  */
       else if (key === 'shema') {
         for(var subKey in data['shema']) {
           let dshs = data['shema'][subKey];
@@ -83,8 +88,8 @@ export function BuildFunk(data) {
       }
       /*  MetaData  */
       else {
-        //  data[key].length > 0
-        if (data[key]) { resp[key] = data[key]; } 
+        /*  data[key].length > 0  */
+        if (data[key]) { resp[key] = data[key]; }
       }
 
     }
