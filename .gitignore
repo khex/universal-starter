@@ -3,7 +3,7 @@
 morgan.log
 
 # Images
-/src/assets/images/
+/src/images/
 
 # Built #
 /__build__/

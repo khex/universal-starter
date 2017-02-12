@@ -1,7 +1,15 @@
 var mongoose = require('mongoose');
-//  import { Document, Schema, Model } from 'mongoose';
-//  import * as mongoose from 'mongoose';
+import { Document, Schema, Model } from 'mongoose';
+import * as mongoose from 'mongoose';
 //  var mongoose = require("mongoose");
+/**
+import * as path from 'path';
+import * as express from 'express';
+import * as bodyParser from 'body-parser';
+import * as cookieParser from 'cookie-parser';
+import * as morgan from 'morgan';
+import * as compression from 'compression';
+**/
 
 /** github.com/Appsilon/styleguide/wiki/mongoose-typescript-models **/
 

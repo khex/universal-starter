@@ -51,7 +51,7 @@ RR.post('/', (req, res) => {
 
       let rid = doc['rid'] + 1;
       recipe['rid'] = rid;
-      recipe['image'] = `assets/images/rid_${rid}.jpg`;
+      //recipe['image'] = `assets/images/rid_${rid}.jpg`;
 
       recipe.save((err) => {
         if (err) { res.json({ "Error": err }) }
