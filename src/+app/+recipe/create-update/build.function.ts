@@ -88,8 +88,6 @@ export function BuildFunk(data) {
       }
       /*  Image URL  */
       else if (key === 'image') {
-        console.log('!!!!!!!!!!!')
-        console.log(key, data[key]);
         resp[key] = `images/${data[key]}`;
       }
       /*  MetaData  */

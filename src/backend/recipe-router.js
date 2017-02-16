@@ -18,7 +18,6 @@ RR.use((req, res, next) => {
 });
 
 RR.get('/', (req, res) => {
-
   Recipe
     .find()
     .sort({"rid": -1})
@@ -26,7 +25,6 @@ RR.get('/', (req, res) => {
       if (err) throw err;
       res.send(docs);
     });
-
 });
 
 RR.get('/:rid', (req, res) => {
