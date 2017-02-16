@@ -5,7 +5,7 @@ import { SelectModule }        from 'ng2-select/ng2-select';
 import { SharedModule }        from '../shared/shared.module';
 
 import { Routing }             from './recipe-routing.module';
-import { ReadAllComponent }    from './read-all/read-all.component';
+import { ReadManyComponent }    from './read-many/read-many.component';
 import { CreateComponent }     from './create-update/create.component';
 import { ReadOneComponent }    from './read-one/read-one.component';
 import { UpdateComponent }     from './create-update/update.component';
@@ -17,7 +17,7 @@ import { UpdateComponent }     from './create-update/update.component';
                   FormsModule,
                   SelectModule,
                   ReactiveFormsModule ],
-  declarations: [ ReadAllComponent,
+  declarations: [ ReadManyComponent,
                   CreateComponent,
                   ReadOneComponent,
                   UpdateComponent ],

@@ -6,10 +6,10 @@ import { ModelService }            from '../../shared/model/model.service';
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
   encapsulation: ViewEncapsulation.Emulated,
-  selector: 'read',
-  templateUrl: './read-all.template.html'
+  selector:    'read',
+  templateUrl: './read-many.template.html'
 })
-export class ReadAllComponent {
+export class ReadManyComponent {
 
   public recipes: any[];
 
