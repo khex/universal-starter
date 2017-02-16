@@ -9,11 +9,11 @@ import { ModelService }            from '../../shared/model/model.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
-  encapsulation: ViewEncapsulation.Emulated,
-  selector: 'read-by-ID',
-  templateUrl: './read-byid.template.html'
+  encapsulation:   ViewEncapsulation.Emulated,
+  selector:    'read-one',
+  templateUrl: './read-one.template.html'
 })
-export class ReadByIDComponent {
+export class ReadOneComponent {
 
   private rid: any;
   private sub: any;

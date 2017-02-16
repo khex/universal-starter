@@ -5,7 +5,7 @@ import { Inject,
 
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
-  encapsulation: ViewEncapsulation.Emulated,
+  encapsulation:   ViewEncapsulation.Emulated,
   selector: 'about',
   template: `
     <div>
@@ -15,8 +15,5 @@ import { Inject,
   `
 })
 export class AboutComponent {
-  constructor(@Inject('req') req: any) {
-    // console.log('req',  req)
-
-  }
+  constructor(@Inject('req') req: any) { }
 }
