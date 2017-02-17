@@ -11,8 +11,7 @@ import { ModelService }            from '../../shared/model/model.service';
 })
 export class ReadManyComponent {
 
-  //public recipes: any[];
-  recipes: any;
+  public recipes: any[];
 
   constructor(public model: ModelService) {
     this.universalInit();
@@ -20,7 +19,7 @@ export class ReadManyComponent {
 
   universalInit() {
     this.model
-      .get('/api/recipes', {page: 2, amount: 5})
+      .get('/api/recipes', {page: 1, amount: 5})
       .subscribe(data => {
         console.log(data);
         this.recipes = data;

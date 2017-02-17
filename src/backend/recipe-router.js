@@ -17,25 +17,31 @@ RR.use((req, res, next) => {
   next();
 });
 
-/**
- *   READ ALL
-**/
+/********************
+**    READ MANY    **
+********************/
 RR.get('/', (req, res) => {
-  res.json({
-    Host: req.get('Host'),
-    Body: JSON.parse(req.get('Body')),
-  })
-  /**
-  Recipe
-    .find()
+
+  let prms = JSON.parse(req.get('Body'))['params'];
+  let page = Number(prms.page);
+  let amnt = Number(prms.amount);
+  let skip = (page === 1) ? 0 : (page - 1) * amnt;
+  console.log(`Mongoose skip: ${skip}, limit: ${amnt}`);
+
+  Recipe.find()
     .sort({"rid": -1})
+    .skip(skip)
+    .limit(amnt)
     .exec((err, docs) => {
       if (err) throw err;
       res.send(docs);
     });
-  **/
+
 });
 
+/*******************
+**    READ ONE    **
+*******************/
 RR.get('/:rid', (req, res) => {
   var rid = Number(req.params.rid);
   Recipe.findOne({'rid': rid}, (err, doc) => {
@@ -44,6 +50,9 @@ RR.get('/:rid', (req, res) => {
   });
 });
 
+/*******************
+**    POST ONE    **
+*******************/
 RR.post('/', (req, res) => {
 
   let reqRec = JSON.parse(req.body.data)['resp'];
