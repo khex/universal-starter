@@ -11,7 +11,8 @@ import { ModelService }            from '../../shared/model/model.service';
 })
 export class ReadManyComponent {
 
-  public recipes: any[];
+  //public recipes: any[];
+  recipes: any;
 
   constructor(public model: ModelService) {
     this.universalInit();

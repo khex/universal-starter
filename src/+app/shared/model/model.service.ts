@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/share';
+import 'rxjs/add/operator/subscribeOn';
 
-import { CacheService  } from '../cache.service';
-import { ApiService  } from '../api.service';
+import { Injectable }   from '@angular/core';
+import { Observable }   from 'rxjs/Observable';
+import { CacheService } from '../cache.service';
+import { ApiService  }  from '../api.service';
 
 export function hashCodeString(str:string): string {
   let hash = 0;
@@ -23,7 +24,9 @@ export function hashCodeString(str:string): string {
 // domain/feature service
 @Injectable()
 export class ModelService {
-   // This is only one example of one Model depending on your domain
+  
+  public rslt: any;
+  // This is only one example of one Model depending on your domain
   constructor(public _api: ApiService, public _cache: CacheService) { }
 
  /**
@@ -34,6 +37,7 @@ export class ModelService {
     // This would cache the first response so if your API isn't idempotent
     // you probably want to remove the item from the cache after you use it. LRU of 10
     // you can use also hashCodeString here
+    console.log('Model Service');
     let key = url;
 
     if (this._cache.has(key)) {

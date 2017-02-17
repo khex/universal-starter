@@ -17,7 +17,15 @@ RR.use((req, res, next) => {
   next();
 });
 
+/**
+ *   READ ALL
+**/
 RR.get('/', (req, res) => {
+  res.json({
+    Host: req.get('Host'),
+    Body: JSON.parse(req.get('Body')),
+  })
+  /**
   Recipe
     .find()
     .sort({"rid": -1})
@@ -25,6 +33,7 @@ RR.get('/', (req, res) => {
       if (err) throw err;
       res.send(docs);
     });
+  **/
 });
 
 RR.get('/:rid', (req, res) => {
