@@ -27,25 +27,24 @@ export class ModelService {
   
   public rslt: any;
   // This is only one example of one Model depending on your domain
-  constructor(public _api: ApiService, public _cache: CacheService) { }
+  constructor(public _api: ApiService,
+              public _cache: CacheService) { }
 
  /**
   * whatever domain/feature method name
   */
-  get(url:string) {
+  get(url:string, params?: any) {
     // you want to return the cache if there is a response in it.
     // This would cache the first response so if your API isn't idempotent
     // you probably want to remove the item from the cache after you use it. LRU of 10
     // you can use also hashCodeString here
-    console.log('Model Service');
     let key = url;
-
     if (this._cache.has(key)) {
       return Observable.of(this._cache.get(key));
     }
     // you probably shouldn't .share() and you should write the correct logic
     return this._api
-      .get(url)
+      .get(url, params)
       .do(json => { this._cache.set(key, json); })
       .share();
   }

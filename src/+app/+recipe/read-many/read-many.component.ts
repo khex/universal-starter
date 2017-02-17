@@ -20,7 +20,7 @@ export class ReadManyComponent {
 
   universalInit() {
     this.model
-      .get('/api/recipes')
+      .get('/api/recipes', {page: 2, amount: 5})
       .subscribe(data => {
         console.log(data);
         this.recipes = data;

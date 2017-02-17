@@ -18,14 +18,11 @@ export class ApiService {
   constructor(public _http: Http) { }
   
  /*  whatever domain/feature method name  */
-  get(url:string, options?: any) {
-    console.log('API Service');
+  get(url:string, params?: any) {
 
     let headers = new Headers();
-    let json = { firstName: 'Alex', secndName: 'Springres' };
-
     headers.append('Content-Type', 'application/json'); 
-    headers.append('Body', JSON.stringify({ json }));
+    headers.append('Body', JSON.stringify({ params }));
     
     return this._http
     //.get(url, options)
