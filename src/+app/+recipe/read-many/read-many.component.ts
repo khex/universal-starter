@@ -15,7 +15,7 @@ import { ModelService }            from '../../shared/model/model.service';
 export class ReadManyComponent {
 
   public recipes: any[];    // recipes data   
-  public page: number = 2;  // current page
+  public page: number = 1;  // current page
   public amnt: number = 5;  // items per page
   public link: string = '/api/recipes';
 
@@ -40,18 +40,10 @@ export class ReadManyComponent {
     });
   }
 
-  setPage() {
-    // do nothing ;)
-    //if (page < 1 || page > this.pager.totalPages) { return; }
-
+  setPage(path: string) {
+    let numb = (path == 'next') ? 1 : (-1);
     this.page = this.page + 1;
-    console.log(`Current page: ${this.page}`);
     this.getRecipes(this.page, this.amnt);
-    //console.log(this.recipes);
-
-    // this.pager = this.pagerService.getPager(this.allItems.length, page);
-    // this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
-
   }
 
 }
