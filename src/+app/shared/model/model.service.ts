@@ -1,11 +1,11 @@
 import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/do';
+//import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/subscribeOn';
 
 import { Injectable }   from '@angular/core';
 import { Observable }   from 'rxjs/Observable';
-import { CacheService } from '../cache.service';
+//import { CacheService } from '../cache.service';
 import { ApiService  }  from '../api.service';
 
 export function hashCodeString(str:string): string {
@@ -28,7 +28,8 @@ export class ModelService {
   public rslt: any;
   // This is only one example of one Model depending on your domain
   constructor(public _api: ApiService,
-              public _cache: CacheService) { }
+              //public _cache: CacheService
+              ) { }
 
  /**
   * whatever domain/feature method name
@@ -39,13 +40,16 @@ export class ModelService {
     // you probably want to remove the item from the cache after you use it. LRU of 10
     // you can use also hashCodeString here
     let key = url;
+    /** Do not Cache Request http://stackoverflow.com/questions/36271899
     if (this._cache.has(key)) {
       return Observable.of(this._cache.get(key));
     }
+    **/
     // you probably shouldn't .share() and you should write the correct logic
+    console.log('ModelService', JSON.stringify(params));
     return this._api
       .get(url, params)
-      .do(json => { this._cache.set(key, json); })
+      //.do(json => { this._cache.set(key, json); })
       .share();
   }
 
@@ -53,7 +57,7 @@ export class ModelService {
     console.log('ModelService:', url);
     return this._api
       .post(url, data)
-      .do(json => { this._cache.set(url, json); })
+      //.do(json => { this._cache.set(url, json); })
       .share();
   }
 

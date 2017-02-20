@@ -13,7 +13,7 @@ mongoose.connect(uri, (err) => {
 });
 
 RR.use((req, res, next) => {
-  console.log('Somebody just came to RR');
+  console.log('Somebody just came to RecipeRoute');
   next();
 });
 
@@ -21,8 +21,11 @@ RR.use((req, res, next) => {
 **    READ MANY    **
 ********************/
 RR.get('/', (req, res) => {
+  
+  // res.json(req.query);
 
   let prms = JSON.parse(req.get('Body'))['params'];
+  console.log('RR', JSON.stringify(prms));
   let page = Number(prms.page);
   let amnt = Number(prms.amount);
   let skip = (page === 1) ? 0 : (page - 1) * amnt;
