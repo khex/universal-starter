@@ -12,24 +12,35 @@ import { Observable }     from 'rxjs/Observable';
 @Injectable()
 export class ApiService {
   
+  /** 
+   *  What Cache Service & what does id do?
+   *
+   *  It handle all urls like
+   *  - /recipes?page=3&amount=5&shoe[color]=blue&shoe[type]=converse
+   *  // >> req.query.shoe.color, req.query.shoe.type 
+   *  - /recipes/1715
+   *  - /search?q=tobi+ferret > req.query.q > "tobi ferret"
+   *  and cache it response in memory to prevent repeated requests
+   **/
+
   constructor(public _http: Http) { }
   
- /*  whatever domain/feature method name  */
+  /*  whatever domain/feature method name  */
   get(url:string, params?: any) {
-
-    console.log('ApiService', JSON.stringify(params));
+    
+    /** Params in header >> Old version
     let headers = new Headers();
     headers.append('Content-Type', 'application/json'); 
     headers.append('Body', JSON.stringify({ params }));
-    
+    //.get(url, { headers: headers })
+    **/
     return this._http
-      .get(url, { headers: headers })
+      .get(url)
       .map(res => res.json())
       .catch(err => { return Observable.throw(err); })
   }
 
   post(url:string, data:any) {
-    console.log('ApiService:', url);
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');

@@ -8,41 +8,45 @@ import { ModelService }            from '../../shared/model/model.service';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
-  encapsulation: ViewEncapsulation.Emulated,
-  selector:    'read',
-  templateUrl: './read-many.template.html'
+  encapsulation:   ViewEncapsulation.Emulated,
+  selector:       'read',
+  templateUrl:    './read-many.template.html'
 })
 export class ReadManyComponent {
 
   public recipes: any[];    // recipes data   
-  public page: number = 1;  // current page
+  public page: number = 2;  // current page
   public amnt: number = 5;  // items per page
+  public link: string = '/api/recipes';
 
   constructor(public model: ModelService,
                      elementRef: ElementRef,
                      renderer: Renderer) {
-    //  http://stackoverflow.com/questions/38053067
-    renderer.listen(elementRef.nativeElement, 'click', (event) => { });
-    this.getRecipes('/api/recipes', this.page, this.amnt);
+    //http://stackoverflow.com/questions/38053067
+    renderer.listen(elementRef.nativeElement, 'click', (event) => {
+      console.log('Smth was cliked!'); // Action on every 'click event'
+    });
+    this.getRecipes(this.page, this.amnt);
   }
 
-  getRecipes(link: string, page: number, amnt: number) {
-    console.log(page, amnt);
+  getRecipes(page: number, amnt: number) {
+    let url = `${this.link}?page=${page}&amount=${amnt}`;
+    console.log(`Read Many URL: ${url}`);
     this.model
-      .get(link, {page: page, amount: amnt})
+      .get(url)
       .subscribe(data => {
         console.log(data);
         this.recipes = data;
     });
   }
-  
+
   setPage() {
     // do nothing ;)
     //if (page < 1 || page > this.pager.totalPages) { return; }
 
     this.page = this.page + 1;
     console.log(`Current page: ${this.page}`);
-    this.getRecipes('/api/recipes', this.page, this.amnt);
+    this.getRecipes(this.page, this.amnt);
     //console.log(this.recipes);
 
     // this.pager = this.pagerService.getPager(this.allItems.length, page);

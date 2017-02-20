@@ -21,14 +21,16 @@ RR.use((req, res, next) => {
 **    READ MANY    **
 ********************/
 RR.get('/', (req, res) => {
-  
-  // res.json(req.query);
 
-  let prms = JSON.parse(req.get('Body'))['params'];
-  console.log('RR', JSON.stringify(prms));
-  let page = Number(prms.page);
-  let amnt = Number(prms.amount);
+  /** Old Style from Header **/
+  //  let prms = JSON.parse(req.get('Body'))['params'];
+  //  let page = Number(prms.page);
+  //  let amnt = Number(prms.amount);
+
+  let page = Number(req.query.page);
+  let amnt = Number(req.query.amount);
   let skip = (page === 1) ? 0 : (page - 1) * amnt;
+  console.log(`Original URL: ${req.originalUrl}`);
   console.log(`Mongoose skip: ${skip}, limit: ${amnt}`);
 
   Recipe.find()
