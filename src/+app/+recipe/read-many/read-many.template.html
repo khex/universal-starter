@@ -31,12 +31,12 @@
 <nav aria-label="...">
   <ul class="pager">
     <li [ngClass]="{disabled:page === 1}">
-      <a (click)="setPage()">
+      <a (click)="setPage('previous')">
         <span aria-hidden="true">&larr;</span>Previous
       </a>
     </li>
     <li>
-      <a (click)="setPage()">
+      <a (click)="setPage('next')">
         Next<span aria-hidden="true">&rarr;</span>
       </a>
     </li>

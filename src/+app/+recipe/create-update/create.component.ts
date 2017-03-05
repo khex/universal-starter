@@ -19,7 +19,8 @@ import { DietData,
          PurposeData,
          CuisineData,
          ComplexData,
-         CategoryData }      from './dropdown-data';
+         CategoryData,
+         AppliancesData }    from './dropdown-data';
 
 @Component({
   selector:    'create',
@@ -36,6 +37,7 @@ export class CreateComponent implements OnInit{
   public dietData = DietData;
   public valuData = ValueData;
   public compData = ComplexData;
+  public applData = AppliancesData;
 
   /** helper func for nh2-selec multiple **/
   public itemsToString(value:Array<any> = []):string {
@@ -78,16 +80,17 @@ export class CreateComponent implements OnInit{
       description:  '',
       image:        '',
       shema:        this._fb.group({
-        category:   '',
-        cuisine:    '',
-        diet:       '',
-        yield:      '',
-        prepTime:   '',
-        totalTime:  '',
-        methods:   [''],
-        purposes:  [''],
-        costs:      '',
-        complxty:   ''        
+        category:    '',
+        cuisine:     '',
+        cost:        '',
+        diet:        '',
+        yield:       '',
+        prepTime:    '',
+        totalTime:   '',
+        complexity:  '',
+        methods:    [''],
+        purposes:   [''],
+        appliances: ['']
       }),
       ingredients:  this._fb.array([ this.initIngredient()  ]),
       instructions: this._fb.array([ this.initInstruction() ]),

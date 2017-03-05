@@ -3,8 +3,10 @@ export function BuildFunk(data) {
   let resp = {
     published: new Date(),
     author: 'Рон Каленьюик',
-    shema: {},
-    ingredients: [],
+    // Leguminy.ru & Leguminy.com
+    publisher: 'Легумины.ру',
+    shema:        {},
+    ingredients:  [],
     instructions: []
   };
 
