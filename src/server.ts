@@ -67,7 +67,7 @@ app.use(cacheControl, express.static(path.join(ROOT, 'dist/client'), {index: fal
  //  Example API  //
 ///////////////////
 import { TodoApi, ServerApi } from './backend/api';
-var RR  = require('./backend/recipe-router');
+var RR  = require('./backend/recipe/recipe-router');
 
 app.get('/data.json',   ServerApi);
 app.use('/api/todos',   TodoApi());

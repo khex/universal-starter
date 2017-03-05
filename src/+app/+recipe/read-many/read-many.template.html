@@ -1,0 +1,69 @@
+<div class="btn-group btn-group-justified" role="group">
+  <div class="btn-group" role="group">
+    <a routerLinkActive="router-link-active"
+       routerLink="/recipe/create"
+       class="btn btn-success">Add New Recipe
+    </a>
+  </div>
+</div>
+
+<h3>Recipe Read Component</h3>
+
+<!-- <pre>{{ recipes | json }}</pre> -->
+<div class="media" *ngFor="let recipe of recipes">
+  <div class="media-left">
+    <a routerLinkActive="router-link-active"
+       routerLink='/recipe/{{recipe.rid}}'>
+      <img alt="100x100"
+           class="media-object"
+           src="{{recipe.image}}"
+           style="width: 100px; height: 100px;"
+           data-holder-rendered="true">
+    </a>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading">{{recipe.name}}</h4>
+    {{recipe.description}}
+  </div>
+</div>
+
+<!-- simple pager -->
+<nav aria-label="...">
+  <ul class="pager">
+    <li [ngClass]="{disabled:page === 1}">
+      <a (click)="setPage('previous')">
+        <span aria-hidden="true">&larr;</span>Previous
+      </a>
+    </li>
+    <li>
+      <a (click)="setPage('next')">
+        Next<span aria-hidden="true">&rarr;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<!-- pager
+<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+    
+    <li [ngClass]="{disabled:pager.currentPage === 1}">
+        <a (click)="setPage(1)">First</a>
+    </li>
+    
+    <li [ngClass]="{disabled:pager.currentPage === 1}">
+        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+    </li>
+    
+    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+        <a (click)="setPage(page)">{{page}}</a>
+    </li>
+    
+    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+        <a (click)="setPage(pager.currentPage + 1)">Next</a>
+    </li>
+    
+    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+        <a (click)="setPage(pager.totalPages)">Last</a>
+    </li>
+</ul>
+-->

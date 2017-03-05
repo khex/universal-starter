@@ -1,10 +1,9 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { ReadAllComponent }     from './read-all/read-all.component';
 import { CreateComponent }      from './create-update/create.component';
 import { ReadOneComponent }     from './read-one/read-one.component';
+import { ReadManyComponent }    from './read-many/read-many.component';
 import { UpdateComponent }      from './create-update/update.component';
-
 
 /** htttp://localhost:3000/api/todos?
       value=This%20is%20My%20custom%20POST&
@@ -14,7 +13,7 @@ import { UpdateComponent }      from './create-update/update.component';
 **/
 export const Routing = RouterModule.forChild([
   /*  Other Module  */
-  { path: 'recipes',            component: ReadAllComponent},
+  { path: 'recipes',            component: ReadManyComponent},
   //       recipes/category     RecipesComponent
   //       recipes/ingredient   15 per page
   //       recipes/method
