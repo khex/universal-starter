@@ -14,17 +14,41 @@
   <div class="media-left">
     <a routerLinkActive="router-link-active"
        routerLink='/recipe/{{recipe.rid}}'>
-      <img alt="100x100"
+      <img alt="{{recipe.name}}"
            class="media-object"
            src="{{recipe.image}}"
            style="width: 100px; height: 100px;"
            data-holder-rendered="true">
     </a>
   </div>
+
   <div class="media-body">
-    <h4 class="media-heading">{{recipe.name}}</h4>
+    <h3 class="media-heading">{{recipe.name}}</h3>
     {{recipe.description}}
   </div>
+
+  <div class="media-footer">
+    <div class="social">
+      <!-- 8 порций -->
+      <i class="fa fa-cutlery"   > {{recipe.shema.yield}}</i>
+      <!-- Рон Каленьюик-->
+      <i class="fa fa-user-o"    > {{recipe.author}}</i>
+      <!-- 25.02.2017-->
+      <i class="fa fa-calendar-o"> {{recipe.published | date:'dd.MM.y'}}</i>
+      <!-- 1:30-->
+      <i class="fa fa-clock-o"   > {{recipe.shema.totalTime}}</i>
+      <!-- Итальянская-->
+      <i class="fa fa-globe"     > {{recipe.shema.cuisine.text}}</i>
+      <!-- Среднея-->
+      <i class="fa fa-usd"       > {{recipe.shema.complexity.text}}</i>
+      <!-- [Завтрак, Обед, Ужин] 
+      <i class="fa fa-check-square-o fa-lg">
+        <span *ngFor="let purose of recipe.shema.purposes">{{purpose.text}}</span>
+      </i>
+      -->
+    </div>
+  </div>
+    
 </div>
 
 <!-- simple pager -->

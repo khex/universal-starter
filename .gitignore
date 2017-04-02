@@ -4,6 +4,7 @@ morgan.log
 
 # Images
 /src/images/
+/src/assets/font-awesome-4.7.0/
 
 # Built #
 /__build__/

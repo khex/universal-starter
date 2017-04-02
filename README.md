@@ -18,7 +18,7 @@ This is my Readme file
  - [ ] update `instructions` rid: 18 - 23:
 
 ## Tasks
- - [ ] does I need TypeScript at backend?
+ - [ ]  does I need TypeScript at backend?
  - [ ] 'backend/recipe-model.ts'  -> TypeScript
  - [ ] 'backend/recipe-routes.ts' -> TypeScript
 
