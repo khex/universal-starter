@@ -29,13 +29,13 @@
       {{recipe.author}} / {{recipe.published | date:'dd.MM.y HH:mm'}}
     </div> 
     <p>{{recipe.description}}</p>
-    <!-- [Завтрак, Обед, Ужин] 
-    <i class="fa fa-check-square-o fa-lg">
-      <span *ngFor="let purose of recipe.shema.purposes">{{purpose.text}}</span>
-    </i>
-    -->
-    <i class="fa fa-tags"></i>
-  </div>
+    <!-- Purpose aka Tags -->
+    <div *ngIf="recipe.shema?.purposes">
+      <i class="fa fa-tags" style="color: #7f7f7f">:
+        <span *ngFor="let purpose of recipe.shema.purposes"> {{purpose.text}}</span>
+      </i>
+    </div>
+  </div><!-- media-body -->
 
   <div class="media-footer">
     <div class="social">
@@ -57,7 +57,7 @@
       </span>
       <!-- Сложность -->
       <span *ngIf="recipe.shema?.complexity">
-        <i class="fa fa-signal"     > {{recipe.shema.complexity.text}}</i>
+        <i class="fa fa-signal"> {{recipe.shema.complexity.text}}</i>
       </span>
       <!-- Стоимость -->
       <span *ngIf="recipe.shema?.cost">
@@ -65,11 +65,23 @@
       </span>
       <!-- Диета -->
       <span *ngIf="recipe.shema?.diet">
-        <i class="fa fa-heart-o" > {{recipe.shema.diet.text}}</i>
+        <i class="fa fa-heart-o"> {{recipe.shema.diet.text}}</i>
       </span>
       <!-- Калории calories -->
       <span *ngIf="recipe.shema?.calories">
-        <i class="fa fa-fire"    > {{recipe.shema.calories}}</i>
+        <i class="fa fa-fire"> {{recipe.shema.calories}}</i>
+      </span>
+      <!-- Посуда -->
+      <span *ngIf="recipe.shema?.appliances">
+        <i class="fa fa-bath">
+          <span *ngFor="let appliance of recipe.shema.appliances"> {{appliance.text}}</span>
+        </i>
+      </span>
+      <!-- Способы -->
+      <span *ngIf="recipe.shema?.methods">
+        <i class="fa fa-spinner">
+          <span *ngFor="let method of recipe.shema.methods"> {{method.text}}</span>
+        </i>
       </span>
     </div>
   </div>

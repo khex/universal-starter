@@ -4,9 +4,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.2.22](sm.th) - ??-04-2017
+## [0.2.22](sm.th) - 06-04-2017
  - add `font awesome`
- - rebild read-many card
+ - retemplate `read-many` card
 
 ## [0.2.21] - 01-04-2017
  - mongo-db > update all documents
