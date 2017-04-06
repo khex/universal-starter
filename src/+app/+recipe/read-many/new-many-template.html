@@ -1,0 +1,66 @@
+<div class="btn-group btn-group-justified" role="group">
+  <div class="btn-group" role="group">
+    <a class="btn btn-success" routerlinkactive="router-link-active" routerlink="/recipe/create">Add New Recipe
+    </a>
+  </div>
+</div>
+
+<h3>Recipe Read-Many Component</h3>
+<!-- <pre>{{ recipes | json }}</pre>-->
+<div class="media" *ngfor="let recipe of recipes">
+
+  <div class="media-left">
+    <a routerlinkactive="router-link-active" routerlink="/recipe/{{recipe.rid}}">
+      <img class="media-object" alt="{{recipe.name}}" src="{{recipe.image}}" style="width: 100px; height: 100px" data-holder-rendered="true"/>
+    </a>
+  </div>
+  
+  <div class="media-body">
+    <h3 class="media-heading">{{recipe.name}}</h3>
+    <p>{{recipe.description}}</p>
+  </div>
+
+  <div class="media-footer">
+    <div class="social">
+      <!-- [Завтрак, Обед, Ужин] -->
+      <i class="fa fa-folder-o">{{recipe.shema.purposes}}</i>
+      <!-- 8 порций -->
+      <i class="fa fa-cutlery">{{recipe.shema.yield}}</i>
+      <!-- Рон Каленьюик-->
+      <i class="fa fa-user-o">{{recipe.author}}</i>
+      <!-- 25.02.2017-->
+      <i class="fa fa-calendar-o">{{recipe.datePublished }}</i>
+      <!-- 1:30-->
+      <i class="fa fa-clock-o">{{recipe.shema.totalTime}}</i>
+      <!-- Итальянская-->
+      <i class="fa fa-globe fa-lg">{{recipe.shema.cuisine}}</i>
+      <!-- Среднея-->
+      <i class="fa fa-usd fa-lg">  {{recipe.shema.complexity}}</i>
+    </div>
+  </div>
+</div>
+
+<!-- pager WTF
+<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+    
+    <li [ngClass]="{disabled:pager.currentPage === 1}">
+        <a (click)="setPage(1)">First</a>
+    </li>
+    
+    <li [ngClass]="{disabled:pager.currentPage === 1}">
+        <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+    </li>
+    
+    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+        <a (click)="setPage(page)">{{page}}</a>
+    </li>
+    
+    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+        <a (click)="setPage(pager.currentPage + 1)">Next</a>
+    </li>
+    
+    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+        <a (click)="setPage(pager.totalPages)">Last</a>
+    </li>
+</ul>
+-->

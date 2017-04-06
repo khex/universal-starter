@@ -2,7 +2,6 @@
 This is my Readme file
 
 # Milestones
- - 0.2.22: read-many > redraw recipe card
  - 0.2.23: read-one > update recipe view
  - 0.2.24: read-one > enable server-side rendering
  - 0.2.25: read-one > add meta tags
@@ -18,9 +17,10 @@ This is my Readme file
  - [ ] update `instructions` rid: 18 - 23:
 
 ## Tasks
- - [ ] does I need TypeScript at backend?
+ - [ ]  does I need TypeScript at backend?
  - [ ] 'backend/recipe-model.ts'  -> TypeScript
  - [ ] 'backend/recipe-routes.ts' -> TypeScript
+ - [ ] model -> prepTime to Object with text and prep
 
 ## Create Form
  - [ ] `dropdown` to `primefaces.org/primeng`

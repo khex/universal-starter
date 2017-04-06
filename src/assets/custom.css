@@ -1,0 +1,41 @@
+.well {
+  background-color: #f9f9f9;
+}
+
+colorbox, .colorbox {
+  display: inline-block;
+  height: 14px;
+  width: 14px;
+  margin-right: 4px;
+  border: 1px solid #000;
+}
+
+/* READ-MANY */
+.media {
+  padding: 15px 18px 15px 18px;
+  /** ProductHunt **/
+  background: #fff none repeat scroll 0 0;
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  border-radius: 3px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.04);
+}
+.media img {
+  min-height: 110px;
+  min-width: 110px;
+  margin-right: 8px;
+}
+.media .media-heading {
+  color: #66922a;
+}
+.media .fa {
+//margin-left: 10px;
+  margin-right: 10px;
+}
+.media-footer {
+  color: #7f7f7f; //  ex #66922a
+  margin-top: 18px;
+  border-top: 1px solid #e5e5e5;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding-top: 15px;
+}

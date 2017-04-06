@@ -9,7 +9,7 @@ import { ModelService }            from '../../shared/model/model.service';
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
   encapsulation:   ViewEncapsulation.Emulated,
-  selector:       'read',
+  selector:       'read-many',
   templateUrl:    './read-many.template.html'
 })
 export class ReadManyComponent {
