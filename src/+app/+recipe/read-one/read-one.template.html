@@ -70,16 +70,16 @@ scotch.io/tutorials/angular-2-form-validation
 
 <div class="row" *ngIf="recipe?.ingredients">
   <div class="col-md-6">
-    <div *ngFor="let ingr of recipe.ingredients; let i = index">
-      <span *ngIf="i%2 == 0">
-        <b>{{ingr.name.text}}</b> - {{ingr.amount}} {{ingr.measure.text}} <i>{{ingr.note}}</i>
+    <div *ngFor="let i of recipe.ingredients; let indx = index">
+      <span *ngIf="indx%2 == 0">
+        <b>{{i.name.text}}</b> - {{i.amount}} {{i.measure.text}} <i>{{i.note}}</i>
       </span>
     </div>
   </div>
   <div class="col-md-6">
-    <div *ngFor="let ingr of recipe.ingredients; let i = index">
-      <span *ngIf="i%2 == 1">
-        <b>{{ingr.name.text}}</b> - {{ingr.amount}} {{ingr.measure.text}} <i>{{ingr.note}}</i>
+    <div *ngFor="let i of recipe.ingredients; let indx = index">
+      <span *ngIf="indx%2 == 1">
+        <b>{{i.name.text}}</b> - {{i.amount}} {{i.measure.text}} <i>{{i.note}}</i>
       </span>
     </div>    
   </div>
