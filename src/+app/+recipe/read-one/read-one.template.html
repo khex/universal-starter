@@ -71,14 +71,14 @@ scotch.io/tutorials/angular-2-form-validation
 <div class="row" *ngIf="recipe?.ingredients">
   <div class="col-md-6">
     <div *ngFor="let i of recipe.ingredients; let indx = index">
-      <span *ngIf="indx%2 == 0">
+      <span *ngIf="indx%2 == 1">
         <b>{{i.name.text}}</b> - {{i.amount}} {{i.measure.text}} <i>{{i.note}}</i>
       </span>
     </div>
   </div>
   <div class="col-md-6">
     <div *ngFor="let i of recipe.ingredients; let indx = index">
-      <span *ngIf="indx%2 == 1">
+      <span *ngIf="indx%2 == 0">
         <b>{{i.name.text}}</b> - {{i.amount}} {{i.measure.text}} <i>{{i.note}}</i>
       </span>
     </div>    
@@ -86,11 +86,10 @@ scotch.io/tutorials/angular-2-form-validation
 </div>
 
 <!-- INSTRUCTIONS -->
-<div *ngIf="recipe?.instructions" class="panel panel-warning">
-  <!-- Default panel contents -->
-  <div class="panel-heading">Инструкции</div>
-  <!-- List group -->
-  <ul *ngFor="let instruction of recipe.instructions" class="list-group">
-    <li class="list-group-item">{{instruction.step}}</li>
-  </ul>
+<div class="page-header"><h3>Инструкции</h3></div>
+
+<div *ngIf="recipe?.instructions">
+  <div *ngFor="let instruction of recipe.instructions">
+    <p>{{instruction.step}}</p>
+  </div>
 </div>
