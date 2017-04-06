@@ -24,44 +24,52 @@ scotch.io/tutorials/angular-2-form-validation
 <div class="row">
   <div class="col-md-6">
     <div *ngIf="recipe.shema?.category">
-      <p><b>Категория:</b> {{recipe.shema.category.text}}</p>
+      <b>Категория:</b> {{recipe.shema.category.text}}
     </div>
     <div *ngIf="recipe.shema?.cuisine">
-      <p><b>Кухня:</b> {{recipe.shema.cuisine.text}}</p>
+      <b>Кухня:</b> {{recipe.shema.cuisine.text}}
     </div>
     <div *ngIf="recipe.shema?.yield">
-      <p><b>К-во порций:</b> {{recipe.shema.yield}}</p>
+      <b>К-во порций:</b> {{recipe.shema.yield}}
     </div>
     <div *ngIf="recipe.shema?.prepTime">
-      <p><b>Время подготовки:</b> {{recipe.shema.prepTime}}</p>
+      <b>Время подготовки:</b> {{recipe.shema.prepTime}}
     </div>
     <div *ngIf="recipe.shema?.totalTime">
-      <p><b>Время приготовления:</b> {{recipe.shema.totalTime}}</p>
+      <b>Время приготовления:</b> {{recipe.shema.totalTime}}
     </div>
     <div *ngIf="recipe.shema?.complexity">
-      <p><b>Сложность приготовления:</b> {{recipe.shema.complexity.text}}</p>
+      <b>Сложность приготовления:</b> {{recipe.shema.complexity.text}}
     </div>
     <div *ngIf="recipe.shema?.cost">
-      <p><b>Стоимость:</b> {{recipe.shema.cost.text}}</p>
+      <b>Стоимость:</b> {{recipe.shema.cost.text}}
     </div>
     <div *ngIf="recipe.shema?.diet">
-      <p><b>Для диеты:</b> {{recipe.shema.diet.text}}</p>
+      <b>Для диеты:</b> {{recipe.shema.diet.text}}
     </div>
     <div *ngIf="recipe.shema?.purposes">
-      <p *ngFor="let purpose of recipe.shema.purposes">
-        <b>Тэги:</b> {{purpose.text}}
-      </p>
+      <b>Тэги:</b>
+      <span *ngFor="let purpose of recipe.shema.purposes">
+         {{purpose.text}},
+      </span>
     </div>
     <div *ngIf="recipe.shema?.methods">
-      <p *ngFor="let method of recipe.shema.methods">
-        <b>Метод приготовления:</b> {{method.text}}
-      </p>
+      <b>Метод приготовления:</b>
+      <span *ngFor="let method of recipe.shema.methods">
+         {{method.text}},
+      </span>
     </div>
     <div *ngIf="recipe.shema?.appliances">
-      <p *ngFor="let appliance of recipe.shema.appliances">
-        <b>Инвентарь:</b> {{appliance.text}}
-      </p>
+      <b>Инвентарь:</b>
+      <span *ngFor="let appliance of recipe.shema.appliances">
+         {{appliance.text}},
+      </span>
     </div>
+  </div>
+  <div class="col-md-6">
+    <img class="img-rounded"
+         src="Banner_300x250.jpg"
+         alt="Banner_300x250">
   </div>
 </div>
 
