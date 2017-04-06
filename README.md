@@ -2,7 +2,6 @@
 This is my Readme file
 
 # Milestones
- - 0.2.23: read-one > update recipe view
  - 0.2.24: read-one > enable server-side rendering
  - 0.2.25: read-one > add meta tags
  - 0.2.26: read-one > add `JSON+LD` recipe schema

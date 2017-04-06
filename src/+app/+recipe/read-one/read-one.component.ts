@@ -16,11 +16,8 @@ import { ModelService }            from '../../shared/model/model.service';
 export class ReadOneComponent {
 
   private rid: any;
-  private sub: any;
+  private sub: any; // <= WTF
   private recipe: any = {};
-  private shema:  any = {};
-  private ingred: any = {};
-  private instra: any = {};
 
   constructor(private model: ModelService,
               private route: ActivatedRoute) { }
@@ -35,9 +32,6 @@ export class ReadOneComponent {
       .get(`/api/recipes/${this.rid}`)
       .subscribe(data => {
         this.recipe = data;
-        this.shema  = data.shema;
-        this.ingred = data.ingredients;
-        this.instra = data.instructions;
     });
 
   }
