@@ -23,7 +23,11 @@
   </div>
 
   <div class="media-body">
-    <h3 class="media-heading">{{recipe.name}}</h3>
+    <h3 class="media-heading">
+      <a routerLinkActive="router-link-active"
+       routerLink='/recipe/{{recipe.rid}}'>{{recipe.name}}
+      </a>
+    </h3>
     <div class="auth-date" style="color: #7f7f7f">
       <!-- Рон Каленьюик / 25.03.17 18:45 -->
       {{recipe.author}} / {{recipe.published | date:'dd.MM.y HH:mm'}}
@@ -41,15 +45,15 @@
     <div class="social">
       <!-- Категория -->
       <span *ngIf="recipe.shema?.category">
-        <i class="fa fa-folder-o"> {{recipe.shema.category.text}}</i>
+        <i class="fa fa-folder-o"></i> {{recipe.shema.category.text}}
       </span>
       <!-- 8 порций -->
       <span *ngIf="recipe.shema?.yield">
-        <i class="fa fa-cutlery"> {{recipe.shema.yield}}</i>
+        <i class="fa fa-cutlery"></i> {{recipe.shema.yield}}
       </span>
       <!-- 1:30 -->
       <span *ngIf="recipe.shema?.totalTime">
-        <i class="fa fa-clock-o"> {{recipe.shema.totalTime}}</i>
+        <i class="fa fa-clock-o"></i> {{recipe.shema.totalTime}}
       </span>
       <!-- Итальянская -->
       <span *ngIf="recipe.shema?.cuisine">

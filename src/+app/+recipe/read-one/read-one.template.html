@@ -12,84 +12,85 @@
   </div>
   <div class="col-md-9">
     <p>{{recipe.description}}</p>
-    <p>{{recipe.created_at}}</p>
+    <p>{{recipe.published | date:'dd.MM.y HH:mm'}}</p>
   </div>
 </div>
 
-<!--
-| Schema.org values |
+<!-- Schema.org values
 scotch.io/tutorials/angular-2-form-validation
 *ngIf="!complexForm.controls['gender'].valid &&
         complexForm.controls['gender'].touched"
 -->
 <div class="row">
-
   <div class="col-md-6">
-    <div *ngIf="shema?.category">
-      <p><b>Категория:</b> {{shema.category.text}}</p>
+    <div *ngIf="recipe.shema?.category">
+      <p><b>Категория:</b> {{recipe.shema.category.text}}</p>
     </div>
-    <div *ngIf="shema?.cuisine">
-      <p><b>Кухня:</b> {{shema.cuisine.text}}</p>
+    <div *ngIf="recipe.shema?.cuisine">
+      <p><b>Кухня:</b> {{recipe.shema.cuisine.text}}</p>
     </div>
-    <div *ngIf="shema?.yield">
-      <p><b>К-во порций:</b> {{shema.yield}}</p>
+    <div *ngIf="recipe.shema?.yield">
+      <p><b>К-во порций:</b> {{recipe.shema.yield}}</p>
     </div>
-    <div *ngIf="shema?.prepTime">
-      <p><b>Время подготовки:</b> {{shema.prepTime}}</p>
+    <div *ngIf="recipe.shema?.prepTime">
+      <p><b>Время подготовки:</b> {{recipe.shema.prepTime}}</p>
     </div>
-    <div *ngIf="shema?.totalTime">
-      <p><b>Время приготовления:</b> {{shema.totalTime}}</p>
+    <div *ngIf="recipe.shema?.totalTime">
+      <p><b>Время приготовления:</b> {{recipe.shema.totalTime}}</p>
     </div>
-    <div *ngIf="shema?.complxty">
-      <p><b>Сложность приготовления:</b> {{shema.complxty.text}}</p>
+    <div *ngIf="recipe.shema?.complexity">
+      <p><b>Сложность приготовления:</b> {{recipe.shema.complexity.text}}</p>
     </div>
-    <div *ngIf="shema?.costs">
-      <p><b>Стоимость:</b> {{shema.costs.text}}</p>
+    <div *ngIf="recipe.shema?.cost">
+      <p><b>Стоимость:</b> {{recipe.shema.cost.text}}</p>
     </div>
-    <div *ngIf="shema?.diet">
-      <p><b>Для диеты:</b> {{shema.diet.text}}</p>
+    <div *ngIf="recipe.shema?.diet">
+      <p><b>Для диеты:</b> {{recipe.shema.diet.text}}</p>
     </div>
-    <div *ngIf="shema?.purposes">
-      <p *ngFor="let purp of shema.purposes">
-        <b>Подходит для:</b> {{purp.text}}
+    <div *ngIf="recipe.shema?.purposes">
+      <p *ngFor="let purpose of recipe.shema.purposes">
+        <b>Тэги:</b> {{purpose.text}}
       </p>
     </div>
-    <div *ngIf="shema?.methods">
-      <p *ngFor="let meth of shema.methods">
-        <b>Метод приготовления:</b> {{meth.text}}</p>
+    <div *ngIf="recipe.shema?.methods">
+      <p *ngFor="let method of recipe.shema.methods">
+        <b>Метод приготовления:</b> {{method.text}}
+      </p>
     </div>
-  <!-- temperary in one column
+    <div *ngIf="recipe.shema?.appliances">
+      <p *ngFor="let appliance of recipe.shema.appliances">
+        <b>Инвентарь:</b> {{appliance.text}}
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- INGREDIENTS -->
+<div class="page-header"><h3>Ингредиенты</h3></div>
+
+<div class="row" *ngIf="recipe?.ingredients">
+  <div class="col-md-6">
+    <div *ngFor="let ingr of recipe.ingredients; let i = index">
+      <span *ngIf="i%2 == 0">
+        <b>{{ingr.name.text}}</b> - {{ingr.amount}} {{ingr.measure.text}} <i>{{ingr.note}}</i>
+      </span>
+    </div>
   </div>
   <div class="col-md-6">
-  -->
+    <div *ngFor="let ingr of recipe.ingredients; let i = index">
+      <span *ngIf="i%2 == 1">
+        <b>{{ingr.name.text}}</b> - {{ingr.amount}} {{ingr.measure.text}} <i>{{ingr.note}}</i>
+      </span>
+    </div>    
   </div>
 </div>
 
-<!--
-    INGREDIENTS 
--->
-
-<div class="page-header">
-  <h3>Ингредиенты</h3>
-</div>
-<div *ngIf="recipe?.ingredients">
-  <div *ngFor="let i of ingred">
-    <p><b>{{i.name.text}}</b> - {{i.amount}} {{i.measure.text}} <i>{{i.note}}</i></p>
-  </div>
-<div>
-
-<!--
-    INSTRUCTIONS 
--->
+<!-- INSTRUCTIONS -->
 <div *ngIf="recipe?.instructions" class="panel panel-warning">
   <!-- Default panel contents -->
   <div class="panel-heading">Инструкции</div>
   <!-- List group -->
-  <ul *ngFor="let inst of instra" class="list-group">
-    <li class="list-group-item">{{inst.step}}</li>
+  <ul *ngFor="let instruction of recipe.instructions" class="list-group">
+    <li class="list-group-item">{{instruction.step}}</li>
   </ul>
 </div>
-
-<!--
-<pre>{{ recipe | json }}</pre>
--->
