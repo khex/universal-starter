@@ -1,6 +1,7 @@
 import { OnInit,
          OnDestroy,
          Component,
+         Renderer,
          ElementRef,
          AfterContentInit,
          ViewEncapsulation,
@@ -15,7 +16,8 @@ import { ModelService }            from '../../shared/model/model.service';
   selector:    'read-one',
   templateUrl: './read-one.template.html'
 })
-export class ReadOneComponent implements AfterContentInit {
+//export class ReadOneComponent implements AfterContentInit {
+export class ReadOneComponent {
 
   private rid: any;
   private sub: any; // <= WTF ?
@@ -35,7 +37,17 @@ export class ReadOneComponent implements AfterContentInit {
 
   constructor(private model: ModelService,
               private route: ActivatedRoute,
-              private elementRef: ElementRef) { }
+              private element: ElementRef,
+              private renderer: Renderer) {
+    //  Attributes are defined by HTML.
+    //  Properties are defined by DOM.
+    //  https://netbasal.com/e43ef673b26c
+    let jsonTag = renderer.createElement(element.nativeElement, "script");
+    renderer.setElementAttribute(jsonTag, "type", "application/ld+json");
+    renderer.setText(jsonTag, "SetText condition.");
+
+    //renderer.createText(jsonTag, "CreateText condition.");
+  }
 
   ngOnInit() {
 
@@ -52,12 +64,12 @@ export class ReadOneComponent implements AfterContentInit {
   }
 
   ngOnDestroy() { this.sub.unsubscribe(); }
-
+  /**
   ngAfterContentInit() {
     var s = document.createElement("script");
     s.type = "application/ld+json";
     s.innerText = JSON.stringify(this.JsonLD);
     this.elementRef.nativeElement.appendChild(s);
   }
-
+  **/
 }
