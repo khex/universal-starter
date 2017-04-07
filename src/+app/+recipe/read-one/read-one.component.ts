@@ -22,27 +22,8 @@ export class ReadOneComponent {
   private rid: any;
   private sub: any; // <= WTF ?
   private recipe: any = {};
-  public jsld: Object = {
-    "@context": "http://schema.org/",
-    "@type": "Recipe",
-    "name": "",
-    "description": "",
-    "image": "http://localhost:3000/images/",
-    "author": {
-        "@type": "Person"
-    },
-    "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5",
-        "reviewCount": "52"
-    },
-    "nutrition": {
-        "@type": "NutritionInformation",
-        "calories": "319 cal"
-    },
-    "recipeIngredient": []
-  };
   public jsonTag: any;
+//public greeting: Promise<boolean>;
 
   constructor(private model: ModelService,
               private route: ActivatedRoute,
@@ -67,20 +48,30 @@ export class ReadOneComponent {
     this.model
       .get(`/api/recipes/${this.rid}`)
       .subscribe(data => {
-        this.recipe = data;
+        // here comes my service cb func
+        this.recipe = data; 
+        this.JsonBuilder(data, (text) => {
+          this.renderer.setText(this.jsonTag, text);
+        });
     });
 
-    this.jsld['name']        = this.recipe.name;
-    this.jsld['description'] = this.recipe.description;
-  //this.jsld['image'] = "http://localhost:3000/" + this.recipe.image;
-  //this.jsld['author']['name'] = this.recipe.author;
-  //this.jsld['datePublished'] = this.recipe.published;
-  //this.jsld['recipeYield'] = this.recipe.shema["yield"];  
-  //this.jsld['prepTime'] = this.recipe.shema.prepTime;
-  //this.jsld['totalTime'] = this.recipe.shema.totalTime;
+    //this.renderer.setText(this.jsonTag, JSON.stringify(this.jsld));
 
-    this.renderer.setText(this.jsonTag, JSON.stringify(this.jsld));
+  }
 
+  JsonBuilder(rcpt: any, cb: any): any {  
+
+    let shema: any = {
+      "@context": "http://schema.org/",
+      "@type": "Recipe",
+    //image: "http://localhost:3000/images/",
+      author: { "@type": "Person" },
+      aggregateRating: {"@type": "AggregateRating", ratingValue: "5", reviewCount: "52"},
+      nutrition: {"@type": "NutritionInformation", calories: "319 cal"},
+      recipeIngredient: []
+    };
+
+    return cb('This is the callback text');
   }
 
   ngOnDestroy() { this.sub.unsubscribe(); }
