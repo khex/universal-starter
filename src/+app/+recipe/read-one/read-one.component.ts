@@ -22,33 +22,27 @@ export class ReadOneComponent {
   private rid: any;
   private sub: any; // <= WTF ?
   private recipe: any = {};
-  public JsonLD = {
-    "@context": "http://schema.org/",
-    "@type": "Recipe",
-    "name": "Strawberry-Mango Mesclun Recipe",
-    "image": "http://images.media-allrecipes.com/userphotos/600x600/1116471.jpg",
-    "author": { "@type": "Person", "name": "scoopnana"},
-    "datePublished": "2008-03-03",
-    "description": "Mango, strawberries, and sweetened dried cranberries are a vibrant.",
-    "prepTime": "PT15M",
-    "totalTime": "PT14M",
-    "recipeYield": "12 servings",
-  };
   public jsld: Object = {
     "@context": "http://schema.org/",
     "@type": "Recipe",
     "name": "",
-    "image": "",
-    "author": {
-      "@type": "Person",
-      "name": ""
-    },
-    "datePublished": "",
     "description": "",
-    "prepTime": "",
-    "totalTime": "",
-    "recipeYield": "",
+    "image": "http://localhost:3000/images/",
+    "author": {
+        "@type": "Person"
+    },
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "52"
+    },
+    "nutrition": {
+        "@type": "NutritionInformation",
+        "calories": "319 cal"
+    },
+    "recipeIngredient": []
   };
+  public jsonTag: any;
 
   constructor(private model: ModelService,
               private route: ActivatedRoute,
@@ -57,10 +51,11 @@ export class ReadOneComponent {
     //  Attributes are defined by HTML.
     //  Properties are defined by DOM.
     //  https://netbasal.com/e43ef673b26c
-    let jsonTag = renderer.createElement(element.nativeElement, "script");
-    renderer.setElementAttribute(jsonTag, "type", "application/ld+json");
-    renderer.setText(jsonTag, JSON.stringify(this.JsonLD));  // vs? .createText()
-
+    //let jsonTag = renderer.createElement(element.nativeElement, "script");
+    //renderer.setElementAttribute(jsonTag, "type", "application/ld+json");
+    //renderer.setText(jsonTag, JSON.stringify(this.JsonLD));  // vs? .createText()
+    this.jsonTag = this.renderer.createElement(this.element.nativeElement, "script");
+    this.renderer.setElementAttribute(this.jsonTag, "type", "application/ld+json");
   }
 
   ngOnInit() {
@@ -74,6 +69,17 @@ export class ReadOneComponent {
       .subscribe(data => {
         this.recipe = data;
     });
+
+    this.jsld['name']        = this.recipe.name;
+    this.jsld['description'] = this.recipe.description;
+  //this.jsld['image'] = "http://localhost:3000/" + this.recipe.image;
+  //this.jsld['author']['name'] = this.recipe.author;
+  //this.jsld['datePublished'] = this.recipe.published;
+  //this.jsld['recipeYield'] = this.recipe.shema["yield"];  
+  //this.jsld['prepTime'] = this.recipe.shema.prepTime;
+  //this.jsld['totalTime'] = this.recipe.shema.totalTime;
+
+    this.renderer.setText(this.jsonTag, JSON.stringify(this.jsld));
 
   }
 
