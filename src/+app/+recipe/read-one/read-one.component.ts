@@ -34,6 +34,21 @@ export class ReadOneComponent {
     "totalTime": "PT14M",
     "recipeYield": "12 servings",
   };
+  public jsld: Object = {
+    "@context": "http://schema.org/",
+    "@type": "Recipe",
+    "name": "",
+    "image": "",
+    "author": {
+      "@type": "Person",
+      "name": ""
+    },
+    "datePublished": "",
+    "description": "",
+    "prepTime": "",
+    "totalTime": "",
+    "recipeYield": "",
+  };
 
   constructor(private model: ModelService,
               private route: ActivatedRoute,
@@ -44,9 +59,8 @@ export class ReadOneComponent {
     //  https://netbasal.com/e43ef673b26c
     let jsonTag = renderer.createElement(element.nativeElement, "script");
     renderer.setElementAttribute(jsonTag, "type", "application/ld+json");
-    renderer.setText(jsonTag, "SetText condition.");
+    renderer.setText(jsonTag, JSON.stringify(this.JsonLD));  // vs? .createText()
 
-    //renderer.createText(jsonTag, "CreateText condition.");
   }
 
   ngOnInit() {
@@ -64,12 +78,5 @@ export class ReadOneComponent {
   }
 
   ngOnDestroy() { this.sub.unsubscribe(); }
-  /**
-  ngAfterContentInit() {
-    var s = document.createElement("script");
-    s.type = "application/ld+json";
-    s.innerText = JSON.stringify(this.JsonLD);
-    this.elementRef.nativeElement.appendChild(s);
-  }
-  **/
+
 }
