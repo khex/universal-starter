@@ -23,7 +23,6 @@ export class ReadOneComponent {
   private sub: any; // <= WTF ?
   private recipe: any = {};
   public jsonTag: any;
-//public greeting: Promise<boolean>;
 
   constructor(private model: ModelService,
               private route: ActivatedRoute,
@@ -48,30 +47,35 @@ export class ReadOneComponent {
     this.model
       .get(`/api/recipes/${this.rid}`)
       .subscribe(data => {
-        // here comes my service cb func
-        this.recipe = data; 
+        this.recipe = data;
         this.JsonBuilder(data, (text) => {
           this.renderer.setText(this.jsonTag, text);
         });
     });
-
-    //this.renderer.setText(this.jsonTag, JSON.stringify(this.jsld));
-
   }
 
-  JsonBuilder(rcpt: any, cb: any): any {  
+  JsonBuilder(rcpt: any, callback: any): string {  
 
     let shema: any = {
-      "@context": "http://schema.org/",
-      "@type": "Recipe",
-    //image: "http://localhost:3000/images/",
-      author: { "@type": "Person" },
+      "@context": "http://schema.org/", "@type": "Recipe", author: { "@type": "Person" },
       aggregateRating: {"@type": "AggregateRating", ratingValue: "5", reviewCount: "52"},
       nutrition: {"@type": "NutritionInformation", calories: "319 cal"},
-      recipeIngredient: []
+      recipeIngredient: ["1/2 cup sugar", "3/4 cup canola oil", "1 teaspoon salt"]
     };
 
-    return cb('This is the callback text');
+    shema.name  = rcpt.name;
+    shema.description = rcpt.description;
+    shema.image = "http://www.leguminy.com/" + rcpt.image;
+    shema.author.name = rcpt.author;
+    shema.recipeCategory = rcpt.shema.category.text;
+    shema.datePublished = rcpt.published;
+    shema.recipeYield = rcpt.shema.yield;
+    //  P<date>T<time> = PT1H15M
+    shema.prepTime = rcpt.shema.prepTime;
+    shema.totalTime = rcpt.shema.totalTime;
+  //shema.recipeIngrediend = rcpt.ingredients.map();
+
+    return callback(JSON.stringify(shema));
   }
 
   ngOnDestroy() { this.sub.unsubscribe(); }
