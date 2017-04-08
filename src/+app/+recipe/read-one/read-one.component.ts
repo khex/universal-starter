@@ -28,12 +28,7 @@ export class ReadOneComponent {
               private route: ActivatedRoute,
               private element: ElementRef,
               private renderer: Renderer) {
-    //  Attributes are defined by HTML.
-    //  Properties are defined by DOM.
     //  https://netbasal.com/e43ef673b26c
-    //let jsonTag = renderer.createElement(element.nativeElement, "script");
-    //renderer.setElementAttribute(jsonTag, "type", "application/ld+json");
-    //renderer.setText(jsonTag, JSON.stringify(this.JsonLD));  // vs? .createText()
     this.jsonTag = this.renderer.createElement(this.element.nativeElement, "script");
     this.renderer.setElementAttribute(this.jsonTag, "type", "application/ld+json");
   }
@@ -57,25 +52,37 @@ export class ReadOneComponent {
   JsonBuilder(rcpt: any, callback: any): string {  
 
     let shema: any = {
-      "@context": "http://schema.org/", "@type": "Recipe", author: { "@type": "Person" },
-       aggregateRating: {"@type": "AggregateRating", ratingValue: "5", reviewCount: "52"}
+      "@context": "http://schema.org/",
+      "@type":    "Recipe",
+      image:      "http://www.leguminy.com/",          
+      author:          {"@type": "Person"},
+      aggregateRating: {"@type": "AggregateRating"},
+      nutrition:       {"@type": "NutritionInformation"},
     };
-
-    shema.name  = rcpt.name;
-    shema.description = rcpt.description;
-    shema.image = "http://www.leguminy.com/" + rcpt.image;
-    shema.author.name = rcpt.author;
-    shema.recipeCategory = rcpt.shema.category.text;
-    shema.datePublished = rcpt.published;
-    shema.recipeYield = rcpt.shema.yield;
-    //  P<date>T<time> = PT1H15M
-    shema.prepTime = rcpt.shema.prepTime;
-    shema.totalTime = rcpt.shema.totalTime;
+    /*  Defaul values  */
+    shema.name             = rcpt.name;
+    shema.description      = rcpt.description;
+    shema.image           += rcpt.image;
+    shema.author.name      = rcpt.author;
+    shema.datePublished    = rcpt.published;
     shema.recipeIngredient = rcpt.ingredients.map((val) => {
-      return `${val.name.text} - ${val.amount} ${val.measure.text}`;
+      return `${val.name.text} - ${(val.amount) ? val.amount : ''} ${(val.measure) ? val.measure.text : ''}`;
     });
+    /*  Custom values  */
+    if(rcpt.shema.category)  { shema.recipeCategory = rcpt.shema.category.text; }
+    if(rcpt.shema.yield)     { shema.recipeYield    = rcpt.shema.yield; }
+    if(rcpt.shema.prepTime)  { shema.prepTime       = rcpt.shema.prepTime; }
+    if(rcpt.shema.totalTime) { shema.totalTime      = rcpt.shema.totalTime; }
+    /*  Random Values  */
+    shema.aggregateRating.ratingValue = this.randomer(3, 3);
+    shema.aggregateRating.reviewCount = this.randomer(15, 35);
+    shema.nutrition.calories          = this.randomer(350, 500); 
 
     return callback(JSON.stringify(shema));
+  }
+
+  randomer(min: number, max: number): number {
+    return Math.floor(Math.random() * max) + min;
   }
 
   ngOnDestroy() { this.sub.unsubscribe(); }

@@ -66,9 +66,7 @@
   <div class="col-md-6">
     <img class="img-rounded"
          alt="Banner_300x250"
-         ng-reflect-src="images/banner_300x250.jpg"
-         src="images/banner_300x250.jpg"
-         ng-reflect-alt="Пицца &quot;Пальмовая роща&quot;"
+         src="http://127.0.0.1:3000/images/banner_300x250.jpg"
          alt="Пицца &quot;Пальмовая роща&quot;"
     >
   </div>
@@ -81,16 +79,22 @@
   <div class="col-md-6">
     <div *ngFor="let i of recipe.ingredients; let indx = index">
       <span *ngIf="indx%2 == 1">
-        <b>{{i.name.text}}</b> - {{i.amount}} {{i.measure.text}} <i>{{i.note}}</i>
+        <b>   {{i.name.text}}</b> -
+        <span>{{(i.amount)  ? i.amount : ''}}</span>
+        <span>{{(i.measure) ? i.measure.text : ''}}</span>
+        <i>   {{(i.note)    ? i.note : ''}}</i>        
       </span>
     </div>
   </div>
   <div class="col-md-6">
     <div *ngFor="let i of recipe.ingredients; let indx = index">
       <span *ngIf="indx%2 == 0">
-        <b>{{i.name.text}}</b> - {{i.amount}} {{i.measure.text}} <i>{{i.note}}</i>
+        <b>   {{i.name.text}}</b> -
+        <span>{{(i.amount)  ? i.amount : ''}}</span>
+        <span>{{(i.measure) ? i.measure.text : ''}}</span>
+        <i>   {{(i.note)    ? i.note : ''}}</i> 
       </span>
-    </div>    
+    </div>
   </div>
 </div>
 

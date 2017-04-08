@@ -2,8 +2,7 @@
 This is my Readme file
 
 # Milestones
- - 0.2.25: read-one > add meta tags
- - 0.2.26: read-one > add `JSON+LD` recipe schema
+ - 0.2.26: read-one > add meta tags
  - 0.2.27: create-update > update form with `primeng`
  - 0.2.28: create-update > edit & save recipe by `rid`
  - 0.2.29: create-update > update layout
@@ -33,4 +32,5 @@ This is my Readme file
  - [x] pagination for `AllRecipes`
 
 ## Read One
+ - [ ] speed up by function {{resipe(data)}} that return HTML code
  - [ ] ? `ingred > measure` save text only
