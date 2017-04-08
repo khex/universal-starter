@@ -1,5 +1,11 @@
 <!-- stackoverflow.com/questions/33700266 Select Basic -->
 
+<!-- Schema.org values
+scotch.io/tutorials/angular-2-form-validation
+*ngIf="!complexForm.controls['gender'].valid &&
+        complexForm.controls['gender'].touched"
+-->
+
 <form class="well form-horizontal" novalidate
      [formGroup]="myForm"
      (ngSubmit)="saveRecipe(myForm)">

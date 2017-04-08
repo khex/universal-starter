@@ -79,7 +79,7 @@ export class CreateComponent implements OnInit{
       name:         '',
       description:  '',
       image:        '',
-      shema:        this._fb.group({
+      shema: this._fb.group({
         category:    '',
         cuisine:     '',
         cost:        '',
