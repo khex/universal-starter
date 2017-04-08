@@ -10,6 +10,8 @@ import { ReadOneComponent }    from './read-one/read-one.component';
 import { ReadManyComponent }   from './read-many/read-many.component';
 import { UpdateComponent }     from './create-update/update.component';
 
+import { Meta }                from '../../angular2-meta';
+
 
 @NgModule({
   imports:      [ Routing,
@@ -21,6 +23,6 @@ import { UpdateComponent }     from './create-update/update.component';
                   CreateComponent,
                   ReadOneComponent,
                   UpdateComponent ],
-  providers:    [ ]
+  providers:    [ Meta ]
 })
 export class RecipeModule { }

@@ -7,8 +7,8 @@ import { OnInit,
          ViewEncapsulation,
          ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute }          from '@angular/router';
-
 import { ModelService }            from '../../shared/model/model.service';
+import { Meta }                    from '../../../angular2-meta';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
@@ -27,10 +27,16 @@ export class ReadOneComponent {
   constructor(private model: ModelService,
               private route: ActivatedRoute,
               private element: ElementRef,
-              private renderer: Renderer) {
+              private renderer: Renderer,
+              private meta: Meta) {
     //  https://netbasal.com/e43ef673b26c
     this.jsonTag = this.renderer.createElement(this.element.nativeElement, "script");
     this.renderer.setElementAttribute(this.jsonTag, "type", "application/ld+json");
+
+    meta.addTags([
+      {name: 'application-name', content: 'Name of my application'},
+      {name: 'description', content: 'A description of the page'}
+    ]);
   }
 
   ngOnInit() {
@@ -86,5 +92,23 @@ export class ReadOneComponent {
   }
 
   ngOnDestroy() { this.sub.unsubscribe(); }
+
+  /**
+    <meta property="fb:app_id" content="331034313679007">
+    <meta property="og:title" content="Простой пирог с черносливом и орехами">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="http://www.povarenok.ru/data/cache/2017apr/06/24/1978180_23671-114x114x.jpg">
+    <meta property="og:url" content="http://www.povarenok.ru/recipes/show/140038/">
+    <meta property="og:site_name" content="Поварёнок">
+    <meta property="og:description" content="Кулинарный рецепт">
+
+    article:published_time - datetime - When the article was first published.
+    article:modified_time - datetime - When the article was last changed.
+    article:expiration_time - datetime - When the article is out of date after.
+    article:author - profile array - Writers of the article.
+    article:section - string - A high-level section name. E.g. Technology
+    article:tag - string array - Tag words associated with this article.
+
+  **/
 
 }
