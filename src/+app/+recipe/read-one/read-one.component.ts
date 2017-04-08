@@ -58,9 +58,7 @@ export class ReadOneComponent {
 
     let shema: any = {
       "@context": "http://schema.org/", "@type": "Recipe", author: { "@type": "Person" },
-      aggregateRating: {"@type": "AggregateRating", ratingValue: "5", reviewCount: "52"},
-      nutrition: {"@type": "NutritionInformation", calories: "319 cal"},
-      recipeIngredient: ["1/2 cup sugar", "3/4 cup canola oil", "1 teaspoon salt"]
+       aggregateRating: {"@type": "AggregateRating", ratingValue: "5", reviewCount: "52"}
     };
 
     shema.name  = rcpt.name;
@@ -73,7 +71,9 @@ export class ReadOneComponent {
     //  P<date>T<time> = PT1H15M
     shema.prepTime = rcpt.shema.prepTime;
     shema.totalTime = rcpt.shema.totalTime;
-  //shema.recipeIngrediend = rcpt.ingredients.map();
+    shema.recipeIngredient = rcpt.ingredients.map((val) => {
+      return `${val.name.text} - ${val.amount} ${val.measure.text}`;
+    });
 
     return callback(JSON.stringify(shema));
   }
