@@ -9,7 +9,6 @@ This is my Readme file
  - 0.4.00: add module `user` as new entity
  - 0.5.00: add `comments`, `likes` & `recipe-book`
 
-#Todo
 ## Urgent
  - [ ] update `instructions` rid: 18 - 23:
 
