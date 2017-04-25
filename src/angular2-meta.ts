@@ -6,10 +6,9 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 // es6-modules are used here
-import { getDOM,
-         DomAdapter } from '@angular/platform-browser/src/dom/dom_adapter';
+import {DomAdapter, getDOM} from '@angular/platform-browser/src/dom/dom_adapter';
 
 /**
  * Represent meta element.
@@ -59,7 +58,8 @@ export class Meta {
   /**
    * Adds a new meta tag to the dom.
    *
-   * ## Example
+   *  ### Example
+   *
    * ```ts
    * const name: MetaDefinition = {name: 'application-name', content: 'Name of my application'};
    * const desc: MetaDefinition = {name: 'description', content: 'A description of the page'};
@@ -79,7 +79,8 @@ export class Meta {
    * Gets the meta tag by the given selector. Returns element or null
    * if there's no such meta element.
    *
-   * ## Example
+   *  ### Example
+   *
    * ```ts
    * const meta: HTMLMetaElement = this.meta.getTag('name=description');
    * const twitterMeta: HTMLMetaElement = this.meta.getTag('name="twitter:title"');
