@@ -34,3 +34,7 @@ This is my Readme file
 ## Read One
  - [ ] speed up by function {{resipe(data)}} that return HTML code
  - [ ] ? `ingred > measure` save text only
+
+## Styles
+ - Semantic UI > Label
+ - Material-UI > Chip

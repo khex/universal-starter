@@ -1,13 +1,8 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { APP_BASE_HREF } from '@angular/common';
-// for AoT we need to manually split universal packages
-import { UniversalModule,
-         isBrowser, isNode,
-         AUTO_PREBOOT } from 'angular2-universal/browser';
-import { IdlePreload,
-         IdlePreloadModule } from '@angularclass/idle-preload';
+import { UniversalModule, isBrowser, isNode, AUTO_PREBOOT } from 'angular2-universal/browser'; // for AoT we need to manually split universal packages
+import { IdlePreload, IdlePreloadModule } from '@angularclass/idle-preload';
 
 import { AppModule, AppComponent } from './+app/app.module';
 import { SharedModule } from './+app/shared/shared.module';
@@ -58,7 +53,6 @@ export const UNIVERSAL_KEY = 'UNIVERSAL_CACHE';
     { provide: 'res', useFactory: getResponse },
 
     { provide: 'LRU', useFactory: getLRU, deps: [] },
-    { provide: APP_BASE_HREF, useValue : '/' },
 
     CacheService,
 
