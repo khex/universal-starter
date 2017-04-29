@@ -1,5 +1,6 @@
 import { NgModule }         from '@angular/core';
 import { FormsModule }      from '@angular/forms';
+import { APP_BASE_HREF }    from '@angular/common';
 
 import { AboutModule }      from './+about/about.module';
 import { HomeModule }       from './+home/home.module';

@@ -285,7 +285,7 @@ scotch.io/tutorials/angular-2-form-validation
       <label class="col-md-2 control-label">Сложность:</label>
       <div class="col-md-4">
         <select class="form-control"
-                [formControl]="myForm.controls.shema.controls['complxty']">
+                [formControl]="myForm.controls.shema.controls['complexity']">
           <option *ngFor="let cd of compData"
                   [value]="cd.id + ', ' + cd.text">{{cd.text}}</option>
         </select>

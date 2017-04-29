@@ -2,13 +2,14 @@
 This is my Readme file
 
 # Milestones
- - 0.2.27: create-update: update form with `primeng`
- - 0.2.28: create-update: edit & save recipe by `rid`
- - 0.2.29: create-update: update layout
- - 0.3.00: taxonomy: add routes to all tags
- - 0.4.00: add module `user` as new entity
- - 0.5.00: add `comments`, `likes` & `recipe-book`
+ - 0.2.26: read-one > add meta tags
+ - 0.2.27: create-update > update form with `primeng`
+ - 0.2.28: create-update > edit & save recipe by `rid`
+ - 0.2.29: create-update > update layout
+ - 0.3.00: add module `user` as new entity
+ - 0.4.00: add `comments`, `likes` & `recipe-book`
 
+#Todo
 ## Urgent
  - [ ] update `instructions` rid: 18 - 23:
 
@@ -27,6 +28,9 @@ This is my Readme file
  - [ ] ? service for `getRecipesData`
  - [ ] ? откидывать пустые поля ингредиентов
 
-## Styles
- - Semantic UI > Label
- - Material-UI > Chip
+## Read many
+ - [x] pagination for `AllRecipes`
+
+## Read One
+ - [ ] speed up by function {{resipe(data)}} that return HTML code
+ - [ ] ? `ingred > measure` save text only

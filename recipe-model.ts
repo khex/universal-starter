@@ -1,8 +1,6 @@
 var mongoose = require('mongoose');
-import { Model,
-	     Schema,
-	     Document }  from 'mongoose';
-import * as mongoose from 'mongoose';  // ther right way
+import { Document, Schema, Model } from 'mongoose';
+import * as mongoose from 'mongoose';
 //  var mongoose = require("mongoose");
 /**
 import * as path from 'path';

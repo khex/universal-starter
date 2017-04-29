@@ -4,9 +4,6 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [0.2.26](asdf) - 25-04-2017
-  - `read-one` add <meta> tags
-
 ## [0.2.25](asdf) - 09-04-2017
   - `read-one` add "application/ld+json"
 

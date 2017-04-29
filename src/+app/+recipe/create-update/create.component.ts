@@ -89,8 +89,8 @@ export class CreateComponent implements OnInit{
         totalTime:   '',
         complexity:  '',
         methods:    [''],
-        purposes:   [''],
-        appliances: ['']
+        purposes:   ['']
+      //appliances: ['']
       }),
       ingredients:  this._fb.array([ this.initIngredient()  ]),
       instructions: this._fb.array([ this.initInstruction() ]),
