@@ -19,7 +19,8 @@
 ------------------------------------------------------------
 +recipeCategory: <Text>  // appetizer
 //  in ISO 8601 format.
-//  Use totalTime or a combination of both cookTime and prepTime.
+//  P - Period
+//  T - Time
 +prepTime:  <Duration>  // PT15M
 +cookTime:  <Duration>  // PT15M 	
 +totalTime: <Duration>  // PT15M 	

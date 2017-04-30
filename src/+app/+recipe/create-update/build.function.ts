@@ -1,51 +1,60 @@
 export function BuildFunk(data) {
 
   let resp = {
-    published: new Date(),
-    author: 'Рон Каленьюик',
-    // Leguminy.ru & Leguminy.com
-    publisher: 'Легумины.ру',
+    published:    new Date(),
+    author:       'Рон Каленьюик',
+    publisher:    'Легумины.ру',
     shema:        {},
     ingredients:  [],
     instructions: []
   };
 
   /**
-   *  Helper Func
-  **/
+   * [shemaType description]
+   * @type {[type]}
+   * Maybe change to `while`
+   **/
   let shemaType = (subKey: string) => {
-    let drop = ['category', 'cuisine', 'diet', 'costs', 'complxty']; 
-    let mult = ['methods', 'purposes'];
-    let text = ['prepTime', 'totalTime', 'yield'];
+    let drop = ['category', 'cuisine', 'diet', 'costs', 'complexity']; 
+    let mult = ['methods', 'purposes', 'appliances'];
+    let time = ['prepTime', 'totalTime'];
+    let text = ['yield'];
 
     let dropTrue = drop.some((val) => { return val === subKey} );
     let multTrue = mult.some((val) => { return val === subKey} );
+    let timeTrue = time.some((val) => { return val === subKey} );
     let textTrue = text.some((val) => { return val === subKey} );
 
     if      (dropTrue) { return 'drop' }
     else if (multTrue) { return 'mult' }
+    else if (timeTrue) { return 'time' }
     else if (textTrue) { return 'text' }
-    else               { console.info('shemaType SubKey Error', subKey)}      
+    else               { new Error('Undefined Shema Value')}
   };
 
   /**
-   *  Helper Func
-  **/
+   * [strgToObjc description]
+   * @type {[type]}
+   */
   let strgToObjc= (strg: any) => {
     if (typeof strg !== 'string') {
       throw Error(`strgToObjc: bad strg -> ${strg}`);
     } else {
       let list = strg.split(", ");
       return {
-        id: Number(list[0]),
+        id:   Number(list[0]),
         text: list[1],
       }
     }
   };
 
+  /**
+   * [for description]
+   * @param {[type]} var key in data [description]
+   */
   for (var key in data) {
     if (data.hasOwnProperty(key)) {
-      /*  Ingredients  */
+      /**  Ingredients  **/
       if (key === 'ingredients') {
         for (var i = 0; i < data['ingredients'].length; i++) {
           let ingr = {};
@@ -60,41 +69,61 @@ export function BuildFunk(data) {
           resp['ingredients'][i] = ingr;
         }
       }
-      /*  Instructions  */
+      /**  Instructions  **/
       else if (key === 'instructions') {
         // first step not empty like ''
         if(data['instructions'][0]['step'].length > 0) {
            resp['instructions'] = data['instructions'];
         }
       } 
-      /*  Skima done!  */
+      /**  Shema Values  **/
       else if (key === 'shema') {
         for(var subKey in data['shema']) {
+          /**
+           * WTF is dshs ??? Rename
+           **/
           let dshs = data['shema'][subKey];
           if (dshs) {
             let tipe = shemaType(subKey);
+            /**
+             * @param tipe is Dropdown
+             **/
             if (tipe === 'drop') {
               resp['shema'][subKey] = strgToObjc(dshs);
             }
+            /**
+             * @param tipe is Multiple value
+             **/
             else if(tipe === 'mult') {
-              let tempList = dshs.map( (val) => {
+              let tempList = dshs.map((val) => {
                 return strgToObjc(val);
               });
               resp['shema'][subKey] = tempList;
             }
-            else {
+            /**
+             * @param tipe is prepTime or cookTime
+             **/
+            else if(tipe === 'time') {
+              let someTime = dshs.split(":");
+              resp['shema'][subKey] = {
+                iso:  `PT${someTime[0]}H${someTime[1]}M`,
+                text: `${someTime[0]}:${someTime[1]}`
+              }
+            }
+            /**@param tipe is Text **/
+            else { 
               resp['shema'][subKey] = dshs;
             }
           }
         }
       }
-      /*  Image URL  */
+      /**  Image URL  **/
       else if (key === 'image') {
         resp[key] = `images/${data[key]}`;
       }
-      /*  MetaData  */
+      /**  MetaData  **/
       else {
-        /*  data[key].length > 0  */
+        /**  data[key].length > 0  **/
         if (data[key]) { resp[key] = data[key]; }
       }
 

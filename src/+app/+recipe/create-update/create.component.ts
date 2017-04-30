@@ -20,7 +20,7 @@ import { DietData,
          CuisineData,
          ComplexData,
          CategoryData,
-         AppliancesData }    from './dropdown-data';
+         ApplianceData }    from './dropdown-data';
 
 @Component({
   selector:    'create',
@@ -37,34 +37,41 @@ export class CreateComponent implements OnInit{
   public dietData = DietData;
   public valuData = ValueData;
   public compData = ComplexData;
-  public applData = AppliancesData;
+  public applData = ApplianceData;
+
+  public methods:any = [];
+  public purpose:any = [];
+  public appliance: any = [];
+  public methodItems: Array<any> = MethodData;
+  public purposeItems: Array<any> = PurposeData;
+  public applianceItems: Array<any> = ApplianceData;
+
 
   /** helper func for nh2-selec multiple **/
-  public itemsToString(value:Array<any> = []):string {
+  public itemsToString(value:Array<any> = []): string {
     return value.map((item:any) => { return item.text; }).join(',');
   }
 
-
   /**  ng2-select > Method  **/
-  public  methodItems: Array<any> = MethodData;
-  private methods:any = [];
-
-  public refreshMethod(value:any):void {
+  public refreshMethod(value:any): void {
     this.methods = value;
     let mtds = value.map((meth:any) => { return `${meth.id}, ${meth.text}`; });
     this.myForm.patchValue({'shema': {'methods': mtds}});
-  } //  <--  The End  -->
-
+  }
 
   /**  ng2-select > Purpose  **/
-  public purposeItems: Array<any> = PurposeData;
-  private purpose:any = [];
-
-  public refreshPurpose(value:any):void {
+  public refreshPurpose(value:any): void {
     this.purpose = value;
     let purp = value.map((prp:any) => { return `${prp.id}, ${prp.text}`; });
     this.myForm.patchValue({'shema': {'purposes': purp}});
-  } //  <--  The End  -->
+  }
+
+  /**  ng2-select > Appliances  **/
+  public refreshAppliance(value:any): void {
+    this.appliance = value;
+    let appl = value.map((app:any) => { return `${app.id}, ${app.text}`; });
+    this.myForm.patchValue({'shema': {'appliances': appl}});
+  }
 
 
   public myForm: FormGroup;
@@ -79,18 +86,18 @@ export class CreateComponent implements OnInit{
       name:         '',
       description:  '',
       image:        '',
-      shema: this._fb.group({
+      shema:        this._fb.group({
         category:    '',
         cuisine:     '',
-        cost:        '',
         diet:        '',
         yield:       '',
         prepTime:    '',
         totalTime:   '',
-        complexity:  '',
+        costs:       '',
+        complexity:  '',      
         methods:    [''],
-        purposes:   ['']
-      //appliances: ['']
+        purposes:   [''],
+        appliances: [''],
       }),
       ingredients:  this._fb.array([ this.initIngredient()  ]),
       instructions: this._fb.array([ this.initInstruction() ]),
@@ -120,7 +127,7 @@ export class CreateComponent implements OnInit{
     control.removeAt(i);
   }
 
-  /** INSTRUCTION LOGIC **/
+  /** Iinstruction Logic **/
   initInstruction() {
     return this._fb.group({
       step: ['']
@@ -143,11 +150,11 @@ export class CreateComponent implements OnInit{
     let data = myForm.value;
     let resp = BuildFunk(data);
 
-    console.log(resp);
+    console.log('saveRecipe:', resp);
     this.model
       .post('/api/recipes/', JSON.stringify({resp}))
       .subscribe(data => {
-        console.info(data);
+        console.info('From server:', data);
     });
 
   }

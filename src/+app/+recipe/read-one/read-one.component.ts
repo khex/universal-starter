@@ -9,6 +9,7 @@ import { OnInit,
 import { ActivatedRoute }          from '@angular/router';
 import { ModelService }            from '../../shared/model/model.service';
 import { Meta }                    from '../../../angular2-meta';
+import { Title }                   from '@angular/platform-browser';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
@@ -22,14 +23,16 @@ export class ReadOneComponent {
   private rid: any;
   private sub: any; // <= WTF ?
   private recipe: any = {};
-  public jsonTag: any;
+  private jsonTag: any;
 
   constructor(private model: ModelService,
               private route: ActivatedRoute,
               private element: ElementRef,
               private renderer: Renderer,
+              private titleService: Title,
               private meta: Meta) {
     //  https://netbasal.com/e43ef673b26c
+
     this.jsonTag = this.renderer.createElement(this.element.nativeElement, "script");
     this.renderer.setElementAttribute(this.jsonTag, "type", "application/ld+json");
 

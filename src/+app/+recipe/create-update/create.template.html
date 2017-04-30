@@ -1,11 +1,5 @@
 <!-- stackoverflow.com/questions/33700266 Select Basic -->
 
-<!-- Schema.org values
-scotch.io/tutorials/angular-2-form-validation
-*ngIf="!complexForm.controls['gender'].valid &&
-        complexForm.controls['gender'].touched"
--->
-
 <form class="well form-horizontal" novalidate
      [formGroup]="myForm"
      (ngSubmit)="saveRecipe(myForm)">
@@ -292,6 +286,22 @@ scotch.io/tutorials/angular-2-form-validation
       </div>
 
     </div><!-- form-group -->
+
+    <div class="form-group">
+
+      <label class="col-md-2 control-label">Утварь:</label>
+      <!-- [formControl]="myForm.controls['appliances']" -->
+      <div class="col-md-4">
+        <ng-select (data)="appliance"
+                   [multiple]="true"
+                   [items]="applianceItems"
+                   [disabled]="disabled"
+                   (data)="refreshAppliance($event)"
+                   placeholder="&nbsp;&nbsp;выберете утварь">
+        </ng-select>
+      </div>
+
+    </div>
 
     <!-- Button -->
     <div class="form-group">
