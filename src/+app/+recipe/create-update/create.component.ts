@@ -7,6 +7,7 @@ import { FormGroup,
          FormArray,
          Validators,
          FormBuilder }       from '@angular/forms';
+import { ActivatedRoute }    from '@angular/router';
 import { ModelService }      from '../../shared/model/model.service';
 
 import { BuildFunk }         from './build.function';
@@ -81,9 +82,14 @@ export class CreateComponent implements OnInit{
 
   constructor(@Inject(FormBuilder)
               private _fb:   FormBuilder,
-              private model: ModelService) { }
+              private model: ModelService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+
+    let temp = this.route.snapshot;
+    console.log('Snapshot:\n', temp);
+
     // we will initialize our form here
     this.myForm = this._fb.group({
       name:         '',

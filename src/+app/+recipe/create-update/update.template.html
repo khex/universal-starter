@@ -1,0 +1,118 @@
+<!-- stackoverflow.com/questions/33700266 Select Basic -->
+
+<form class="well form-horizontal"
+      novalidate
+      [formGroup]="myForm"
+      (ngSubmit)="saveRecipe(myForm)">
+  <fieldset>
+
+    <legend>Редактирование рецепта</legend>
+  
+    <!-- Schema.org: Things > name <Text> [g,y] +-->
+    <div class="form-group"> 
+      <label class="col-sm-3 control-label">Название блюда:</label> 
+      <div class="col-sm-9"> 
+        <input class="form-control" type="text" 
+               [formControl]="myForm.controls['name']"> 
+      </div> 
+    </div>      
+
+    <!-- Schema.org: Things > description <Text> [g,y] +-->
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Краткое описание:</label>
+      <div class="col-sm-9">
+        <textarea class="form-control" type="text" rows="3"
+                 [formControl]="myForm.controls['description']">
+        </textarea>
+      </div>
+    </div>
+
+    <!-- Schema.org: Things > image <Text> [g,y] +-->
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Основное фото:</label>
+      <div class="col-sm-9">
+        <input class="form-control" type="text"
+              [formControl]="myForm.controls['image']">
+      </div>
+    </div>
+
+    <!--
+        Ingredient
+    -->
+    <legend>Ингредиенты</legend>
+
+    <p>Вы можете разбить ингредиенты на <b>группы</b>
+       (например: тесто, начинка, соус).</p>
+
+    <!-- Ingredient Labels -->
+    <div class="form-group ">
+      <label class="col-sm-2 control-label ingredient">Группа</label>
+      <label class="col-sm-3 control-label ingredient">Ингредиент</label>
+      <label class="col-sm-2 control-label ingredient">К-во</label>
+      <label class="col-sm-2 control-label ingredient">Мера</label>
+      <label class="col-sm-3 control-label ingredient">Примечание</label>
+    </div>
+
+    <!-- Schema.org: Recipe > recipeIngredient <Text> || <ItemList> [g,y] -->
+    <!--  Ingredients Array  -->
+    <div formArrayName="ingredients">
+
+      <div *ngFor="let address of myForm.controls.ingredients.controls;
+                   let i=index">
+
+        <!-- Ingredient -->
+        <div class="form-group" [formGroupName]="i">
+         
+          <!--  <b>{{i + 1}}.</b>  -->
+
+          <!--  Ingredient Group  -->
+          <div class="col-sm-2 col-ingred">
+            <input class="form-control" type="text"
+                   formControlName="group">
+          </div>
+
+          <!--  Ingredient Name  -->
+          <div class="col-sm-3 col-ingred">
+            <select class="form-control"
+                    formControlName="name">
+              <option *ngFor="let id of ingrData"
+                      [value]="id.id + ', ' + id.text">{{id.text}}</option>
+            </select>
+          </div>
+
+          <!--  Ingredient Amount  -->
+          <div class="col-sm-2 col-ingred">
+            <input class="form-control" type="text"
+                   formControlName="amount">
+          </div>
+
+          <!--  Ingredient Measure  -->
+          <div class="col-sm-2 col-ingred">
+            <select class="form-control"
+                    formControlName="measure">
+              <option *ngFor="let md of measData"
+                      [value]="md.id + ', ' + md.text">{{md.text}}</option>
+            </select>
+          </div>
+
+          <!--  Ingredient Note  -->
+          <div class="col-sm-3 col-ingred">
+            <input class="form-control" type="text"
+                   style="width: 90%; display: inline;"
+                   formControlName="note">
+            <span class="glyphicon glyphicon-remove pull-right"
+                  *ngIf="myForm.controls.ingredients.controls.length > 1"
+                  (click)="removeIngredient(i)">
+            </span>              
+          </div>
+          
+        </div>
+      </div><!-- end *ngFor-->
+    </div>
+    
+    <div class="margin-20">
+      <a (click)="addIngredient()" style="cursor: default">Добавить ингредиент</a>
+    </div><!-- formArrayName="ingredients"> -->
+
+  </fieldset>
+</form>
