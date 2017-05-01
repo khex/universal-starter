@@ -60,7 +60,7 @@ export class UpdateComponent implements OnInit{
       name:         '',
       description:  '',
       image:        '',
-      ingredients:  this._fb.array([ this.initIngredient() ]),
+      ingredients:  this._fb.array([]),
       shema:        this._fb.group({
         category:    '',
         cuisine:     '',
@@ -79,9 +79,18 @@ export class UpdateComponent implements OnInit{
     this.route.params.subscribe((prms) => { this.rid = prms['rid']; });
     this.model.get(`/api/recipes/${this.rid}`).subscribe((rcpt) => {
         
-        this.myForm.patchValue({'name': rcpt.name});
-        this.myForm.patchValue({'description': rcpt.description});
-        this.myForm.patchValue({'image': rcpt.image});
+        this.myForm.controls['name'].patchValue(rcpt.name);
+        this.myForm.controls['description'].patchValue(rcpt.description);
+        this.myForm.controls['image'].patchValue(rcpt.image);
+
+        this.myForm.patchValue({'ingredients': [{
+            "amount": "50",
+            "measure": 'asdf',
+            "note": "Вологодское",
+        }]});
+        for (var i = 0; i < rcpt.ingredients.length; ++i) {
+          this.addIngredient();
+        }
 
       });
   }
