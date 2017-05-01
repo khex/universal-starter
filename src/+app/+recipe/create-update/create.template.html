@@ -210,8 +210,10 @@
       <!-- Schema.org: Recipe > cookingMethod <Text> [g,y] +-->
       <label class="col-md-2 control-label">Способ:</label>
       <div class="col-md-4">
-        <!-- [formControl]="myForm.controls['method']" -->
+        <!-- [formControl]="myForm.controls['method']"
+             github.com/valor-software/ng2-select/  -->
         <ng-select (data)="methods"
+                   [active]="methActive"
                    [multiple]="true"
                    [items]="methodItems"
                    [disabled]="disabled"
@@ -225,6 +227,7 @@
       <div class="col-md-4">
         <!-- [formControl]="myForm.controls['purpose']" -->
         <ng-select (data)="purpose"
+                   [active]="purpActive"
                    [multiple]="true"
                    [items]="purposeItems"
                    [disabled]="disabled"

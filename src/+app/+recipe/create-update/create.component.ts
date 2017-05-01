@@ -39,27 +39,27 @@ export class CreateComponent implements OnInit{
   public compData = ComplexData;
   public applData = ApplianceData;
 
-  public methods:any = [];
-  public purpose:any = [];
-  public appliance: any = [];
-  public methodItems: Array<any> = MethodData;
-  public purposeItems: Array<any> = PurposeData;
-  public applianceItems: Array<any> = ApplianceData;
-
-
-  /** helper func for nh2-selec multiple **/
-  public itemsToString(value:Array<any> = []): string {
-    return value.map((item:any) => { return item.text; }).join(',');
-  }
 
   /**  ng2-select > Method  **/
+  public methods:any = [];
+  public methodItems: Array<any> = MethodData;
+  public methActive = [
+    {id: 4, text: 'Варение', qqq: '4534535353'},
+    {id: 6, text: 'Квашение', quatro: 'The main'}
+  ];
+
   public refreshMethod(value:any): void {
     this.methods = value;
+    console.log('value:', value, '\n', 'methods,', this.methods);
     let mtds = value.map((meth:any) => { return `${meth.id}, ${meth.text}`; });
     this.myForm.patchValue({'shema': {'methods': mtds}});
   }
 
   /**  ng2-select > Purpose  **/
+  public purpose:any = [];
+  public purposeItems: Array<any> = PurposeData;
+  public purpActive = [{id: 1, text: 'На завтрак'}, {id: 2, text: 'На обед'}]
+
   public refreshPurpose(value:any): void {
     this.purpose = value;
     let purp = value.map((prp:any) => { return `${prp.id}, ${prp.text}`; });
@@ -67,6 +67,9 @@ export class CreateComponent implements OnInit{
   }
 
   /**  ng2-select > Appliances  **/
+  public appliance: any = [];
+  public applianceItems: Array<any> = ApplianceData;
+
   public refreshAppliance(value:any): void {
     this.appliance = value;
     let appl = value.map((app:any) => { return `${app.id}, ${app.text}`; });
@@ -94,7 +97,7 @@ export class CreateComponent implements OnInit{
         prepTime:    '',
         totalTime:   '',
         costs:       '',
-        complexity:  '',      
+        complexity:  '',
         methods:    [''],
         purposes:   [''],
         appliances: [''],
