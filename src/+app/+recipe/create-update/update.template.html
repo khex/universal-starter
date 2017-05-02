@@ -154,10 +154,44 @@
                       formControlName="step" style="width: 97%">
             </textarea>
           </div>
-          
         </div>
-      </div><!-- end *ngFor-->
+      </div>
+    </div>
+    
+    <div class="margin-20">
+      <a (click)="addInstruction()" style="cursor: default">Добавить ингредиент</a>
     </div><!-- formArrayName="instructions"> -->
+
+    <!--
+        Schema.org Values from temp.html
+    -->
+    <legend>Recipe Schema.org</legend>
+    <div class="form-group">
+
+      <!-- Schema.org: Recipe > recipeCategory <Text> [g,y] +-->
+      <label class="col-md-2 control-label">Категория:</label>
+      <div class="col-md-4">
+        <select class="form-control"
+                placeholder="выберете что-то"
+                [formControl]="myForm.controls.shema.controls['category']">
+          <!-- чи в однині recipe is 'salad' -->
+          <option *ngFor="let cd of cateData"
+                  [value]="cd.id + ', ' + cd.text">{{cd.text}}</option>
+        </select>
+      </div>
+
+      <!-- Schema.org: Recipe > recipeCuisine <Text> [g,y] +-->
+      <label class="col-md-2 control-label">Кухня:</label>
+      <div class="col-md-4">
+        <!-- [formControl]="myForm.controls['cuisine']" -->
+        <select class="form-control"
+                [formControl]="myForm.controls.shema.controls['cuisine']">
+          <option *ngFor="let cd of cuisData"
+                  [value]="cd.id + ', ' + cd.text">{{cd.text}}</option>
+        </select>
+      </div>
+    </div><!-- recipeCategory & recipeCuisine -->
+
 
     <!-- Button -->
     <div class="form-group">

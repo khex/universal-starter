@@ -71,11 +71,13 @@ export class UpdateComponent implements OnInit{
       name:         '',
       description:  '',
       image:        '',
-    //os:           '',
-    //so:           '',
     //ubuntu:       [], multiple example
       ingredients:  this._fb.array([]),
       instructions: this._fb.array([]),
+      shema:        this._fb.group({
+        category:     '',
+        cuisine:      '',        
+    })
     });
 
     this.route.params.subscribe((prms) => { this.rid = prms['rid']; });
@@ -103,6 +105,15 @@ export class UpdateComponent implements OnInit{
           var step = rcpt.instructions[i]['step'];
           this.addInstruction(step);
         }
+
+        /**  Shema  **/
+        var RS = rcpt.shema;
+        this.myForm.patchValue({
+          shema: {category: `${RS.category.id}, ${RS.category.text}`}
+        });
+        this.myForm.patchValue({
+          shema: {cuisine: `${RS.cuisine.id}, ${RS.cuisine.text}`}
+        });
 
       });
   }
