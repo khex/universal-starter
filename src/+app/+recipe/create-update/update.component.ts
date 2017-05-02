@@ -58,7 +58,7 @@ export class UpdateComponent implements OnInit{
   constructor(@Inject(FormBuilder)
               private _fb:   FormBuilder,
               private model: ModelService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
     /* [ { path: 'recipe', parameters: {} },
@@ -78,8 +78,12 @@ export class UpdateComponent implements OnInit{
         category:   '',
         cuisine:    '',
         prepTime:   '',
-        totalTime:  '',   
-    })
+        totalTime:  '',
+        diet:       '',
+        yield:      '',
+        cost:       '',
+        complexity: ''
+      })
     });
 
     this.route.params.subscribe((prms) => { this.rid = prms['rid']; });
@@ -110,18 +114,44 @@ export class UpdateComponent implements OnInit{
 
         /**  Shema  **/
         var RS = rcpt.shema;
-        this.myForm.patchValue({
-          shema: {category: `${RS.category.id}, ${RS.category.text}`}
-        });
-        this.myForm.patchValue({
-          shema: {cuisine: `${RS.cuisine.id}, ${RS.cuisine.text}`}
-        });
-        this.myForm.patchValue({
-          shema: {prepTime: (typeof RS.prepTime !== 'string') ? RS.prepTime.text : RS.prepTime}
-        });
-        this.myForm.patchValue({
-          shema: {totalTime: (typeof RS.totalTime !== 'string') ? RS.totalTime.text : RS.totalTime}
-        });
+        this.myForm.patchValue({shema: {
+          category: `${RS.category.id}, ${RS.category.text}`
+        }});
+        this.myForm.patchValue({shema: {
+          cuisine: `${RS.cuisine.id}, ${RS.cuisine.text}`
+        }});
+        if (RS.prepTime) {
+          this.myForm.patchValue({shema: {
+            prepTime: (typeof RS.prepTime !== 'string')
+            ? RS.prepTime.text : RS.prepTime
+          }});
+        }
+        if (RS.totalTime) {
+          this.myForm.patchValue({shema: {
+            totalTime: (typeof RS.totalTime !== 'string')
+            ? RS.totalTime.text : RS.totalTime
+          }});
+        }
+        if (RS.diet) {
+          this.myForm.patchValue({shema: {
+            diet: `${RS.diet.id}, ${RS.diet.text}`
+          }});
+        }
+        if (RS.yield) {
+          this.myForm.patchValue({shema: {
+            yield: RS.yield
+          }});
+        }
+        if (RS.cost) {
+          this.myForm.patchValue({shema: {
+            cost: `${RS.cost.id}, ${RS.cost.text}`
+          }});
+        }
+        if (RS.complexity) {
+          this.myForm.patchValue({shema: {
+            complexity: `${RS.complexity.id}, ${RS.complexity.text}`
+          }});
+        }
       });
   }
 
@@ -131,11 +161,7 @@ export class UpdateComponent implements OnInit{
   addIngredient(gr, na, am, me, no) {
     const control = <FormArray>this.myForm.controls['ingredients'];
     control.push(this._fb.group({
-      group:   gr,
-      name:    na,
-      amount:  am,
-      measure: me,
-      note:    no
+      group: gr, name: na, amount: am, measure: me, note: no
     }));
   }
 

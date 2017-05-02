@@ -211,84 +211,57 @@
       </div>
     </div><!-- form-group -->
 
-    <!-- Schema.org: Recipe > totalTime, prepTime, 
-         Alternative testing timePicker
     <div class="form-group">
-      <label class="col-sm-2 control-label">Подготовка:</label> 
-      <div class="col-md-2">
-        <select  name="hours">
-          <option selected="selected">час.</option>
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="8">0</option>
-          <option value="12">1</option>
-          <option value="16">2</option>
-          <option value="20">3</option>
-          <option value="24">4</option>
-          <option value="36">5</option>
-          <option value="48">6</option>
+      
+      <!-- Schema.org: Recipe > suitableForDiet <RestrictedDiet> [g,y] +-->
+      <label class="col-md-2 control-label">Диета:</label>
+      <div class="col-md-4">
+        <select class="form-control"
+               [formControl]="myForm.controls.shema.controls['diet']"
+               placeholder="выберете диету">
+          <option *ngFor="let dd of dietData"
+                  [value]="dd.id + ', ' + dd.text">{{dd.text}}</option>
         </select>
       </div>
-      <div class="col-md-2">
-        <select  name="minutes">
-          <option selected="selected">мин.</option>
-          <option value="00">00</option>
-          <option value="05">05</option>
-          <option value="10">10</option>
-          <option value="15">15</option>
-          <option value="20">20</option>
-          <option value="25">25</option>
-          <option value="30">30</option>
-          <option value="35">35</option>
-          <option value="40">40</option>
-          <option value="45">45</option>
-          <option value="50">50</option>
-          <option value="55">55</option>
+
+      <!-- Schema.org: Recipe > recipeCuisine <Text> [g,y] +
+           Или количество шт. напр. печеньки - 28 шт.
+           Савоярди - 100 шт.
+           Переделать форму ввода под калькулятор
+           К-во [number] [порц., шт.]
+      -->
+      <label class="col-md-2 control-label">Количество:</label>
+      <div class="col-md-4">
+        <input class="form-control" type="text"
+              [formControl]="myForm.controls.shema.controls['yield']"
+              placeholder="введите количество">
+      </div>
+
+    </div><!-- form-group -->
+
+    <div class="form-group">
+      
+      <!-- Schema.org: Recipe > costs <Text> [myValue] +-->
+      <label class="col-md-2 control-label">Стоимость:</label>
+      <div class="col-md-4">
+        <select class="form-control"
+                [formControl]="myForm.controls.shema.controls['cost']">
+          <option *ngFor="let vd of valuData"
+                  [value]="vd.id + ', ' + vd.text">{{vd.text}}</option>
         </select>
       </div>
-      <label class="col-sm-2 control-label">Общее:</label> 
-      <div class="col-md-2">
-        <select  name="hours">
-          <option selected="selected">час.</option>
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="8">0</option>
-          <option value="12">1</option>
-          <option value="16">2</option>
-          <option value="20">3</option>
-          <option value="24">4</option>
-          <option value="36">5</option>
-          <option value="48">6</option>
+
+      <!-- Schema.org: Recipe > complexity <Text> [myValue] +-->
+      <label class="col-md-2 control-label">Сложность:</label>
+      <div class="col-md-4">
+        <select class="form-control"
+                [formControl]="myForm.controls.shema.controls['complexity']">
+          <option *ngFor="let cd of compData"
+                  [value]="cd.id + ', ' + cd.text">{{cd.text}}</option>
         </select>
       </div>
-      <div class="col-md-2">
-        <select  name="minutes">
-          <option selected="selected">мин.</option>
-          <option value="00">00</option>
-          <option value="05">05</option>
-          <option value="10">10</option>
-          <option value="15">15</option>
-          <option value="20">20</option>
-          <option value="25">25</option>
-          <option value="30">30</option>
-          <option value="35">35</option>
-          <option value="40">40</option>
-          <option value="45">45</option>
-          <option value="50">50</option>
-          <option value="55">55</option>
-        </select>
-      </div>
-    </div>--><!-- form-group -->
+
+    </div><!-- form-group -->
 
     <!-- Button -->
     <div class="form-group">
