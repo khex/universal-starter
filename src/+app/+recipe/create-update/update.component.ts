@@ -75,8 +75,10 @@ export class UpdateComponent implements OnInit{
       ingredients:  this._fb.array([]),
       instructions: this._fb.array([]),
       shema:        this._fb.group({
-        category:     '',
-        cuisine:      '',        
+        category:   '',
+        cuisine:    '',
+        prepTime:   '',
+        totalTime:  '',   
     })
     });
 
@@ -114,7 +116,12 @@ export class UpdateComponent implements OnInit{
         this.myForm.patchValue({
           shema: {cuisine: `${RS.cuisine.id}, ${RS.cuisine.text}`}
         });
-
+        this.myForm.patchValue({
+          shema: {prepTime: (typeof RS.prepTime !== 'string') ? RS.prepTime.text : RS.prepTime}
+        });
+        this.myForm.patchValue({
+          shema: {totalTime: (typeof RS.totalTime !== 'string') ? RS.totalTime.text : RS.totalTime}
+        });
       });
   }
 

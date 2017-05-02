@@ -192,6 +192,103 @@
       </div>
     </div><!-- recipeCategory & recipeCuisine -->
 
+    <!-- Schema.org: Recipe > totalTime, prepTime, cookTime
+        <Duration> in ISO 8601 format. [g,y] 1:25 + -->
+    <div class="form-group">
+
+      <label class="col-sm-2 control-label">Подготовка:</label> 
+      <div class="col-md-4">
+        <input class="form-control" type="text"
+               placeholder="Время подготовки чч:мм"
+              [formControl]="myForm.controls.shema.controls['prepTime']">
+      </div>
+      
+      <label class="col-sm-2 control-label">Общее:</label> 
+      <div class="col-md-4">
+        <input class="form-control" type="text"
+               placeholder="Общее время чч:мм"
+              [formControl]="myForm.controls.shema.controls['totalTime']">
+      </div>
+    </div><!-- form-group -->
+
+    <!-- Schema.org: Recipe > totalTime, prepTime, 
+         Alternative testing timePicker
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Подготовка:</label> 
+      <div class="col-md-2">
+        <select  name="hours">
+          <option selected="selected">час.</option>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="8">0</option>
+          <option value="12">1</option>
+          <option value="16">2</option>
+          <option value="20">3</option>
+          <option value="24">4</option>
+          <option value="36">5</option>
+          <option value="48">6</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <select  name="minutes">
+          <option selected="selected">мин.</option>
+          <option value="00">00</option>
+          <option value="05">05</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="25">25</option>
+          <option value="30">30</option>
+          <option value="35">35</option>
+          <option value="40">40</option>
+          <option value="45">45</option>
+          <option value="50">50</option>
+          <option value="55">55</option>
+        </select>
+      </div>
+      <label class="col-sm-2 control-label">Общее:</label> 
+      <div class="col-md-2">
+        <select  name="hours">
+          <option selected="selected">час.</option>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="8">0</option>
+          <option value="12">1</option>
+          <option value="16">2</option>
+          <option value="20">3</option>
+          <option value="24">4</option>
+          <option value="36">5</option>
+          <option value="48">6</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <select  name="minutes">
+          <option selected="selected">мин.</option>
+          <option value="00">00</option>
+          <option value="05">05</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="25">25</option>
+          <option value="30">30</option>
+          <option value="35">35</option>
+          <option value="40">40</option>
+          <option value="45">45</option>
+          <option value="50">50</option>
+          <option value="55">55</option>
+        </select>
+      </div>
+    </div>--><!-- form-group -->
 
     <!-- Button -->
     <div class="form-group">

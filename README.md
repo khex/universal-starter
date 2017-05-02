@@ -18,16 +18,16 @@ This is my Readme file
  - [ ] backend/recipe-routes.ts -> TypeScript
  - [ ] model -> prepTime to Object with text and prep
 
-## Create Form
+## Form
+ - [ ] alternative time picking afted `update time@Mongo`
  - [ ] сразу 5 ингредиентов или указать к-во
  - [ ] resize `create page` to 12 without panel
- - [ ] ? make `create page` pop-up?
+ - [ ] ? make `create page` pop-up
  - [ ] ? service for `getRecipesData`
- - [ ] ? откидывать пустые поля ингредиентов
 
 ## Styles
  - Semantic UI > Label
  - Material-UI > Chip
 
-## InAngular 4.*
+## Angular 4.*
  - form > ngPrimefaces
