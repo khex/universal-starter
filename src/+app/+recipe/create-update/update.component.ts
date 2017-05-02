@@ -71,9 +71,10 @@ export class UpdateComponent implements OnInit{
       name:        '',
       description: '',
       image:       '',
-      OS:          '',
-      ubuntu:      [],
-      ingredients: this._fb.array([]),
+      os:          '',
+      so:          '',
+    //ubuntu:      [],
+      ingredients: this._fb.array([ this.initIngredient() ]),
     });
 
     this.route.params.subscribe((prms) => { this.rid = prms['rid']; });
@@ -82,26 +83,29 @@ export class UpdateComponent implements OnInit{
         this.myForm.controls['name'].patchValue(rcpt.name);
         this.myForm.controls['description'].patchValue(rcpt.description);
         this.myForm.controls['image'].patchValue(rcpt.image);
+        this.myForm.controls['os'].patchValue('5', {onlySelf: true});
+        // value == select value
+        this.myForm.controls['so'].patchValue('8, Trisquel', {onlySelf: true});
+
+        //for (var i = 0; i < rcpt.ingredients.length; ++i) {
+        //  this.addIngredient();
+        //}
         //this.myForm.patchValue({'ingredients': [{
         //    "amount": "50",
         //    "measure": 'asdf',
         //    "note": "Вологодское",
         //}]});
-        for (var i = 0; i < rcpt.ingredients.length; ++i) {
-          this.addIngredient();
-        }
-
       });
   }
 
   /** Ingredients Logic **/
   initIngredient() {
     return this._fb.group({
-      group:   '',
-      name:    '',
-      amount:  '',
-      measure: '',
-      note:    ''
+      group:   'Закуски',
+      name:    '6, Айва',
+      amount:  '4',
+      measure: '5, стак.',
+      note:    'натереть'
     });
   }
 

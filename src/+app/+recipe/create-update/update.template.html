@@ -40,25 +40,27 @@
     <div class="form-group">
       <label class="col-sm-3 control-label">Dropdown:</label>
       <div class="col-sm-3">
-
-        <select   class="form-control" size="1" name="hero[]"
-                  [formControl]="myForm.controls['OS']">
-          <option value="id: 1, text: 'Linux'"  >Linux</option>
-          <option value="id: 2, text: 'OS X'"   >OS X</option>
-          <option value="id: 3, text: 'Windows'">Windows</option>
-          <option value="id: 4, text: 'BSD'"    >BSD</option>
-          <option value="id: 5, text: 'ReactOS'">ReactOS</option>
+        <select   class="form-control" formControlName="name"
+                  [formControl]="myForm.controls['os']">
+          <option *ngFor="let ubnt of ubntData" [value]="ubnt.id">{{ ubnt.text }}</option>   
         </select>
       </div>
-
+      <label class="col-sm-3 control-label">Dropdown:</label>
+      <div class="col-sm-3">
+        <select   class="form-control" formControlName="name"
+                  [formControl]="myForm.controls['so']">
+          <option *ngFor="let ubnt of ubntData" [value]="ubnt.id + ', ' + ubnt.text">{{ ubnt.text }}</option>   
+        </select>
+      </div>
+      <!--
       <label class="col-sm-2 control-label">Dropdown:</label>
       <div class="col-sm-3">
-        <!-- multiple by Ctrl + Shift -->
         <select   class="form-control" size="3" multiple
                   [formControl]="myForm.controls['ubuntu']">
           <option *ngFor="let ubnt of ubntData" [value]="ubnt">{{ ubnt.text }}</option>   
         </select>
       </div>
+      -->
     </div>
 
     <!--
