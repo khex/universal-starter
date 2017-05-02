@@ -3,7 +3,7 @@
 <form class="well form-horizontal"
       novalidate
       [formGroup]="myForm"
-      (ngSubmit)="saveRecipe(myForm)">
+      (ngSubmit)="consoleRecipe(myForm)">
   <fieldset>
 
     <legend>Редактирование рецепта</legend>
@@ -33,6 +33,31 @@
       <div class="col-sm-9">
         <input class="form-control" type="text"
               [formControl]="myForm.controls['image']">
+      </div>
+    </div>
+
+    <!-- Schema.org: Things > image <Text> [g,y] +-->
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Dropdown:</label>
+      <div class="col-sm-3">
+
+        <select   class="form-control" size="1" name="hero[]"
+                  [formControl]="myForm.controls['OS']">
+          <option value="id: 1, text: 'Linux'"  >Linux</option>
+          <option value="id: 2, text: 'OS X'"   >OS X</option>
+          <option value="id: 3, text: 'Windows'">Windows</option>
+          <option value="id: 4, text: 'BSD'"    >BSD</option>
+          <option value="id: 5, text: 'ReactOS'">ReactOS</option>
+        </select>
+      </div>
+
+      <label class="col-sm-2 control-label">Dropdown:</label>
+      <div class="col-sm-3">
+        <!-- multiple by Ctrl + Shift -->
+        <select   class="form-control" size="3" multiple
+                  [formControl]="myForm.controls['ubuntu']">
+          <option *ngFor="let ubnt of ubntData" [value]="ubnt">{{ ubnt.text }}</option>   
+        </select>
       </div>
     </div>
 
@@ -113,6 +138,16 @@
     <div class="margin-20">
       <a (click)="addIngredient()" style="cursor: default">Добавить ингредиент</a>
     </div><!-- formArrayName="ingredients"> -->
+
+    <!-- Button -->
+    <div class="form-group">
+      <label class="col-md-2 control-label"></label>
+      <div class="col-md-4">
+        <button class="btn btn-primary" type="submit">Send
+          <span class="glyphicon glyphicon-send"></span>
+        </button>
+      </div>
+    </div><!-- form-group -->
 
   </fieldset>
 </form>

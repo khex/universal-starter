@@ -24,10 +24,9 @@ import { DietData,
          ApplianceData }    from './dropdown-data';
 
 @Component({
-  changeDetection: ChangeDetectionStrategy.Default,
-  encapsulation:   ViewEncapsulation.Emulated,
-  selector:        'update',
-  templateUrl:     './update.template.html',
+  selector:      'update',
+  templateUrl:   './update.template.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class UpdateComponent implements OnInit{
 
@@ -44,6 +43,18 @@ export class UpdateComponent implements OnInit{
   public compData = ComplexData;
   public applData = ApplianceData;
 
+  public ubntItems = [];
+  public ubntData = [
+    {id: 1, text: 'Edubuntu'},
+    {id: 2, text: 'Kubuntu'},
+    {id: 3, text: 'Lubuntu'},
+    {id: 4, text: 'Xubuntu'},
+    {id: 5, text: 'Linspire'},
+    {id: 6, text: 'Mangaka'},
+    {id: 7, text: 'Runtu'},
+    {id: 8, text: 'Trisquel'}
+  ]
+
   constructor(@Inject(FormBuilder)
               private _fb:   FormBuilder,
               private model: ModelService,
@@ -57,23 +68,12 @@ export class UpdateComponent implements OnInit{
     this.linkEdit = (trsu[1]['path'] === 'update') ? true : false;
 
     this.myForm = this._fb.group({
-      name:         '',
-      description:  '',
-      image:        '',
-      ingredients:  this._fb.array([]),
-      shema:        this._fb.group({
-        category:    '',
-        cuisine:     '',
-        diet:        '',
-        yield:       '',
-        prepTime:    '',
-        totalTime:   '',
-        costs:       '',
-        complexity:  '',
-        methods:    [''],
-        purposes:   [''],
-        appliances: [''],
-      }),
+      name:        '',
+      description: '',
+      image:       '',
+      OS:          '',
+      ubuntu:      [],
+      ingredients: this._fb.array([]),
     });
 
     this.route.params.subscribe((prms) => { this.rid = prms['rid']; });
@@ -82,12 +82,11 @@ export class UpdateComponent implements OnInit{
         this.myForm.controls['name'].patchValue(rcpt.name);
         this.myForm.controls['description'].patchValue(rcpt.description);
         this.myForm.controls['image'].patchValue(rcpt.image);
-
-        this.myForm.patchValue({'ingredients': [{
-            "amount": "50",
-            "measure": 'asdf',
-            "note": "Вологодское",
-        }]});
+        //this.myForm.patchValue({'ingredients': [{
+        //    "amount": "50",
+        //    "measure": 'asdf',
+        //    "note": "Вологодское",
+        //}]});
         for (var i = 0; i < rcpt.ingredients.length; ++i) {
           this.addIngredient();
         }
@@ -116,6 +115,11 @@ export class UpdateComponent implements OnInit{
     // remove ingredient from the list
     const control = <FormArray>this.myForm.controls['ingredients'];
     control.removeAt(i);
-  } // Ingredients Logic
+  } // << Ingredients Logic
+
+  consoleRecipe(myForm) {
+    let data = myForm.value
+    console.log(data);
+  }
 
 }
