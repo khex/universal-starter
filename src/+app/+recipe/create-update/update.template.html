@@ -36,23 +36,8 @@
       </div>
     </div>
 
-    <!-- Schema.org: Things > image <Text> [g,y] +-->
+    <!-- Multiple select
     <div class="form-group">
-      <label class="col-sm-3 control-label">Dropdown:</label>
-      <div class="col-sm-3">
-        <select   class="form-control" formControlName="name"
-                  [formControl]="myForm.controls['os']">
-          <option *ngFor="let ubnt of ubntData" [value]="ubnt.id">{{ ubnt.text }}</option>   
-        </select>
-      </div>
-      <label class="col-sm-3 control-label">Dropdown:</label>
-      <div class="col-sm-3">
-        <select   class="form-control" formControlName="name"
-                  [formControl]="myForm.controls['so']">
-          <option *ngFor="let ubnt of ubntData" [value]="ubnt.id + ', ' + ubnt.text">{{ ubnt.text }}</option>   
-        </select>
-      </div>
-      <!--
       <label class="col-sm-2 control-label">Dropdown:</label>
       <div class="col-sm-3">
         <select   class="form-control" size="3" multiple
@@ -60,8 +45,7 @@
           <option *ngFor="let ubnt of ubntData" [value]="ubnt">{{ ubnt.text }}</option>   
         </select>
       </div>
-      -->
-    </div>
+    </div> -->
 
     <!--
         Ingredient
@@ -99,7 +83,7 @@
           </div>
 
           <!--  Ingredient Name  -->
-          <div class="col-sm-3 col-ingred">
+          <div class="col-sm-4 col-ingred">
             <select class="form-control"
                     formControlName="name">
               <option *ngFor="let id of ingrData"
@@ -108,9 +92,11 @@
           </div>
 
           <!--  Ingredient Amount  -->
-          <div class="col-sm-2 col-ingred">
+          <div class="col-sm-1 col-ingred"
+               style="padding-left: 1px; padding-right: 1px;">
             <input class="form-control" type="text"
-                   formControlName="amount">
+                   formControlName="amount"
+                   style="padding-left: 10px; padding-right: 1px;">
           </div>
 
           <!--  Ingredient Measure  -->
@@ -140,6 +126,38 @@
     <div class="margin-20">
       <a (click)="addIngredient()" style="cursor: default">Добавить ингредиент</a>
     </div><!-- formArrayName="ingredients"> -->
+
+    <!--
+        Instructions
+    -->
+    <legend>Инструкции</legend>
+
+    <p>Укажите пошаговые инструкции</p>
+
+    <!-- Schema.org: Recipe > recipeInstructions <Text> [g,y] +-->
+    <!-- Instructions Array  -->
+    <div formArrayName="instructions">
+
+      <div *ngFor="let address of myForm.controls.instructions.controls;
+                   let i=index">
+
+        <!-- Instruction -->
+        <div class="form-group" [formGroupName]="i">
+
+          <!--  Ingredient Note  style="width: 90%; display: inline;" -->
+          <div class="col-sm-12 col-ingred">
+            <span class="glyphicon glyphicon-remove pull-right"
+                  *ngIf="myForm.controls.instructions.controls.length > 1"
+                  (click)="removeInstruction(i)">
+            </span>
+            <textarea class="form-control" type="text" rows="2"
+                      formControlName="step" style="width: 97%">
+            </textarea>
+          </div>
+          
+        </div>
+      </div><!-- end *ngFor-->
+    </div><!-- formArrayName="instructions"> -->
 
     <!-- Button -->
     <div class="form-group">

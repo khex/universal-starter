@@ -68,13 +68,14 @@ export class UpdateComponent implements OnInit{
     this.linkEdit = (trsu[1]['path'] === 'update') ? true : false;
 
     this.myForm = this._fb.group({
-      name:        '',
-      description: '',
-      image:       '',
-      os:          '',
-      so:          '',
-    //ubuntu:      [],
-      ingredients: this._fb.array([ this.initIngredient() ]),
+      name:         '',
+      description:  '',
+      image:        '',
+    //os:           '',
+    //so:           '',
+    //ubuntu:       [], multiple example
+      ingredients:  this._fb.array([]),
+      instructions: this._fb.array([]),
     });
 
     this.route.params.subscribe((prms) => { this.rid = prms['rid']; });
@@ -83,43 +84,60 @@ export class UpdateComponent implements OnInit{
         this.myForm.controls['name'].patchValue(rcpt.name);
         this.myForm.controls['description'].patchValue(rcpt.description);
         this.myForm.controls['image'].patchValue(rcpt.image);
-        this.myForm.controls['os'].patchValue('5', {onlySelf: true});
-        // value == select value
-        this.myForm.controls['so'].patchValue('8, Trisquel', {onlySelf: true});
+        //  value == <select value='' ...>
+        //  this.myForm.controls['so'].patchValue('8, Trisquel', {onlySelf: true});
 
-        //for (var i = 0; i < rcpt.ingredients.length; ++i) {
-        //  this.addIngredient();
-        //}
-        //this.myForm.patchValue({'ingredients': [{
-        //    "amount": "50",
-        //    "measure": 'asdf',
-        //    "note": "Вологодское",
-        //}]});
+        /** Ingredients  **/
+        for (var i = 0; i < rcpt.ingredients.length; ++i) {
+          var ingr  = rcpt.ingredients[i];
+          var grup = (ingr.group) ? ingr.group : '';
+          var name  = `${ingr.name.id}, ${ingr.name.text}`;
+          var amnt  = (ingr.amount) ? ingr.amount : '';
+          var meas  = `${ingr.measure.id}, ${ingr.measure.text}`;
+          var note  = (ingr.note) ? ingr.note : '';
+          this.addIngredient(grup, name, amnt, meas, note);
+        }
+
+        /** Instructions **/
+        for (var i = 0; i < rcpt.instructions.length; ++i) {
+          var step = rcpt.instructions[i]['step'];
+          this.addInstruction(step);
+        }
+
       });
   }
 
-  /** Ingredients Logic **/
-  initIngredient() {
-    return this._fb.group({
-      group:   'Закуски',
-      name:    '6, Айва',
-      amount:  '4',
-      measure: '5, стак.',
-      note:    'натереть'
-    });
-  }
-
-  addIngredient() {
-    // add ingredient to the list
+  /** Ingredients Logic
+   *  create empty like initIngredient()
+   *  addIngredient('', '', '', '', '');  **/
+  addIngredient(gr, na, am, me, no) {
     const control = <FormArray>this.myForm.controls['ingredients'];
-    control.push(this.initIngredient());
+    control.push(this._fb.group({
+      group:   gr,
+      name:    na,
+      amount:  am,
+      measure: me,
+      note:    no
+    }));
   }
 
   removeIngredient(i: number) {
-    // remove ingredient from the list
     const control = <FormArray>this.myForm.controls['ingredients'];
     control.removeAt(i);
   } // << Ingredients Logic
+
+  /** Instruction Logic **/
+  addInstruction(step) {
+    const control = <FormArray>this.myForm.controls['instructions'];
+    control.push(this._fb.group({
+      step: step
+    }));
+  }
+
+  removeInstruction(i: number) {
+    const control = <FormArray>this.myForm.controls['instructions'];
+    control.removeAt(i);
+  } // << Instruction Logic
 
   consoleRecipe(myForm) {
     let data = myForm.value
