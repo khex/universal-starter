@@ -15,7 +15,7 @@ export function BuildFunk(data) {
    * Maybe change to `while`
    **/
   let shemaType = (subKey: string) => {
-    let drop = ['category', 'cuisine', 'diet', 'costs', 'complexity']; 
+    let drop = ['category', 'cuisine', 'diet', 'cost', 'complexity']; 
     let mult = ['methods', 'purposes', 'appliances'];
     let time = ['prepTime', 'totalTime'];
     let text = ['yield'];

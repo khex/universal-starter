@@ -3,7 +3,7 @@
 <form class="well form-horizontal"
       novalidate
       [formGroup]="myForm"
-      (ngSubmit)="consoleRecipe(myForm)">
+      (ngSubmit)="updateRecipe(myForm)">
   <fieldset>
 
     <legend>Редактирование рецепта</legend>
@@ -42,7 +42,7 @@
       <div class="col-sm-3">
         <select   class="form-control" size="3" multiple
                   [formControl]="myForm.controls['ubuntu']">
-          <option *ngFor="let ubnt of ubntData" [value]="ubnt">{{ ubnt.text }}</option>   
+          <option *ngFor="let ubnt of ubntData" [value]="ubnt">{{ ubnt.text }}</option>
         </select>
       </div>
     </div> -->
@@ -263,7 +263,46 @@
 
     </div><!-- form-group -->
 
-    <!-- Button -->
+    <div class="form-group">
+      <!-- Schema.org: Recipe > cookingMethod <Text> [g,y] +-->
+      <label class="col-md-2 control-label">Способ:</label>
+      <div class="col-md-4">
+        <!-- [formControl]="myForm.controls['methods']"  -->
+        <select   class="form-control" size="4" multiple
+                  [formControl]="myForm.controls.shema.controls['methods']">
+          <option *ngFor="let meth of methData"
+                  [value]="meth.id + ', ' + meth.text">{{meth.text}}</option>
+        </select>
+      </div>
+
+      <!-- Schema.org: Recipe > recipePurpose <Text> [myValue] +-->
+      <label class="col-md-2 control-label">Назначение:</label>
+      <div class="col-md-4">
+        <!-- [formControl]="myForm.controls['purposes']" -->
+        <select   class="form-control" size="4" multiple
+                  [formControl]="myForm.controls.shema.controls['purposes']">
+          <option *ngFor="let purp of purpData"
+                  [value]="purp.id + ', ' + purp.text">{{purp.text}}</option>
+        </select>
+      </div>
+
+    </div><!-- form-group -->
+
+    <div class="form-group">
+      <label class="col-md-2 control-label">Утварь:</label>
+      <div class="col-md-4">
+        <!-- [formControl]="myForm.controls['appliances']" -->
+        <select   class="form-control" size="4" multiple
+                  [formControl]="myForm.controls.shema.controls['appliances']">
+          <option *ngFor="let appl of applData"
+                  [value]="appl.id + ', ' + appl.text">{{appl.text}}</option>
+        </select>
+      </div>
+    </div><!-- form-group -->
+
+    <!--==========
+        Button
+    ===========-->
     <div class="form-group">
       <label class="col-md-2 control-label"></label>
       <div class="col-md-4">

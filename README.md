@@ -20,6 +20,7 @@ This is my Readme file
 
 ## Form
  - [ ] alternative time picking afted `update time@Mongo`
+ - [ ] analyse Recipe.shema.yield and create dropdowns
  - [ ] сразу 5 ингредиентов или указать к-во
  - [ ] resize `create page` to 12 without panel
  - [ ] ? make `create page` pop-up

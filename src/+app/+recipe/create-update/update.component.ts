@@ -15,12 +15,12 @@ import { IRecipe }           from '../recipe.interface';
 import { DietData,
          ValueData,
          IngredData,
-         MethodData,
-         MeasureData,
-         PurposeData,
+         MeasureData,        
          CuisineData,
          ComplexData,
          CategoryData,
+         MethodData,
+         PurposeData,
          ApplianceData }    from './dropdown-data';
 
 @Component({
@@ -30,8 +30,8 @@ import { DietData,
 })
 export class UpdateComponent implements OnInit{
 
-  public rid: any;
-  public linkEdit: boolean; //  route update or edit?
+  public rid: number;
+  public linkEdit: boolean;  //  update or edit?
   public myForm: FormGroup;
 
   public ingrData = IngredData;
@@ -41,19 +41,9 @@ export class UpdateComponent implements OnInit{
   public dietData = DietData;
   public valuData = ValueData;
   public compData = ComplexData;
+  public methData = MethodData;
+  public purpData = PurposeData;
   public applData = ApplianceData;
-
-  public ubntItems = [];
-  public ubntData = [
-    {id: 1, text: 'Edubuntu'},
-    {id: 2, text: 'Kubuntu'},
-    {id: 3, text: 'Lubuntu'},
-    {id: 4, text: 'Xubuntu'},
-    {id: 5, text: 'Linspire'},
-    {id: 6, text: 'Mangaka'},
-    {id: 7, text: 'Runtu'},
-    {id: 8, text: 'Trisquel'}
-  ]
 
   constructor(@Inject(FormBuilder)
               private _fb:   FormBuilder,
@@ -61,9 +51,7 @@ export class UpdateComponent implements OnInit{
               private route: ActivatedRoute) {}
 
   ngOnInit() {
-    /* [ { path: 'recipe', parameters: {} },
-         { path: 'update', parameters: {} },
-         { path: '23', parameters: {} } ] */
+    //  'update' or 'create'
     let trsu = this.route.snapshot.url;
     this.linkEdit = (trsu[1]['path'] === 'update') ? true : false;
 
@@ -71,7 +59,6 @@ export class UpdateComponent implements OnInit{
       name:         '',
       description:  '',
       image:        '',
-    //ubuntu:       [], multiple example
       ingredients:  this._fb.array([]),
       instructions: this._fb.array([]),
       shema:        this._fb.group({
@@ -82,18 +69,21 @@ export class UpdateComponent implements OnInit{
         diet:       '',
         yield:      '',
         cost:       '',
-        complexity: ''
+        complexity: '',
+        methods:    [],
+        purposes:   [],
+        appliances: []
       })
     });
 
-    this.route.params.subscribe((prms) => { this.rid = prms['rid']; });
+    this.route.params
+        .subscribe((prms) => { this.rid = +prms['rid']; });
     this.model.get(`/api/recipes/${this.rid}`).subscribe((rcpt) => {
         
         this.myForm.controls['name'].patchValue(rcpt.name);
         this.myForm.controls['description'].patchValue(rcpt.description);
         this.myForm.controls['image'].patchValue(rcpt.image);
-        //  value == <select value='' ...>
-        //  this.myForm.controls['so'].patchValue('8, Trisquel', {onlySelf: true});
+      //this.myForm.controls['so'].patchValue('8, Trisquel', {onlySelf: true});
 
         /** Ingredients  **/
         for (var i = 0; i < rcpt.ingredients.length; ++i) {
@@ -114,12 +104,16 @@ export class UpdateComponent implements OnInit{
 
         /**  Shema  **/
         var RS = rcpt.shema;
-        this.myForm.patchValue({shema: {
-          category: `${RS.category.id}, ${RS.category.text}`
-        }});
-        this.myForm.patchValue({shema: {
-          cuisine: `${RS.cuisine.id}, ${RS.cuisine.text}`
-        }});
+        if (RS.category) {
+          this.myForm.patchValue({shema: {
+            category: `${RS.category.id}, ${RS.category.text}`
+          }});
+        }
+        if (RS.cuisine) {
+          this.myForm.patchValue({shema: {
+            cuisine: `${RS.cuisine.id}, ${RS.cuisine.text}`
+          }});
+        }
         if (RS.prepTime) {
           this.myForm.patchValue({shema: {
             prepTime: (typeof RS.prepTime !== 'string')
@@ -150,6 +144,29 @@ export class UpdateComponent implements OnInit{
         if (RS.complexity) {
           this.myForm.patchValue({shema: {
             complexity: `${RS.complexity.id}, ${RS.complexity.text}`
+          }});
+        }
+        if (RS.methods) {
+          /** temp for lower case like: '2, выпекание' **/
+          this.myForm.patchValue({shema: {
+            methods: RS.methods.map((meth) => {
+              return (/[А-Я]/.test(meth.text[0]))
+                ? `${meth.id}, ${meth.text}` : '';
+            })
+          }});
+        }
+        if (RS.purposes) {
+          this.myForm.patchValue({shema: {
+            purposes: RS.purposes.map((purp) => {
+              return `${purp.id}, ${purp.text}`
+            })
+          }});
+        }
+        if (RS.appliances) {
+          this.myForm.patchValue({shema: {
+            appliances: RS.appliances.map((appl) => {
+              return `${appl.id}, ${appl.text}`
+            })
           }});
         }
       });
@@ -183,9 +200,28 @@ export class UpdateComponent implements OnInit{
     control.removeAt(i);
   } // << Instruction Logic
 
-  consoleRecipe(myForm) {
-    let data = myForm.value
-    console.log(data);
+  saveRecipe(myForm) {
+    let data = myForm.value;
+    let resp = BuildFunk(data);
+
+    console.log('saveRecipe:', resp);
+    this.model
+      .post('/api/recipes/', JSON.stringify({resp}))
+      .subscribe(data => {
+        console.info('From server:', data);
+    });
+  }
+
+  updateRecipe(myForm) {
+    let data = myForm.value;
+    let resp = BuildFunk(data);
+
+    console.log('updateRecipe:', resp);
+    this.model
+      .put(`/api/recipes/${this.rid}`, JSON.stringify({resp}))
+      .subscribe(data => {
+        console.info('From server:', data);
+    });
   }
 
 }

@@ -8,7 +8,7 @@ import { Observable }   from 'rxjs/Observable';
 import { CacheService } from '../cache.service';
 import { ApiService  }  from '../api.service';
 
-export function hashCodeString(str:string): string {
+export function hashCodeString(str: string): string {
   let hash = 0;
   if (str.length === 0) {
     return hash + '';
@@ -49,10 +49,18 @@ export class ModelService {
       .share();
   }
 
-  post(url:string, data:any) {
+  post(url: string, data: any) {
     console.log('ModelService:', url);
     return this._api
       .post(url, data)
+      .do(json => { this._cache.set(url, json); })
+      .share();
+  }
+
+  put(url: string, data: any) {
+    console.log('ModelService:', url);
+    return this._api
+      .put(url, data)
       .do(json => { this._cache.set(url, json); })
       .share();
   }
