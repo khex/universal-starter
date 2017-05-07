@@ -1,0 +1,12 @@
+"4.6.x, 4.7.x, 5.x",6.x,7.x
+Module system,Module system,Module system
+Database abstraction,Database layer,Database layer
+Menu system,Menu system,Menu system
+Form generation,Form generation,Form generation
+File upload system,File upload system,File upload system
+Search system,Search system,Search system
+Node access system,Node access system,Node access system
+Theme system,Theme system,Theme system
+,Constants,Constants
+,Global variables,Global variables
+,,Field API

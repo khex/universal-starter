@@ -28,4 +28,3 @@
 | 24 |                   | shema.appliances|           | many |  +  |     |      |
 |----|-------------------|-----------------|-----------|------|-----|-----|------|
 | v20|
-`<script type="application/ld+json">` only Google JSON-LD fields.

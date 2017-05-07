@@ -1,3 +1,4 @@
+/**  Schema v20  **/
 import { Inject,
          OnInit,
          Component,
@@ -28,7 +29,7 @@ import { DietData,
   templateUrl:   './update.template.html',
   encapsulation: ViewEncapsulation.None
 })
-export class UpdateComponent implements OnInit{
+export class UpdateComponent{
 
   public rid: number;
   public linkEdit: boolean;  //  update or edit?

@@ -1,4 +1,4 @@
-//our root app component
+/**  Schema v20  **/
 import { Inject,
          OnInit,
          Component,

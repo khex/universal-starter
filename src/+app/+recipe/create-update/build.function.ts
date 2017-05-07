@@ -15,6 +15,7 @@ export function BuildFunk(data) {
    * Maybe change to `while`
    **/
   let shemaType = (subKey: string) => {
+
     let drop = ['category', 'cuisine', 'diet', 'cost', 'complexity']; 
     let mult = ['methods', 'purposes', 'appliances'];
     let time = ['prepTime', 'totalTime'];
@@ -29,7 +30,13 @@ export function BuildFunk(data) {
     else if (multTrue) { return 'mult' }
     else if (timeTrue) { return 'time' }
     else if (textTrue) { return 'text' }
-    else               { new Error('Undefined Shema Value')}
+    else               { throw new EvalError('Undefined Shema Value') }
+    /**    
+    if      (drop.includes(subKey)) { return 'drop' }
+    else if (mult.includes(subKey)) { return 'mult' }
+    else if (time.includes(subKey)) { return 'time' }
+    else                            { return 'text' }
+    **/
   };
 
   /**

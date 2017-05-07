@@ -1,7 +1,7 @@
 import { Inject, 
-	     Component,
-	     ViewEncapsulation,
-	     ChangeDetectionStrategy } from '@angular/core';
+         Component,
+         ViewEncapsulation,
+         ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
