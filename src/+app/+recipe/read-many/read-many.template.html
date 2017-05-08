@@ -16,7 +16,7 @@
        routerLink='/recipe/{{recipe.rid}}'>
       <img alt="{{recipe.name}}"
            class="media-object"
-           src="{{recipe.image}}"
+           src="images/{{recipe.image}}"
            style="width: 124px; height: 124px;"
            data-holder-rendered="true">
     </a>
@@ -26,6 +26,10 @@
     <h3 class="media-heading">
       <a routerLinkActive="router-link-active"
        routerLink='/recipe/{{recipe.rid}}'>{{recipe.name}}
+      </a>
+      <a class="btn btn-default pull-right"
+         routerLink="/recipe/update/{{recipe.rid}}"
+         role="button">Edit
       </a>
     </h3>
     <div class="auth-date" style="color: #7f7f7f">
@@ -53,7 +57,7 @@
       </span>
       <!-- 1:30 -->
       <span *ngIf="recipe.shema?.totalTime">
-        <i class="fa fa-clock-o"></i> {{recipe.shema.totalTime}}
+        <i class="fa fa-clock-o"></i> {{recipe.shema.totalTime.text}}
       </span>
       <!-- Итальянская -->
       <span *ngIf="recipe.shema?.cuisine">

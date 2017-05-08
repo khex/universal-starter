@@ -1,0 +1,306 @@
+<!-- stackoverflow.com/questions/33700266 Select Basic -->
+<!-- Schema v20 -->
+
+<form class="well form-horizontal"
+      novalidate
+      [formGroup]="myForm"
+      (ngSubmit)="saveRecipe(myForm)">
+  <fieldset>
+
+    <legend>Редактирование рецепта</legend>
+  
+    <!-- Schema.org: Things > name <Text> [g,y] +-->
+    <div class="form-group"> 
+      <label class="col-sm-3 control-label">Название блюда:</label> 
+      <div class="col-sm-9"> 
+        <input class="form-control" type="text" 
+               [formControl]="myForm.controls['name']"> 
+      </div> 
+    </div>      
+
+    <!-- Schema.org: Things > description <Text> [g,y] +-->
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Краткое описание:</label>
+      <div class="col-sm-9">
+        <textarea class="form-control" type="text" rows="3"
+                 [formControl]="myForm.controls['description']">
+        </textarea>
+      </div>
+    </div>
+
+    <!-- Schema.org: Things > image <Text> [g,y] +-->
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Основное фото:</label>
+      <div class="col-sm-9">
+        <input class="form-control" type="text"
+              [formControl]="myForm.controls['image']">
+      </div>
+    </div>
+
+    <!--
+        Ingredient
+    -->
+    <legend>Ингредиенты</legend>
+
+    <p>Вы можете разбить ингредиенты на <b>группы</b>
+       (например: тесто, начинка, соус).</p>
+
+    <!-- Ingredient Labels -->
+    <div class="form-group ">
+      <label class="col-sm-2 control-label ingredient">Группа</label>
+      <label class="col-sm-3 control-label ingredient">Ингредиент</label>
+      <label class="col-sm-2 control-label ingredient">К-во</label>
+      <label class="col-sm-2 control-label ingredient">Мера</label>
+      <label class="col-sm-3 control-label ingredient">Примечание</label>
+    </div>
+
+    <!-- Schema.org: Recipe > recipeIngredient <Text> || <ItemList> [g,y] -->
+    <!--  Ingredients Array  -->
+    <div formArrayName="ingredients">
+
+      <div *ngFor="let address of myForm.controls.ingredients.controls;
+                   let i=index">
+
+        <!-- Ingredient -->
+        <div class="form-group" [formGroupName]="i">
+         
+          <!--  <b>{{i + 1}}.</b>  -->
+
+          <!--  Ingredient Group  -->
+          <div class="col-sm-2 col-ingred">
+            <input class="form-control" type="text"
+                   formControlName="group">
+          </div>
+
+          <!--  Ingredient Name  -->
+          <div class="col-sm-4 col-ingred">
+            <select class="form-control"
+                    formControlName="name">
+              <option *ngFor="let id of ingrData"
+                      [value]="id.id + ', ' + id.text">{{id.text}}</option>
+            </select>
+          </div>
+
+          <!--  Ingredient Amount  -->
+          <div class="col-sm-1 col-ingred"
+               style="padding-left: 1px; padding-right: 1px;">
+            <input class="form-control" type="text"
+                   formControlName="amount"
+                   style="padding-left: 10px; padding-right: 1px;">
+          </div>
+
+          <!--  Ingredient Measure  -->
+          <div class="col-sm-2 col-ingred">
+            <select class="form-control"
+                    formControlName="measure">
+              <option *ngFor="let md of measData"
+                      [value]="md.id + ', ' + md.text">{{md.text}}</option>
+            </select>
+          </div>
+
+          <!--  Ingredient Note  -->
+          <div class="col-sm-3 col-ingred">
+            <input class="form-control" type="text"
+                   style="width: 90%; display: inline;"
+                   formControlName="note">
+            <span class="glyphicon glyphicon-remove pull-right"
+                  *ngIf="myForm.controls.ingredients.controls.length > 1"
+                  (click)="removeIngredient(i)">
+            </span>              
+          </div>
+          
+        </div>
+      </div><!-- end *ngFor-->
+    </div>
+    
+    <div class="margin-20">
+      <a (click)="addIngredient()" style="cursor: default">Добавить ингредиент</a>
+    </div><!-- formArrayName="ingredients"> -->
+
+    <!--
+        Instructions
+    -->
+    <legend>Инструкции</legend>
+
+    <p>Укажите пошаговые инструкции</p>
+
+    <!-- Schema.org: Recipe > recipeInstructions <Text> [g,y] +-->
+    <!-- Instructions Array  -->
+    <div formArrayName="instructions">
+
+      <div *ngFor="let address of myForm.controls.instructions.controls;
+                   let i=index">
+
+        <!-- Instruction -->
+        <div class="form-group" [formGroupName]="i">
+
+          <!--  Ingredient Note  style="width: 90%; display: inline;" -->
+          <div class="col-sm-12 col-ingred">
+            <span class="glyphicon glyphicon-remove pull-right"
+                  *ngIf="myForm.controls.instructions.controls.length > 1"
+                  (click)="removeInstruction(i)">
+            </span>
+            <textarea class="form-control" type="text" rows="2"
+                      formControlName="step" style="width: 97%">
+            </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="margin-20">
+      <a (click)="addInstruction()" style="cursor: default">Добавить ингредиент</a>
+    </div><!-- formArrayName="instructions"> -->
+
+    <!--
+        Schema.org Values from temp.html
+    -->
+    <legend>Recipe Schema.org</legend>
+    <div class="form-group">
+
+      <!-- Schema.org: Recipe > recipeCategory <Text> [g,y] +-->
+      <label class="col-md-2 control-label">Категория:</label>
+      <div class="col-md-4">
+        <select class="form-control"
+                placeholder="выберете что-то"
+                [formControl]="myForm.controls.shema.controls['category']">
+          <!-- чи в однині recipe is 'salad' -->
+          <option *ngFor="let cd of cateData"
+                  [value]="cd.id + ', ' + cd.text">{{cd.text}}</option>
+        </select>
+      </div>
+
+      <!-- Schema.org: Recipe > recipeCuisine <Text> [g,y] +-->
+      <label class="col-md-2 control-label">Кухня:</label>
+      <div class="col-md-4">
+        <!-- [formControl]="myForm.controls['cuisine']" -->
+        <select class="form-control"
+                [formControl]="myForm.controls.shema.controls['cuisine']">
+          <option *ngFor="let cd of cuisData"
+                  [value]="cd.id + ', ' + cd.text">{{cd.text}}</option>
+        </select>
+      </div>
+    </div><!-- recipeCategory & recipeCuisine -->
+
+    <!-- Schema.org: Recipe > totalTime, prepTime, cookTime
+        <Duration> in ISO 8601 format. [g,y] 1:25 + -->
+    <div class="form-group">
+
+      <label class="col-sm-2 control-label">Подготовка:</label> 
+      <div class="col-md-4">
+        <input class="form-control" type="text"
+               placeholder="Время подготовки чч:мм"
+              [formControl]="myForm.controls.shema.controls['prepTime']">
+      </div>
+      
+      <label class="col-sm-2 control-label">Общее:</label> 
+      <div class="col-md-4">
+        <input class="form-control" type="text"
+               placeholder="Общее время чч:мм"
+              [formControl]="myForm.controls.shema.controls['totalTime']">
+      </div>
+    </div><!-- form-group -->
+
+    <div class="form-group">
+      
+      <!-- Schema.org: Recipe > suitableForDiet <RestrictedDiet> [g,y] +-->
+      <label class="col-md-2 control-label">Диета:</label>
+      <div class="col-md-4">
+        <select class="form-control"
+               [formControl]="myForm.controls.shema.controls['diet']"
+               placeholder="выберете диету">
+          <option *ngFor="let dd of dietData"
+                  [value]="dd.id + ', ' + dd.text">{{dd.text}}</option>
+        </select>
+      </div>
+
+      <!-- Schema.org: Recipe > recipeCuisine <Text> [g,y] +
+           Или количество шт. напр. печеньки - 28 шт.
+           Савоярди - 100 шт.
+           Переделать форму ввода под калькулятор
+           К-во [number] [порц., шт.]
+      -->
+      <label class="col-md-2 control-label">Количество:</label>
+      <div class="col-md-4">
+        <input class="form-control" type="text"
+              [formControl]="myForm.controls.shema.controls['yield']"
+              placeholder="введите количество">
+      </div>
+
+    </div><!-- form-group -->
+
+    <div class="form-group">
+      
+      <!-- Schema.org: Recipe > costs <Text> [myValue] +-->
+      <label class="col-md-2 control-label">Стоимость:</label>
+      <div class="col-md-4">
+        <select class="form-control"
+                [formControl]="myForm.controls.shema.controls['cost']">
+          <option *ngFor="let vd of valuData"
+                  [value]="vd.id + ', ' + vd.text">{{vd.text}}</option>
+        </select>
+      </div>
+
+      <!-- Schema.org: Recipe > complexity <Text> [myValue] +-->
+      <label class="col-md-2 control-label">Сложность:</label>
+      <div class="col-md-4">
+        <select class="form-control"
+                [formControl]="myForm.controls.shema.controls['complexity']">
+          <option *ngFor="let cd of compData"
+                  [value]="cd.id + ', ' + cd.text">{{cd.text}}</option>
+        </select>
+      </div>
+
+    </div><!-- form-group -->
+
+    <div class="form-group">
+      <!-- Schema.org: Recipe > cookingMethod <Text> [g,y] +-->
+      <label class="col-md-2 control-label">Способ:</label>
+      <div class="col-md-4">
+        <!-- [formControl]="myForm.controls['methods']"  -->
+        <select   class="form-control" size="4" multiple
+                  [formControl]="myForm.controls.shema.controls['methods']">
+          <option *ngFor="let meth of methData"
+                  [value]="meth.id + ', ' + meth.text">{{meth.text}}</option>
+        </select>
+      </div>
+
+      <!-- Schema.org: Recipe > recipePurpose <Text> [myValue] +-->
+      <label class="col-md-2 control-label">Назначение:</label>
+      <div class="col-md-4">
+        <!-- [formControl]="myForm.controls['purposes']" -->
+        <select   class="form-control" size="4" multiple
+                  [formControl]="myForm.controls.shema.controls['purposes']">
+          <option *ngFor="let purp of purpData"
+                  [value]="purp.id + ', ' + purp.text">{{purp.text}}</option>
+        </select>
+      </div>
+
+    </div><!-- form-group -->
+
+    <div class="form-group">
+      <label class="col-md-2 control-label">Утварь:</label>
+      <div class="col-md-4">
+        <!-- [formControl]="myForm.controls['appliances']" -->
+        <select   class="form-control" size="4" multiple
+                  [formControl]="myForm.controls.shema.controls['appliances']">
+          <option *ngFor="let appl of applData"
+                  [value]="appl.id + ', ' + appl.text">{{appl.text}}</option>
+        </select>
+      </div>
+    </div><!-- form-group -->
+
+    <!--==========
+        Button
+    ===========-->
+    <div class="form-group">
+      <label class="col-md-2 control-label"></label>
+      <div class="col-md-4">
+        <button class="btn btn-primary" type="submit">Send
+          <span class="glyphicon glyphicon-send"></span>
+        </button>
+      </div>
+    </div><!-- form-group -->
+
+  </fieldset>
+</form>

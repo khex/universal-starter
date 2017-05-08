@@ -1,4 +1,4 @@
-//our root app component
+/**  Schema v20  **/
 import { Inject,
          OnInit,
          Component,
@@ -7,6 +7,7 @@ import { FormGroup,
          FormArray,
          Validators,
          FormBuilder }       from '@angular/forms';
+import { ActivatedRoute }    from '@angular/router';
 import { ModelService }      from '../../shared/model/model.service';
 
 import { BuildFunk }         from './build.function';
@@ -20,7 +21,7 @@ import { DietData,
          CuisineData,
          ComplexData,
          CategoryData,
-         AppliancesData }    from './dropdown-data';
+         ApplianceData }    from './dropdown-data';
 
 @Component({
   selector:    'create',
@@ -37,60 +38,75 @@ export class CreateComponent implements OnInit{
   public dietData = DietData;
   public valuData = ValueData;
   public compData = ComplexData;
-  public applData = AppliancesData;
-
-  /** helper func for nh2-selec multiple **/
-  public itemsToString(value:Array<any> = []):string {
-    return value.map((item:any) => { return item.text; }).join(',');
-  }
+  public applData = ApplianceData;
 
 
   /**  ng2-select > Method  **/
-  public  methodItems: Array<any> = MethodData;
-  private methods:any = [];
+  public methods:any = [];
+  public methodItems: Array<any> = MethodData;
+  public methActive = [
+    {id: 4, text: 'Варение', qqq: '4534535353'},
+    {id: 6, text: 'Квашение', quatro: 'The main'}
+  ];
 
-  public refreshMethod(value:any):void {
+  public refreshMethod(value:any): void {
     this.methods = value;
+    console.log('value:', value, '\n', 'methods,', this.methods);
     let mtds = value.map((meth:any) => { return `${meth.id}, ${meth.text}`; });
     this.myForm.patchValue({'shema': {'methods': mtds}});
-  } //  <--  The End  -->
-
+  }
 
   /**  ng2-select > Purpose  **/
+  public purpose:any = [];
   public purposeItems: Array<any> = PurposeData;
-  private purpose:any = [];
+  public purpActive = [{id: 1, text: 'На завтрак'}, {id: 2, text: 'На обед'}]
 
-  public refreshPurpose(value:any):void {
+  public refreshPurpose(value:any): void {
     this.purpose = value;
     let purp = value.map((prp:any) => { return `${prp.id}, ${prp.text}`; });
     this.myForm.patchValue({'shema': {'purposes': purp}});
-  } //  <--  The End  -->
+  }
+
+  /**  ng2-select > Appliances  **/
+  public appliance: any = [];
+  public applianceItems: Array<any> = ApplianceData;
+
+  public refreshAppliance(value:any): void {
+    this.appliance = value;
+    let appl = value.map((app:any) => { return `${app.id}, ${app.text}`; });
+    this.myForm.patchValue({'shema': {'appliances': appl}});
+  }
 
 
   public myForm: FormGroup;
 
   constructor(@Inject(FormBuilder)
               private _fb:   FormBuilder,
-              private model: ModelService) { }
+              private model: ModelService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+
+    let temp = this.route.snapshot;
+    console.log('Snapshot:\n', temp);
+
     // we will initialize our form here
     this.myForm = this._fb.group({
       name:         '',
       description:  '',
       image:        '',
-      shema: this._fb.group({
+      shema:        this._fb.group({
         category:    '',
         cuisine:     '',
-        cost:        '',
         diet:        '',
         yield:       '',
         prepTime:    '',
         totalTime:   '',
+        costs:       '',
         complexity:  '',
         methods:    [''],
-        purposes:   ['']
-      //appliances: ['']
+        purposes:   [''],
+        appliances: [''],
       }),
       ingredients:  this._fb.array([ this.initIngredient()  ]),
       instructions: this._fb.array([ this.initInstruction() ]),
@@ -120,7 +136,7 @@ export class CreateComponent implements OnInit{
     control.removeAt(i);
   }
 
-  /** INSTRUCTION LOGIC **/
+  /** Iinstruction Logic **/
   initInstruction() {
     return this._fb.group({
       step: ['']
@@ -143,12 +159,12 @@ export class CreateComponent implements OnInit{
     let data = myForm.value;
     let resp = BuildFunk(data);
 
-    console.log(resp);
+    console.log('saveRecipe:', resp);
     this.model
       .post('/api/recipes/', JSON.stringify({resp}))
       .subscribe(data => {
-        console.info(data);
+        console.info('From server:', data);
     });
-
   }
+
 }
