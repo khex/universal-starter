@@ -126,7 +126,7 @@ export function BuildFunk(data) {
       }
       /**  Image URL  **/
       else if (key === 'image') {
-        resp[key] = `images/${data[key]}`;
+        resp[key] = `${data[key]}`;
       }
       /**  MetaData  **/
       else {

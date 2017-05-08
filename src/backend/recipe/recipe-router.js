@@ -81,20 +81,26 @@ RR.post('/', (req, res) => {
   });
 });
 
-/********************
-**    READ MANY    **
-********************/
+/*********************
+**    UPDATE ONE    **
+*********************/
 RR.put('/:rid', (req, res) => {
 
-  let rid = Number(req.params.rid);
+  let rid = {'rid': Number(req.params.rid)};
   let rcp = JSON.parse(req.body.data)['resp'];
-  //  'upsert' creates the object if it doesn't exist.
-  let opt = {upsert: false};
+  let opt = {'upsert': false};
   
-  Recipe.findOneAndUpdate({'rid': rid}, rcp, opt, (err, doc) => {
-    if (err) { console.log(err.message); }
-    else     { res.json(doc); }
+  Recipe.findOneAndUpdate(rid, rcp, opt, (err, doc) => {
+    if (err) { res.json(err); }
+    //  it returns an old unmodified doc, find updated
+    else {    
+      Recipe.findOne(rid, (err, doc) => {
+        if (err) { res.json(err); }
+        else     { res.json(doc); }
+      });
+    }
   });
+
 });
 
 module.exports = RR;

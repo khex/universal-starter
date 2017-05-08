@@ -1,11 +1,13 @@
 # Todo list
 
-### Milestones
+### Bugs
+ - Рецепт рендерится на сервере и не имеет доступа к Title браузера
+ - update-recipe подргужается так, что браузер приседает
 
+### Milestones
   * 0.2.27: create-update: edit recipe by `rid`
-    - [ ] нестыковка `<meta>` с документов базе.
-    - [ ] нестыковка `LD+JSON` с документов базе.
-    - [ ] почуму `edit` перегружается.
+    - [x] нестыковка `<meta>` с документов базе.
+    - [x] нестыковка `LD+JSON` с документов базе.
     - [ ] unite `create` & `edit` controllers.
     - [ ] draw guideline for updating Schema.
 
@@ -29,9 +31,11 @@
   - 0.4.00: add `comments`, `likes` & `recipe-book`
 
 ### MongoDB
-  - [ ] update `instructions` rid: 18 - 23:
-  - [ ] update `time` rid: 1 - 29:
-
+  - [x] update `instructions` rid: 18 - 23:
+  - [x] update `time` rid: 1 - 29:
+  - [x] update images
+  - [x] all ingreds to 2 words
+        `перец сладкий красный` to `перец сладкий` comments: `красный`
 ### backend
   - [ ] does I need TypeScript at backend?
   - [ ] backend/recipe-model.ts  -> TypeScript

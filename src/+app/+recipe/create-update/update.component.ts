@@ -29,7 +29,7 @@ import { DietData,
   templateUrl:   './update.template.html',
   encapsulation: ViewEncapsulation.None
 })
-export class UpdateComponent{
+export class UpdateComponent implements OnInit{
 
   public rid: number;
   public linkEdit: boolean;  //  update or edit?
@@ -53,6 +53,9 @@ export class UpdateComponent{
 
   ngOnInit() {
     //  'update' or 'create'
+    /**
+     * @update:  rename trsu
+     */
     let trsu = this.route.snapshot.url;
     this.linkEdit = (trsu[1]['path'] === 'update') ? true : false;
 
@@ -90,10 +93,10 @@ export class UpdateComponent{
         for (var i = 0; i < rcpt.ingredients.length; ++i) {
           var ingr  = rcpt.ingredients[i];
           var grup = (ingr.group) ? ingr.group : '';
-          var name  = `${ingr.name.id}, ${ingr.name.text}`;
-          var amnt  = (ingr.amount) ? ingr.amount : '';
-          var meas  = `${ingr.measure.id}, ${ingr.measure.text}`;
-          var note  = (ingr.note) ? ingr.note : '';
+          var name = (ingr.name) ? `${ingr.name.id}, ${ingr.name.text}` : '';
+          var amnt = (ingr.amount) ? ingr.amount : '';
+          var meas = (ingr.measure) ?  `${ingr.measure.id}, ${ingr.measure.text}` : '';
+          var note = (ingr.note) ? ingr.note : '';
           this.addIngredient(grup, name, amnt, meas, note);
         }
 
@@ -221,7 +224,7 @@ export class UpdateComponent{
     this.model
       .put(`/api/recipes/${this.rid}`, JSON.stringify({resp}))
       .subscribe(data => {
-        console.info('From server:', data);
+        console.log('From server:', data);
     });
   }
 

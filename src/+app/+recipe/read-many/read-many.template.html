@@ -16,7 +16,7 @@
        routerLink='/recipe/{{recipe.rid}}'>
       <img alt="{{recipe.name}}"
            class="media-object"
-           src="{{recipe.image}}"
+           src="images/{{recipe.image}}"
            style="width: 124px; height: 124px;"
            data-holder-rendered="true">
     </a>
@@ -57,7 +57,7 @@
       </span>
       <!-- 1:30 -->
       <span *ngIf="recipe.shema?.totalTime">
-        <i class="fa fa-clock-o"></i> {{recipe.shema.totalTime}}
+        <i class="fa fa-clock-o"></i> {{recipe.shema.totalTime.text}}
       </span>
       <!-- Итальянская -->
       <span *ngIf="recipe.shema?.cuisine">

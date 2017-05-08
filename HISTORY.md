@@ -3,42 +3,28 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 Only three actions alowed: **Create**, **Update** & **Delete**.
 
-## [0.2.27] - 12-05-2017
-**recipe/crup** Create: edit recipe document by `rid`.
-**recipe/read-one** Create: edit button.
-**recipe/read-many** Create: edit button.
-
-## [0.2.27] - ??-05-2017
-#### recipe
-  * crup
-    - Create: edit recipe document by `rid`.
-  * read-one
-    - Create: edit button.
-  * read-many
-    - Create: edit button.
-
-#### template
-  * app.component.html
-    - Update: class `"container"` to `"container-fluid"`
-    - Update: `.com-sm-n` to `.com-md-n col-lg-n`
+## [0.2.27] - 08-05-2017
+#### Create
+  - **recipe/crup**:
+    * edit recipe document by `rid`.
+    * unite `create` & `edit` in single components.
+  - **recipe/read-one**: edit button.
+  - **recipe/read-many**: edit button.
+#### Update
+  - **recipe/read-one**: template to new `Schema`.
+  - **MongoDB**: all recipes from 1 to 23.
 
 ## [0.2.26] - 25-04-2017
-
-#### recipe/read-one
-- Create: `Meta` and `OpenGraph` tags by `MetaService`.
-
+#### Create
+  - **recipe/read-one**: `meta` and `OpenGraph` tags by `MetaService`.
 
 ## [0.2.25] - 09-04-2017
-
 #### recipe/read-one
 -  Create: "application/ld+json"
 
-
 ## [0.2.24] - 06-04-2017
-
 #### Added
  - `read-one` server rendering
-
 
 ## [0.2.23] - 06-04-2017
 ### Changed
