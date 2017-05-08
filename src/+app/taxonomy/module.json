@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "name": "Token",
+  "description": "Provides a user interface for the Token API and some missing core tokens.",
+  "_comment": "# Information added by Drupal.org packaging script on 2017-04-29",
+  "core": "8.x",
+  "version:": "8x-1.0",
+  "darestamp": 1493466847
+}

@@ -48,7 +48,7 @@ RR.get('/', (req, res) => {
 **    READ ONE    **
 *******************/
 RR.get('/:rid', (req, res) => {
-  var rid = Number(req.params.rid);
+  let rid = Number(req.params.rid);
   Recipe.findOne({'rid': rid}, (err, doc) => {
     if (err) { console.log(err.message); }
     else     { res.json(doc); }
@@ -78,6 +78,27 @@ RR.post('/', (req, res) => {
         if (err) { res.json({ "Error": err }) }
         else     { res.json({ "Saved": reqRec }) }
     });
+  });
+});
+
+/*********************
+**    UPDATE ONE    **
+*********************/
+RR.put('/:rid', (req, res) => {
+
+  let rid = {'rid': Number(req.params.rid)};
+  let rcp = JSON.parse(req.body.data)['resp'];
+  let opt = {'upsert': false};
+  
+  Recipe.findOneAndUpdate(rid, rcp, opt, (err, doc) => {
+    if (err) { res.json(err); }
+    //  it returns an old unmodified doc, find updated
+    else {    
+      Recipe.findOne(rid, (err, doc) => {
+        if (err) { res.json(err); }
+        else     { res.json(doc); }
+      });
+    }
   });
 
 });

@@ -44,9 +44,18 @@ export class ApiService {
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-
     return this._http
       .post(url, JSON.stringify({ data }), { headers: headers })
+      .map((res) => res.json())
+      .catch(err => { return Observable.throw(err); });
+  }
+
+  put(url:string, data: any) {
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this._http
+      .put(url, JSON.stringify({ data }), { headers: headers })
       .map((res) => res.json())
       .catch(err => { return Observable.throw(err); });
   }
