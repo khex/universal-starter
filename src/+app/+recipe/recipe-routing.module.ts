@@ -1,9 +1,8 @@
 import { Routes, RouterModule }  from '@angular/router';
 
-import { CreateComponent }       from './create-update/create.component';
 import { ReadOneComponent }      from './read-one/read-one.component';
 import { ReadManyComponent }     from './read-many/read-many.component';
-import { UpdateComponent }       from './create-update/update.component';
+import { CrUpComponent }         from './cr-up/cr-up.component';
 import { DeleteComponent }       from './delete/delete.component'; 
 
 /** htttp://localhost:3000/api/todos?
@@ -22,8 +21,8 @@ import { DeleteComponent }       from './delete/delete.component';
 export const Routing = RouterModule.forChild([
   /*  Other Module  */
   { path: 'recipes',            component: ReadManyComponent },
-  { path: 'recipe/create',      component: CreateComponent },
-  { path: 'recipe/update/:rid', component: UpdateComponent },
+  { path: 'recipe/create',      component: CrUpComponent },
+  { path: 'recipe/update/:rid', component: CrUpComponent },
   { path: 'recipe/delete/:rid', component: DeleteComponent },
   { path: 'recipe/:rid',        component: ReadOneComponent },
 

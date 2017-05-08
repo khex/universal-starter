@@ -25,11 +25,12 @@ import { DietData,
          ApplianceData }    from './dropdown-data';
 
 @Component({
-  selector:      'update',
-  templateUrl:   './update.template.html',
-  encapsulation: ViewEncapsulation.None
+  changeDetection: ChangeDetectionStrategy.Default,
+  encapsulation:   ViewEncapsulation.Emulated,
+  selector:       'cr-up',
+  templateUrl:    './cr-up.template.html',
 })
-export class UpdateComponent implements OnInit{
+export class CrUpComponent implements OnInit{
 
   public rid: number;
   public linkEdit: boolean;  //  update or edit?
@@ -80,9 +81,9 @@ export class UpdateComponent implements OnInit{
       })
     });
 
-    this.route.params
-        .subscribe((prms) => { this.rid = +prms['rid']; });
-    this.model.get(`/api/recipes/${this.rid}`).subscribe((rcpt) => {
+    if (this.linkEdit === true) {
+      this.route.params.subscribe((prms) => { this.rid = +prms['rid']; });
+      this.model.get(`/api/recipes/${this.rid}`).subscribe((rcpt) => {
         
         this.myForm.controls['name'].patchValue(rcpt.name);
         this.myForm.controls['description'].patchValue(rcpt.description);
@@ -174,7 +175,10 @@ export class UpdateComponent implements OnInit{
           }});
         }
       });
-  }
+    } else {
+      console.info('Create State');
+    }
+  }// ngOnInit()
 
   /** Ingredients Logic
    *  create empty like initIngredient()
@@ -208,24 +212,18 @@ export class UpdateComponent implements OnInit{
     let data = myForm.value;
     let resp = BuildFunk(data);
 
-    console.log('saveRecipe:', resp);
-    this.model
-      .post('/api/recipes/', JSON.stringify({resp}))
-      .subscribe(data => {
-        console.info('From server:', data);
-    });
-  }
-
-  updateRecipe(myForm) {
-    let data = myForm.value;
-    let resp = BuildFunk(data);
-
-    console.log('updateRecipe:', resp);
-    this.model
-      .put(`/api/recipes/${this.rid}`, JSON.stringify({resp}))
-      .subscribe(data => {
-        console.log('From server:', data);
-    });
-  }
-
+    if(this.linkEdit === true) {
+      this.model
+        .put(`/api/recipes/${this.rid}`, JSON.stringify({resp}))
+        .subscribe(data => {
+          console.log('From server:', data);
+      });
+    } else {
+      this.model
+        .post('/api/recipes/', JSON.stringify({resp}))
+        .subscribe(data => {
+          console.info('From server:', data);
+      });
+    }
+  }// saveRecipe(myForm)
 }

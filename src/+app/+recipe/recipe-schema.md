@@ -1,6 +1,7 @@
-|----|-------------------|-----------------|-----------|------|-----|-----|------|
-|  # | Google JSON-LD    | MySchema        | Class     | Amnt |Done |Wall |Social| 
-|----|-------------------|-----------------|-----------|------|-----|-----|------|
+## Schema v.20
+
+|  # |      JSON-LD      | MySchema        | Class     | Amnt |Done |Wall |Social| 
+| -- |:------------------|:----------------|:----------|:----:|:---:|:---:|:----:|
 |  1 | name              | name            |+<Text>    | one  |  +  |  +  |      |
 |  2 | recipeCategory    | shema.category  |+<Text>    | one  |  +  |     |      |
 |  3 | image             | image           |+<URL>     | one  |  +  |  +  |      |
@@ -15,7 +16,7 @@
 | 12 | recipeYield       | shema.yield     |+<Text>    | one  |  +  |  +  |      |
 | 13 | recipeIngredient  | ingredients     |+<Text>    | many |  +  |     |      |
 | 14 | author            | author          |-<Person>  | one  |  +  |  +  |      |
-| 15 |                   | publisher       |           | one  |  +  |     |      |
+| 15 |                   | publisher       |-<Organiz.>| one  |  +  |     |      |
 | 16 |                   | likes           |           | one  |     |     |   +  |
 | 17 |                   | viewedTimes     |           | one  |     |     |   +  |
 | 18 |                   | sourseUrl       |           | one  |     |     |   +  |
@@ -26,5 +27,18 @@
 | 22 |                   | shema.methods   |           | many |  +  |     |      |
 | 23 |                   | shema.purposes  |           | many |  +  |     |      |
 | 24 |                   | shema.appliances|           | many |  +  |     |      |
-|----|-------------------|-----------------|-----------|------|-----|-----|------|
-| v20|
+
+### Update Some Field
+  * read-one
+    - read-one.component.ts
+    - read-one.template.html
+  * read-many
+    - read-many.component.ts
+    - read-many.template.html
+  * cr-up
+    - cr-up.component.ts
+    - cr-up.template.html
+    - build.function.ts
+    - dropdown-data.ts
+  * recipe-schema.md
+  * recipe-model.js

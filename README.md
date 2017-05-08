@@ -2,40 +2,31 @@
 
 ### Bugs
  - Рецепт рендерится на сервере и не имеет доступа к Title браузера
- - update-recipe подргужается так, что браузер приседает
+ - `cr-up` подргужается так, что браузер приседает
 
 ### Milestones
-  * 0.2.27: create-update: edit recipe by `rid`
-    - [x] нестыковка `<meta>` с документов базе.
-    - [x] нестыковка `LD+JSON` с документов базе.
-    - [ ] unite `create` & `edit` controllers.
-    - [ ] draw guideline for updating Schema.
-
-  * 0.2.28@create-update: update layout.
+  * 0.2.28 >> create-update: update layout.
     - [ ] change `app.main.tempalate`. leave only `<head>` and `<nav-bar>`.
     - [ ] change `read-all` template layout.
     - [ ] change to `.col-lg-n` to 1117 px.
-
-  * 0.2.29@MongooseSchema unit test
+  * 0.2.29 >> create-update: sort all by tags and categories
+    - [ ] on left panel add template with dropdowns
+    - [ ] write all business logic
+    - [ ] backend: write cursor request to Mongo
+  * 0.2.30 >> recipe-routing: unify all routes
+    - [ ] do smth
+  * 0.2.31 >> MongooseSchema unit tests
     - [ ] `read-one.component` & `read-one.template`
     - [ ] `read-many.component` & `read-many.template`
     - [ ] `crup.component` & `crup.template`
     - [ ] `backend/recipe/model.js`
 
-  * 0.2.30:create-update: sort all by tags and categories
-    - [ ] on left panel add template with dropdowns
-    - [ ] write all business logic
-    - [ ] backend: write cursor request to Mongo
-
   - 0.3.00: add module `user` as new entity
   - 0.4.00: add `comments`, `likes` & `recipe-book`
 
 ### MongoDB
-  - [x] update `instructions` rid: 18 - 23:
-  - [x] update `time` rid: 1 - 29:
-  - [x] update images
-  - [x] all ingreds to 2 words
-        `перец сладкий красный` to `перец сладкий` comments: `красный`
+  - [ ] ...
+
 ### backend
   - [ ] does I need TypeScript at backend?
   - [ ] backend/recipe-model.ts  -> TypeScript
@@ -51,8 +42,9 @@
     - [ ] ? service for `getRecipesData`
   * read-many
     - [ ] lists to `LD+JSON` list as Google recipe
+    - [ ] update ccard footer to codepen example
   * read-one
-    - [ ] do smth
+    - [ ] ...
   * delete
     - [ ] write all logic
 

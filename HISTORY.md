@@ -5,14 +5,14 @@ Only three actions alowed: **Create**, **Update** & **Delete**.
 
 ## [0.2.27] - 08-05-2017
 #### Create
-  - **recipe/crup**:
-    * edit recipe document by `rid`.
-    * unite `create` & `edit` in single components.
+  - **recipe/cr-up**: edit recipe document by `rid`.
+  - **recipe/cr-up**: unite `create` & `edit` in single components.
   - **recipe/read-one**: edit button.
   - **recipe/read-many**: edit button.
+  - **recipe/recipe-schema**: guideline for updating Schema.
 #### Update
   - **recipe/read-one**: template to new `Schema`.
-  - **MongoDB**: all recipes from 1 to 23.
+  - **MongoDB**: all recipes from `rid` 1 to 23.
 
 ## [0.2.26] - 25-04-2017
 #### Create

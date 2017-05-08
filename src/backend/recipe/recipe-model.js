@@ -6,8 +6,8 @@ var RecipeSchema = new Schema({
   name:        String,
   description: String,
   image:       String,
-  publisher:   String,  // Organization > SimplyRecipes.com
-  author:      String,  // Person       > Jamie Oliver
+  publisher:   String,  // Should be <Organization>
+  author:      String,  // Should be <Person> 
   published:   Date,
   shema: {
     yield:         String,
